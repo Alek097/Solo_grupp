@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+<html ng-app="main">
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <% for (var cssFile in htmlWebpackPlugin.options.myFilesInjection.css) { %>
+    <link href="<%= htmlWebpackPlugin.options.myFilesInjection.css[cssFile] %>" type="text/css" rel="stylesheet" />
+    <% } %>
+    <% for (var jsFile in htmlWebpackPlugin.options.myFilesInjection.js) { %>
+    <script src="<%= htmlWebpackPlugin.options.myFilesInjection.js[jsFile] %>" type="text/javascript"></script>
+    <% } %>
+</head>
+<body>
+    <div class="container-fluid" id="container">
+        <ng-view></ng-view>
+    </div>
+</body>
+</html>

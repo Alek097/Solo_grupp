@@ -1,0 +1,24 @@
+{
+  "name": "solo_grupp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aliaksei Piatrouski",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^2.22.0",
+    "transfer-webpack-plugin": "^0.1.4",
+    "tsd": "^0.6.5",
+    "webpack": "^1.13.2",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.8.10"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.1.0"
+  }
+}
