@@ -32,12 +32,22 @@ module.exports = {
                     //css files
                 ],
                 js: [
-                    //JavaScripts libs
+                     GetBundles('lib/jquery/dist/jquery.min.js'),
+                     GetBundles('lib/angular/angular.min.js'),
+                     GetBundles('lib/bootstrap/dist/js/bootstrap.min.js'),
+                     GetBundles('lib/angular-route/angular-route.min.js')
                 ]
             }
         }),
         new TransferWebpackPlugin([
-            //JavaScripts libs
+            { from: 'node_modules/angular', to: 'lib/angular' },
+            { from: 'node_modules/angular-route', to: 'lib/angular-route' },
+            { from: 'node_modules/bootstrap', to: 'lib/bootstrap' },
+            { from: 'node_modules/jquery', to: 'lib/jquery' },
         ])
     ]
 };
+
+function GetBundles(url) {
+    return '/Bundles/' + url;
+}
