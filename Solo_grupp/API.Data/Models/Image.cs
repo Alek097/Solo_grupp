@@ -7,6 +7,7 @@
 	{
 		public Guid Id { get; set; }
 		public string URL { get; set; }
+		public virtual News News { get; set; }
 
 		public Image()
 		{
