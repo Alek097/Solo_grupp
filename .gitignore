@@ -78,6 +78,8 @@ _[Ss]cripts
 ###################
 Solo_grupp/API/Scripts/*.js
 Solo_grupp/API/Scripts/*.js.map
+Solo_grupp/API/Scripts/*/*.js
+Solo_grupp/API/Scripts/*/*.js.map
 Solo_grupp/API/node_modules/
 Solo_grupp/API/Bundles/
 Solo_grupp/API/typings/
