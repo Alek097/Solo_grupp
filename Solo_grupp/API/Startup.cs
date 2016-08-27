@@ -14,8 +14,9 @@ namespace API
 			var config = new HttpConfiguration();
 
 			ContainerConfig.Config(config);
-
+			IdentityConfig.Config(app);
 			WebApiConfig.RegisterRoutes(config);
+
 			config.MapHttpAttributeRoutes();
 			app.UseWebApi(config);
 
