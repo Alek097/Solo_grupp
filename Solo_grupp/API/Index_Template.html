@@ -6,6 +6,9 @@
     <% for (var cssFile in htmlWebpackPlugin.options.myFilesInjection.css) { %>
     <link href="<%= htmlWebpackPlugin.options.myFilesInjection.css[cssFile] %>" type="text/css" rel="stylesheet" />
     <% } %>
+    <% for (var lessFile in htmlWebpackPlugin.options.myFilesInjection.less) { %>
+    <link href="<%= htmlWebpackPlugin.options.myFilesInjection.less[lessFile] %>" type="text/css" rel="stylesheet/less" />
+    <% } %>
     <% for (var jsFile in htmlWebpackPlugin.options.myFilesInjection.js) { %>
     <script src="<%= htmlWebpackPlugin.options.myFilesInjection.js[jsFile] %>" type="text/javascript"></script>
     <% } %>

@@ -29,13 +29,17 @@ module.exports = {
             inject: false,
             myFilesInjection: {
                 css: [
-                    //css files
+                    GetBundles('lib/bootstrap/dist/css/bootstrap.min.css')
+                ],
+                less: [
+
                 ],
                 js: [
-                     GetBundles('lib/jquery/dist/jquery.min.js'),
-                     GetBundles('lib/angular/angular.min.js'),
-                     GetBundles('lib/bootstrap/dist/js/bootstrap.min.js'),
-                     GetBundles('lib/angular-route/angular-route.min.js')
+                   GetBundles('lib/less/dist/less.min.js'),
+                   GetBundles('lib/jquery/dist/jquery.min.js'),
+                   GetBundles('lib/angular/angular.min.js'),
+                   GetBundles('lib/bootstrap/dist/js/bootstrap.min.js'),
+                   GetBundles('lib/angular-route/angular-route.min.js')
                 ]
             }
         }),
@@ -44,6 +48,7 @@ module.exports = {
             { from: 'node_modules/angular-route', to: 'lib/angular-route' },
             { from: 'node_modules/bootstrap', to: 'lib/bootstrap' },
             { from: 'node_modules/jquery', to: 'lib/jquery' },
+            { from: 'node_modules/less', to: 'lib/less' }
         ])
     ]
 };
