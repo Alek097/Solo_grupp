@@ -8,6 +8,11 @@
 	#endregion
 	public class ApplicationContext : IdentityDbContext<User>, IContext
 	{
+		public ApplicationContext()
+			: base("solo_grupp_users")
+		{
+
+		}
 		public DbSet<News> News { get; set; }
 		public DbSet<Resolution> Permission { get; set; }
 		public DbSet<Image> Images { get; set; }
