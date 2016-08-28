@@ -279,6 +279,10 @@
       <Project>{cbb02189-738a-48d4-aa04-76d9d4a53d55}</Project>
       <Name>API.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\API.Logging\API.Logging.csproj">
+      <Project>{7066849a-3cd0-4639-bee6-5f2fe9cbeb91}</Project>
+      <Name>API.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bundles\app\style.less" />

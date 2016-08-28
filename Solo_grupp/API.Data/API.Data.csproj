@@ -66,6 +66,12 @@
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\API.Logging\API.Logging.csproj">
+      <Project>{7066849a-3cd0-4639-bee6-5f2fe9cbeb91}</Project>
+      <Name>API.Logging</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
