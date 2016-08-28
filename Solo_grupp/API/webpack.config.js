@@ -32,14 +32,15 @@ module.exports = {
                     GetBundles('lib/bootstrap/dist/css/bootstrap.min.css')
                 ],
                 less: [
-
+                    GetBundles('app/style.less')
                 ],
                 js: [
                    GetBundles('lib/less/dist/less.min.js'),
                    GetBundles('lib/jquery/dist/jquery.min.js'),
                    GetBundles('lib/angular/angular.min.js'),
                    GetBundles('lib/bootstrap/dist/js/bootstrap.min.js'),
-                   GetBundles('lib/angular-route/angular-route.min.js')
+                   GetBundles('lib/angular-route/angular-route.min.js'),
+                   GetBundles('app/bundle.js')
                 ]
             }
         }),
