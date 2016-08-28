@@ -85,7 +85,7 @@
 			}
 			catch (DataException ex)
 			{
-				this.logger.WriteFatal(ex, "Произошла фатальная ошибка при сохранении изменений в БД");
+				this.logger.WriteFatal(ex, "Произошла фатальная ошибка при сохранении изменений в БД, дальнейшая работа невозможна");
 			}
 			catch (Exception ex)
 			{
