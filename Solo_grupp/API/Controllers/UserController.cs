@@ -9,7 +9,7 @@
 	using System.Web.Http;
 	using Data;
 	#endregion
-	public class RegistrationController : ApiController
+	public class UserController : ApiController
 	{
 	}
 }
