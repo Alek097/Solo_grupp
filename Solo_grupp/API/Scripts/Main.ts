@@ -1,4 +1,4 @@
-﻿import 'Pages/PagesModule.ts'
+﻿import './Pages/PagesModule.ts'
 
 angular.module('main',
     [
