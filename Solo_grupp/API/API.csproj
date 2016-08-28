@@ -79,6 +79,22 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -201,12 +217,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ApplicationUserManager.cs" />
+    <Compile Include="App_Start\ContainerConfig..cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\UnityResolver.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Infrastructure\UnityControllerActivator.cs" />
+    <Compile Include="Infrastructure\UnityHttpControllerActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bundles\app\bundle.js" />
+    <Content Include="Bundles\app\img\Logo.jpg" />
     <Content Include="Index_Template.html" />
+    <Content Include="Scripts\Pages\Registration\RegistrationView.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -217,8 +243,7 @@
     <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bundles\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Bundles\lib\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -232,13 +257,31 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeController.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\CommonModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\Authentification.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\User.ts" />
     <TypeScriptCompile Include="Scripts\Main.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Registration\RegistrationController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Registration\RegistrationModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Registration\RegistrationService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="tsd.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\API.Data\API.Data.csproj">
+      <Project>{cbb02189-738a-48d4-aa04-76d9d4a53d55}</Project>
+      <Name>API.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bundles\app\style.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
