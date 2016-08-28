@@ -14,7 +14,7 @@
     <% } %>
 </head>
 <body>
-    <nav id="nav" class="navbar navbar-default">
+    <nav id="nav" class="navbar navbar-default" ng-controller="authorizeController as auth">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -35,6 +35,9 @@
                     <li><a href="#">Поставщики</a></li>
                     <li><a href="#">Контакты</a></li>
                     <li><a href="#">Доставка</a></li>
+                    <li ng-show="!auth.isAuth"><a href="#">Войти</a></li>
+                    <li ng-show="!auth.isAuth"><a href="#">Регистрация</a></li>
+                    <li ng-show="auth.isAuth"><a href="#">{{auth.fullName}}</a></li>
                 </ul>
             </div>
         </div>
