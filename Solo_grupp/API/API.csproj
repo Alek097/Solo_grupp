@@ -229,6 +229,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bundles\app\bundle.js" />
+    <Content Include="Bundles\app\img\Logo.jpg" />
     <Content Include="Index_Template.html" />
     <Content Include="Scripts\Pages\Registration\RegistrationView.html" />
     <Content Include="Web.config" />
@@ -241,7 +243,7 @@
     <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bundles\" />
+    <Folder Include="Bundles\lib\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +274,9 @@
       <Project>{cbb02189-738a-48d4-aa04-76d9d4a53d55}</Project>
       <Name>API.Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bundles\app\style.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
