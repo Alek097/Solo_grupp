@@ -257,6 +257,11 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeController.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\CommonModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\Authentification.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\User.ts" />
     <TypeScriptCompile Include="Scripts\Main.ts" />
     <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Registration\RegistrationController.ts" />
