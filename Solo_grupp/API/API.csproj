@@ -276,6 +276,10 @@
     <Content Include="tsd.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\API.Data.Repositories\API.Data.Repositories.csproj">
+      <Project>{2555f7c2-2c2d-4fcc-b8e8-14040c6e0f41}</Project>
+      <Name>API.Data.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\API.Data\API.Data.csproj">
       <Project>{cbb02189-738a-48d4-aa04-76d9d4a53d55}</Project>
       <Name>API.Data</Name>
