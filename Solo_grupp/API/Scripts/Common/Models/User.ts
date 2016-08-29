@@ -1,4 +1,5 @@
 ﻿export class User {
+    public Id: string;
     public FirstName: string;
     public SecondName: string;
     public Patronymic: string;
