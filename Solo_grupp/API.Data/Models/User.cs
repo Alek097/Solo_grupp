@@ -11,6 +11,7 @@
 		public string LastName { get; set; }
 		public string Patronymic { get; set; }
 		public string FullName { get; set; }
+		public string Adress { get; set; }
 		public virtual ICollection<Resolution> Permission { get; set; }
 		public virtual ICollection<News> News { get; set; }
 	}
