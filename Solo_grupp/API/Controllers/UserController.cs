@@ -8,8 +8,22 @@
 	using System.Net.Http;
 	using System.Web.Http;
 	using Data;
+	using System.Threading.Tasks;
+	using Models;
 	#endregion
 	public class UserController : ApiController
 	{
+		public UserController()
+		{
+
+		}
+		[AllowAnonymous]
+		public async Task SignUp(RegistrationModel model)
+		{
+			await Task.Run(() =>
+			{
+
+			});
+		}
 	}
 }
