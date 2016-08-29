@@ -217,7 +217,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\ContainerConfig..cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\UnityResolver.cs" />

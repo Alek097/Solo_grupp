@@ -1,8 +1,7 @@
-﻿namespace API.App_Start
+﻿namespace API.Data
 {
 	#region Using
-	using Data;
-	using Data.Models;
+	using Models;
 	using Microsoft.AspNet.Identity;
 	using Microsoft.AspNet.Identity.EntityFramework;
 	using Microsoft.AspNet.Identity.Owin;
