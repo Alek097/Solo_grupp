@@ -246,7 +246,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bundles\lib\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

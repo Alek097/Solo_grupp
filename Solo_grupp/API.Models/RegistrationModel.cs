@@ -3,7 +3,7 @@
 	#region Using
 	using System.ComponentModel.DataAnnotations;
 	#endregion
-	public class RegistartionModel
+	public class RegistrationModel
 	{
 		[Required(ErrorMessage = "Отсутствует имя")]
 		public string FirstName { get; set; }

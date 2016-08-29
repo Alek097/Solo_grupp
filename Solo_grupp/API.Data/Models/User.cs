@@ -20,7 +20,7 @@
 		{
 
 		}
-		public User(RegistartionModel model)
+		public User(RegistrationModel model)
 		{
 			this.firstUpper(model.FirstName);
 			this.firstUpper(model.LastName);
