@@ -14,6 +14,7 @@
 	using Microsoft.AspNet.Identity.Owin;
 	using Data.Models;
 	using Data.Repositories.Interfaces;
+	using Data.Repositories;
 	#endregion
 	public class UserController : ApiController
 	{
@@ -33,8 +34,19 @@
 		public async Task SignUp(RegistrationModel model)
 		{
 			NotActiveUser user = new NotActiveUser(model);
-
 			await this.repository.RegistartionAsync(user);
+		}
+		[AllowAnonymous]
+		public async Task<HttpResponseMessage> Activation(Guid id)
+		{
+			RepositoryResult<User> result = await this.repository.Activation(id);
+
+			if (result.Responce.StatusCode == HttpStatusCode.OK)
+			{
+				IdentityResult identityResult = await this.UserManager.CreateAsync(result.Value, result.Value.PasswordHash);
+			}
+
+			return result.Responce;
 		}
 	}
 }

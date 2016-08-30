@@ -7,6 +7,8 @@
 	using Logging;
 	using System.Net.Mail;
 	using System.Threading.Tasks;
+	using System.Net.Http;
+	using System.Net;
 	#endregion
 	public class UserRepository : IUserRepository
 	{
@@ -17,6 +19,53 @@
 			this.context = context;
 			this.logger = logger;
 		}
+
+		public async Task<RepositoryResult<User>> Activation(Guid id)
+		{
+			RepositoryResult<User> result = new RepositoryResult<User>();
+
+			NotActiveUser notActiveUser = this.context.Get<NotActiveUser, Guid>(id);
+
+			//TODO: Исправить
+			if (notActiveUser == null)
+			{
+				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
+
+				response.Headers.Location = new Uri("http://localhost:11799/#/error?httpCode=404&message=Пользователь не найден");
+
+				result.Responce = response;
+			}
+			else
+			{
+				User newUser = new User(notActiveUser);
+				this.context.Add(newUser);
+				this.context.Delete(notActiveUser);
+				int changes = await this.context.SaveChangesAsync();
+
+				if (changes == 0)
+				{
+					HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
+					response.Headers.Location = new Uri("http://localhost:11799/#/error?httpCode=500&message=Ошибка на сервере");
+
+					result.Responce = response;
+				}
+				else
+				{
+					this.logger.WriteInformation(string.Format("Пользователь с id = {0} и ФИО = {1} успешно активировался, теперь id = {3}",
+						notActiveUser.Id,
+						newUser.FullName,
+						newUser.Id));
+
+					HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+					response.Headers.Location = new Uri("http://localhost:11799/#/SignIn");
+
+					result.Responce = response;
+					result.Value = newUser;
+				}
+			}
+			return result;
+		}
+
 		public async Task RegistartionAsync(NotActiveUser user)
 		{
 			context.Add(user);
@@ -44,13 +93,15 @@
 				smtp.UseDefaultCredentials = false;
 				smtp.EnableSsl = true;
 
-				smtp.Credentials = new System.Net.NetworkCredential(email, password);
+				smtp.Credentials = new NetworkCredential(email, password);
 
 				await smtp.SendMailAsync(m);
+
+				this.logger.WriteInformation(string.Format("Зарегестрировался новый пользователь id = {0}. Письмо подтверждения отправлено на {1}.", user.Id, user.Email));
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
-				logger.WriteError(ex, string.Format("Ошибка при отправке сообщения на {0} с {1}.", user.Email, email));
+				this.logger.WriteError(ex, string.Format("Ошибка при отправке сообщения на {0} с {1}.", user.Email, email));
 			}
 		}
 	}
