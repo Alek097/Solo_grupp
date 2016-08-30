@@ -5,6 +5,6 @@
 	#endregion
 	public interface IUserRepository
 	{
-		void Registartion(User user);
+		void Registartion(NotActiveUser user);
 	}
 }

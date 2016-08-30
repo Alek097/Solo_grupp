@@ -7,7 +7,7 @@
 	#endregion
 	public class UserRepository : IUserRepository
 	{
-		public void Registartion(User user)
+		public void Registartion(NotActiveUser user)
 		{
 			
 		}
