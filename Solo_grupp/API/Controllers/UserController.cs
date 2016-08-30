@@ -30,8 +30,8 @@
 		[AllowAnonymous]
 		public async Task SignUp(RegistrationModel model)
 		{
-			User user = new User(model);
-			IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+			//User user = new User(model);
+			//IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 		}
 	}
 }
