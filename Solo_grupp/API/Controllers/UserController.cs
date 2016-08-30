@@ -41,7 +41,7 @@
 		{
 			RepositoryResult<User> result = await this.repository.Activation(id);
 
-			if (result.Responce.StatusCode == HttpStatusCode.OK)
+			if (result.ResultType == RepositoryResultType.OK)
 			{
 				IdentityResult identityResult = await this.UserManager.CreateAsync(result.Value, result.Value.PasswordHash);
 			}

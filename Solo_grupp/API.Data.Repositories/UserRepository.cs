@@ -34,6 +34,7 @@
 				response.Headers.Location = new Uri("http://localhost:11799/#/error?httpCode=404&message=Пользователь не найден");
 
 				result.Responce = response;
+				result.ResultType = RepositoryResultType.Bad;
 			}
 			else
 			{
@@ -48,6 +49,7 @@
 					response.Headers.Location = new Uri("http://localhost:11799/#/error?httpCode=500&message=Ошибка на сервере");
 
 					result.Responce = response;
+					result.ResultType = RepositoryResultType.Bad;
 				}
 				else
 				{
@@ -56,11 +58,12 @@
 						newUser.FullName,
 						newUser.Id));
 
-					HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+					HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
 					response.Headers.Location = new Uri("http://localhost:11799/#/SignIn");
 
 					result.Responce = response;
 					result.Value = newUser;
+					result.ResultType = RepositoryResultType.OK;
 				}
 			}
 			return result;

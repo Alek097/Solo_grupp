@@ -7,5 +7,6 @@
 	{
 		public TValue Value { get; set; }
 		public HttpResponseMessage Responce { get; set; }
+		public RepositoryResultType ResultType { get; set; }
 	}
 }
