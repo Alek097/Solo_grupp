@@ -8,6 +8,9 @@
 		DeleteProduct,
 		AddNews,
 		DeleteNews,
-		EditNews
+		EditNews,
+		AddComment,
+		DeleteUserComment,
+		EditUserComment
 	}
 }
