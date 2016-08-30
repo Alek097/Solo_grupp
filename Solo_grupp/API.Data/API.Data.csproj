@@ -89,8 +89,10 @@
     <Compile Include="IContext.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\News.cs" />
+    <Compile Include="Models\NotActiveUser.cs" />
     <Compile Include="Models\Resolution.cs" />
     <Compile Include="Models\ResolutionType.cs" />
+    <Compile Include="Models\Salt.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
