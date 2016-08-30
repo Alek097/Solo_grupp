@@ -13,9 +13,11 @@
 	using Microsoft.AspNet.Identity;
 	using Microsoft.AspNet.Identity.Owin;
 	using Data.Models;
+	using Data.Repositories.Interfaces;
 	#endregion
 	public class UserController : ApiController
 	{
+		private readonly IUserRepository repository;
 		private ApplicationUserManager UserManager
 		{
 			get
@@ -23,15 +25,16 @@
 				return this.ControllerContext.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
 			}
 		}
-		public UserController()
+		public UserController(IUserRepository repository)
 		{
-
+			this.repository = repository;
 		}
 		[AllowAnonymous]
 		public async Task SignUp(RegistrationModel model)
 		{
-			//User user = new User(model);
-			//IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+			NotActiveUser user = new NotActiveUser(model);
+
+			await this.repository.RegistartionAsync(user);
 		}
 	}
 }
