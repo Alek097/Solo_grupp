@@ -2,9 +2,10 @@
 {
 	#region Using
 	using Models;
+	using System.Threading.Tasks;
 	#endregion
 	public interface IUserRepository
 	{
-		void Registartion(NotActiveUser user);
+		Task RegistartionAsync(NotActiveUser user);
 	}
 }
