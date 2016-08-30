@@ -20,6 +20,8 @@
 		public DbSet<News> News { get; set; }
 		public DbSet<Resolution> Permission { get; set; }
 		public DbSet<Image> Images { get; set; }
+		public DbSet<NotActiveUser> NotActiveUsers { get; set; }
+		public DbSet<Salt> Salts { get; set; }
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
@@ -31,6 +33,10 @@
 			modelBuilder.Entity<User>()
 				.HasMany(user => user.News)
 				.WithOptional(news => news.User);
+
+			modelBuilder.Entity<User>()
+				.HasRequired(user => user.Salt)
+				.WithOptional(salt => salt.User);
 
 			modelBuilder.Entity<News>()
 				.HasMany(news => news.Images)
@@ -67,7 +73,7 @@
 			{
 				this.logger.WriteFatal(ex, "Произошла фатальная ошибка при сохранении изменений в БД, дальнейшая работа невозможна");
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				this.logger.WriteFatal(ex, "Произошла ошибка при сохранении изменений в БД");
 			}
