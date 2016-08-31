@@ -1,5 +1,10 @@
 ﻿@BrandColor: #ec7f3a;
 
+@NameWidth-All: 196.813px;
+@NameWidth-Mobile-S: 318px;
+
+@Mobile-S-Size: 320px;
+
 #brand {
     width: 50px;
     height: auto;
@@ -16,14 +21,24 @@
     background-color: @BrandColor;
 }
 
-#pageList {
-    font-size: 14pt;
+.pageList {
+    font-size: 12pt;
+    background-color: @BrandColor;
 }
 
-#pageList > li > a {
-    color: white;
+.pageList > li > a {
+    color: white !important;
 
     &:hover {
-        color: black;
+        color: black !important;
     }
+}
+
+#userName .pageList {
+    white-space: pre;
+}
+
+#userName {
+    max-width: @NameWidth-All;
+    overflow-x: hidden;
 }
