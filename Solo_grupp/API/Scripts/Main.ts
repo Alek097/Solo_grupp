@@ -19,4 +19,9 @@ angular.module('main',
             {
                 templateUrl: '../Scripts/Pages/Home/HomeView.html',
             });
+        $routeProvider.when('/SignUp',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+            });
     });
