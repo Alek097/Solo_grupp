@@ -37,9 +37,10 @@ module.exports = {
                 js: [
                    GetBundles('lib/less/dist/less.min.js'),
                    GetBundles('lib/jquery/dist/jquery.min.js'),
-                   GetBundles('lib/angular/angular.min.js'),
                    GetBundles('lib/bootstrap/dist/js/bootstrap.min.js'),
+                   GetBundles('lib/angular/angular.min.js'),
                    GetBundles('lib/angular-route/angular-route.min.js'),
+                   GetBundles('lib/angular-animate/angular-animate.min.js'),
                    GetBundles('app/bundle.js')
                 ]
             }
@@ -47,6 +48,7 @@ module.exports = {
         new TransferWebpackPlugin([
             { from: 'node_modules/angular', to: 'lib/angular' },
             { from: 'node_modules/angular-route', to: 'lib/angular-route' },
+            { from: 'node_modules/angular-animate', to: 'lib/angular-animate' },
             { from: 'node_modules/bootstrap', to: 'lib/bootstrap' },
             { from: 'node_modules/jquery', to: 'lib/jquery' },
             { from: 'node_modules/less', to: 'lib/less' }

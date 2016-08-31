@@ -3,10 +3,14 @@
 @NameWidth-All: 196.813px;
 @NameWidth-Mobile-S: 318px;
 
+@homeList-Size: 230px;
+@navbar-Size: 50px;
+
 @Mobile-S-Size: 320px;
+@Tablet-Size: 768px;
 
 #brand {
-    width: 50px;
+    width: @navbar-Size;
     height: auto;
     border-radius: 100%;
 }
@@ -19,6 +23,7 @@
 
 #nav {
     background-color: @BrandColor;
+    margin: 0px;
 }
 
 .pageList {
@@ -34,11 +39,54 @@
     }
 }
 
-#userName .pageList {
+.pageList > tbody > tr > th {
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.pageList {
     white-space: pre;
 }
 
 #userName {
     max-width: @NameWidth-All;
     overflow-x: hidden;
+    white-space: pre;
+}
+
+#homeList {
+    width: @homeList-Size;
+    height: 1000px;
+    background-color: @BrandColor;
+    position: fixed;
+    padding-top: 9px;
+    text-align: center;
+
+    @media(max-width : @Tablet-Size) {
+        position: static;
+        height: auto;
+        width: auto;
+        padding-top: @navbar-Size;
+    }
+}
+
+#homeList > .pageList > li {
+    @media(max-width : @Tablet-Size) {
+        height: 62px;
+
+        a {
+            padding-top:20px;
+            padding-bottom: 20px;
+            font-size: 14pt;
+        }
+    }
+}
+
+#homePage {
+    padding-left: @homeList-Size;
+    padding-top: @navbar-Size;
+
+    @media(max-width : @Tablet-Size) {
+        padding: 0px;
+    }
 }
