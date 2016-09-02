@@ -10,7 +10,7 @@
 	using System.Net.Http;
 	using System.Net;
 	#endregion
-	public class UserRepository : IUserRepository
+	public class UserRepository : Repository, IUserRepository
 	{
 		private readonly IContext context;
 		private readonly ILogger logger;
@@ -31,40 +31,32 @@
 			{
 				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
 
-				response.Headers.Location = new Uri("http://localhost:11799/#/error?httpCode=404&message=Пользователь не найден");
+				response.Headers.Location = new Uri(base.MovedError(404, "Пользователь не найден"));
 
 				result.Responce = response;
 				result.ResultType = RepositoryResultType.Bad;
+
+				logger.WriteError(string.Format("Не активированный пользователь с id = {0} не найден"));
 			}
 			else
 			{
 				User newUser = new User(notActiveUser);
 				this.context.Add(newUser);
 				this.context.Delete(notActiveUser);
-				int changes = await this.context.SaveChangesAsync();
+				await this.context.SaveChangesAsync();
 
-				if (changes == 0)
-				{
-					HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.InternalServerError);
-					response.Headers.Location = new Uri("http://localhost:11799/#/error?httpCode=500&message=Ошибка на сервере");
 
-					result.Responce = response;
-					result.ResultType = RepositoryResultType.Bad;
-				}
-				else
-				{
-					this.logger.WriteInformation(string.Format("Пользователь с id = {0} и ФИО = {1} успешно активировался, теперь id = {3}",
-						notActiveUser.Id,
-						newUser.FullName,
-						newUser.Id));
+				this.logger.WriteInformation(string.Format("Пользователь с id = {0} и ФИО = {1} успешно активировался, теперь id = {3}",
+					notActiveUser.Id,
+					newUser.FullName,
+					newUser.Id));
 
-					HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
-					response.Headers.Location = new Uri("http://localhost:11799/#/SignIn");
+				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
+				response.Headers.Location = new Uri(string.Format("{0}/#/SignIn", DNS));
 
-					result.Responce = response;
-					result.Value = newUser;
-					result.ResultType = RepositoryResultType.OK;
-				}
+				result.Responce = response;
+				result.Value = newUser;
+				result.ResultType = RepositoryResultType.OK;
 			}
 			return result;
 		}
