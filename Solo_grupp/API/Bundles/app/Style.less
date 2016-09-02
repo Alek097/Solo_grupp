@@ -71,7 +71,7 @@
         height: 62px;
 
         a {
-            padding-top:20px;
+            padding-top: 20px;
             padding-bottom: 20px;
             font-size: 14pt;
         }
@@ -79,6 +79,28 @@
 }
 
 #homePage {
+    padding-left: @homeList-Size;
+    padding-top: @navbar-Size;
+
+    @media(max-width : @Tablet-Size) {
+        padding-top: 0px;
+        padding-left: @homeList-Size;
+    }
+}
+
+#errorContainer {
+    text-align: center;
+}
+
+#httpCode {
+    font-size: 150pt;
+    color: @BrandColor;
+}
+
+#errorMessage {
+    font-size: 30pt;
+}
+.container {
     padding-left: @homeList-Size;
     padding-top: @navbar-Size;
 

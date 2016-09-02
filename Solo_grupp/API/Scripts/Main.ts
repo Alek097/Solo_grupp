@@ -25,10 +25,10 @@ angular.module('main',
             {
                 templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
             });
-        $routeProvider.when('/Error?httpCode=:httpCode&message=:message',
+        $routeProvider.when('/Error/:httpCode/:message',
             <ng.route.IRoute>
             {
-                templateUrl: '../Scripts/Common/Error/ErrorView.ts',
+                templateUrl: '../Scripts/Pages/Error/ErrorView.html',
                 controller: 'errorController',
                 controllerAs: 'error'
             });
