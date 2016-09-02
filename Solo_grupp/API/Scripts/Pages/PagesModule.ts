@@ -1,4 +1,6 @@
-﻿angular.module('pages',
-    [
+﻿import './Error/ErrorModule.ts';
 
+angular.module('pages',
+    [
+        'error'
     ]);

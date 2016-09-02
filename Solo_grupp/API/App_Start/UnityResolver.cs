@@ -8,7 +8,7 @@
 	#endregion
 	public class UnityResolver : IDependencyResolver
 	{
-		protected IUnityContainer container;
+		internal IUnityContainer Container { get; set; }
 
 		public UnityResolver(IUnityContainer container)
 		{
@@ -16,14 +16,14 @@
 			{
 				throw new ArgumentNullException("container");
 			}
-			this.container = container;
+			this.Container = container;
 		}
 
 		public object GetService(Type serviceType)
 		{
 			try
 			{
-				return container.Resolve(serviceType);
+				return Container.Resolve(serviceType);
 			}
 			catch (ResolutionFailedException)
 			{
@@ -35,7 +35,7 @@
 		{
 			try
 			{
-				return container.ResolveAll(serviceType);
+				return Container.ResolveAll(serviceType);
 			}
 			catch (ResolutionFailedException)
 			{
@@ -45,13 +45,13 @@
 
 		public IDependencyScope BeginScope()
 		{
-			var child = container.CreateChildContainer();
+			var child = Container.CreateChildContainer();
 			return new UnityResolver(child);
 		}
 
 		public void Dispose()
 		{
-			container.Dispose();
+			Container.Dispose();
 		}
 	}
 }

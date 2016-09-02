@@ -217,12 +217,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\ContainerConfig..cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\UnityResolver.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Infrastructure\UnityControllerActivator.cs" />
     <Compile Include="Infrastructure\UnityHttpControllerActivator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -232,8 +231,13 @@
     <Content Include="Bundles\app\bundle.js" />
     <Content Include="Bundles\app\img\Logo.jpg" />
     <Content Include="Index_Template.html" />
-    <Content Include="Scripts\Pages\Registration\RegistrationView.html" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\Pages\Error\ErrorView.html" />
+    <Content Include="Scripts\Common\Menu\MenuView.html" />
+    <Content Include="Scripts\Pages\Home\HomeView.html" />
+    <Content Include="Scripts\Pages\SignUp\SignUpView.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -244,7 +248,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Bundles\lib\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -260,13 +263,17 @@
     <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeController.ts" />
     <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\CommonModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Error\ErrorController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Error\ErrorModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Menu\MenuModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Authentification.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\User.ts" />
     <TypeScriptCompile Include="Scripts\Main.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Menu\MenuDirective.ts" />
     <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Registration\RegistrationController.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Registration\RegistrationModule.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\Registration\RegistrationService.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -275,9 +282,21 @@
     <Content Include="tsd.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\API.Data.Repositories\API.Data.Repositories.csproj">
+      <Project>{2555f7c2-2c2d-4fcc-b8e8-14040c6e0f41}</Project>
+      <Name>API.Data.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\API.Data\API.Data.csproj">
       <Project>{cbb02189-738a-48d4-aa04-76d9d4a53d55}</Project>
       <Name>API.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\API.Logging\API.Logging.csproj">
+      <Project>{7066849a-3cd0-4639-bee6-5f2fe9cbeb91}</Project>
+      <Name>API.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\API.Models\API.Models.csproj">
+      <Project>{e1a5f029-8caf-43ed-8453-2e6fe48f00f1}</Project>
+      <Name>API.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

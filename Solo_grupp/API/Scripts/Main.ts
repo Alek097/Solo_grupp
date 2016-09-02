@@ -3,16 +3,33 @@ import './Common/CommonModule.ts'
 
 angular.module('main',
     [
+        'ngRoute',
+        'ngAnimate',
+        'pages',
         'common',
-        'pages'
-    ]);
-    //.config(($routeProvider: ng.route.IRouteProvider) =>
-    //{
-    //    $routeProvider.when('registration/',
-    //        <ng.route.IRoute>
-    //        {
-    //            templateUrl: './Pages/Registration/RegistrationView.html',
-    //            controller: 'RegistrationController',
-    //            controllerAs: 'registr'
-    //        });
-    //});
+    ])
+    .config(($routeProvider: ng.route.IRouteProvider) =>
+    {
+        $routeProvider.when('/Home',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/Home/HomeView.html',
+            });
+        $routeProvider.when('/',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/Home/HomeView.html',
+            });
+        $routeProvider.when('/SignUp',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+            });
+        $routeProvider.when('/Error/:httpCode/:message',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/Error/ErrorView.html',
+                controller: 'errorController',
+                controllerAs: 'error'
+            });
+    });

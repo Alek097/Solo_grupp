@@ -1,7 +1,9 @@
 ﻿namespace API.App_Start
 {
+	using Data;
 	#region Using
 	using Infrastructure;
+	using Logging;
 	using Microsoft.Practices.Unity;
 	using System.Web.Http;
 	using System.Web.Http.Dispatcher;
@@ -27,7 +29,8 @@
 
 		private static void MapTypes(IUnityContainer container)
 		{
-
+			container.RegisterType<ILogger, Logger>();
+			container.RegisterType<IContext, ApplicationContext>();
 		}
 	}
 }
