@@ -231,6 +231,7 @@
     <Content Include="Bundles\app\bundle.js" />
     <Content Include="Bundles\app\img\Logo.jpg" />
     <Content Include="Index_Template.html" />
+    <Content Include="Scripts\Common\Error\ErrorView.html" />
     <Content Include="Scripts\Common\Menu\MenuView.html" />
     <Content Include="Scripts\Pages\Home\HomeView.html" />
     <Content Include="Scripts\Pages\SignUp\SignUpView.html" />
@@ -262,6 +263,8 @@
     <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeController.ts" />
     <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\CommonModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Error\ErrorController.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Error\ErrorModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Authentification.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\User.ts" />

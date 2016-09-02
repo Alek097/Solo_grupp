@@ -3,9 +3,10 @@ import './Common/CommonModule.ts'
 
 angular.module('main',
     [
+        'ngRoute',
+        'ngAnimate',
         'pages',
         'common',
-        'ngRoute',
     ])
     .config(($routeProvider: ng.route.IRouteProvider) =>
     {
@@ -23,5 +24,12 @@ angular.module('main',
             <ng.route.IRoute>
             {
                 templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+            });
+        $routeProvider.when('/Error?httpCode=:httpCode&message=:message',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Common/Error/ErrorView.ts',
+                controller: 'errorController',
+                controllerAs: 'error'
             });
     });
