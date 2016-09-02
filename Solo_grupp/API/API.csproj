@@ -263,6 +263,7 @@
     <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeController.ts" />
     <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\CommonModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\Registration.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuModule.ts" />

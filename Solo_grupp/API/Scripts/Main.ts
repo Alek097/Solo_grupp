@@ -8,8 +8,7 @@ angular.module('main',
         'pages',
         'common',
     ])
-    .config(($routeProvider: ng.route.IRouteProvider) =>
-    {
+    .config(($routeProvider: ng.route.IRouteProvider) => {
         $routeProvider.when('/Home',
             <ng.route.IRoute>
             {
@@ -24,6 +23,8 @@ angular.module('main',
             <ng.route.IRoute>
             {
                 templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+                controller: 'signUpController',
+                controllerAs: 'signUpCtrl'
             });
         $routeProvider.when('/Error/:httpCode/:message',
             <ng.route.IRoute>
