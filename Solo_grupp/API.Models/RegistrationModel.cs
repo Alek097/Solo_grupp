@@ -18,6 +18,7 @@
 		[Compare("Password", ErrorMessage = "Пароли не совпадают")]
 		public string RepeatedPassword { get; set; }
 		[Required(ErrorMessage = "Отсутствует адрес")]
+		[RegularExpression(@"с\.[A-Za-zА-Яа-яЁё]+ г\.[A-Za-zА-Яа-яЁё]")]
 		public string Adress { get; set; }
 		[Required(ErrorMessage = "Отсутствует E-mail")]
 		public string Email { get; set; }
