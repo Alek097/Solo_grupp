@@ -33,4 +33,11 @@ angular.module('main',
                 controller: 'errorController',
                 controllerAs: 'error'
             });
+        $routeProvider.when('/Message/:message',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/Message/MessageView.html',
+                controller: 'messageController',
+                controllerAs: 'messageCtrl'
+            });
     });
