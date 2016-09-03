@@ -11,7 +11,7 @@
                     <p class="error" id="error-email"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-model="Email" ng-keyup="signUpCtrl.emailValidate(Email)" type="text" class="form-control" id="email" placeholder="Введите email">
+                    <input ng-model="Email" ng-keyup="signUpCtrl.emailValidate(Email)" type="text" class="form-control" id="email" autocomplete="off" placeholder="Введите email">
                 </div>
             </div>
 
@@ -23,7 +23,7 @@
                     <p class="error" id="error-password"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-model="Password" ng-keyup="signUpCtrl.passwordValidate(Password)" type="password" class="form-control" placeholder="Пароль">
+                    <input ng-model="Password" ng-keyup="signUpCtrl.passwordValidate(Password)" type="password" class="form-control" id="pass" autocomplete="off" placeholder="Пароль">
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
                     <p class="error" id="error-repeatedPassword"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-model="RepeatedPassword" ng-keyup="signUpCtrl.repeatedPasswordValidate(RepeatedPassword)" type="password" class="form-control" id="repeatedPassword" placeholder="Повторить пароль">
+                    <input ng-model="RepeatedPassword" ng-keyup="signUpCtrl.repeatedPasswordValidate(RepeatedPassword)" type="password" class="form-control" id="repeatedPassword" autocomplete="off" placeholder="Повторить пароль">
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                     <p class="error" id="error-lastName"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-model="LastName" ng-keyup="signUpCtrl.lastNameValidate(LastName)" lastNameValidate type="text" class="form-control" id="lastName" placeholder="Иванов">
+                    <input ng-model="LastName" ng-keyup="signUpCtrl.lastNameValidate(LastName)" lastNameValidate type="text" class="form-control" id="lastName" autocomplete="off" placeholder="Иванов">
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
                     <p class="error" id="error-firstName"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-model="FirstName" ng-keyup="signUpCtrl.firstNameValidate(FirstName)" type="text" class="form-control" id="firstName" placeholder="Иван">
+                    <input ng-model="FirstName" ng-keyup="signUpCtrl.firstNameValidate(FirstName)" type="text" class="form-control" id="firstName" autocomplete="off" placeholder="Иван">
                 </div>
             </div>
 
@@ -71,7 +71,7 @@
                     <p class="error" id="error-patronymic"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-model="Patronymic" ng-keyup="signUpCtrl.patronymicValidate(Patronymic)" type="text" class="form-control" id="patronymic" placeholder="Иванович">
+                    <input ng-model="Patronymic" ng-keyup="signUpCtrl.patronymicValidate(Patronymic)" type="text" class="form-control" id="patronymic" autocomplete="off" placeholder="Иванович">
                 </div>
             </div>
 
@@ -83,7 +83,7 @@
                     <p class="error" id="error-adress"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-model="Adress" ng-keyup="signUpCtrl.adressValidate(Adress)" type="text" class="form-control" id="adress" placeholder="с.Россия г.Москва ул.Пушкина д.1 кв.1">
+                    <input ng-model="Adress" ng-keyup="signUpCtrl.adressValidate(Adress)" type="text" class="form-control" id="adress" autocomplete="off" placeholder="с.Россия г.Москва ул.Пушкина д.1 кв.1">
                 </div>
             </div>
 
@@ -95,7 +95,7 @@
                     <p class="error" id="error-phoneNumber"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-model="PhoneNumber" ng-keyup="signUpCtrl.phoneNumberValidate(PhoneNumber)" type="number" class="form-control" id="phoneNumber" placeholder="Номер телефона">
+                    <input ng-model="PhoneNumber" ng-keyup="signUpCtrl.phoneNumberValidate(PhoneNumber)" type="number" class="form-control" id="phoneNumber" autocomplete="off" placeholder="Номер телефона">
                 </div>
             </div>
 
