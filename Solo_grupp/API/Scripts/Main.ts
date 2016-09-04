@@ -26,6 +26,13 @@ angular.module('main',
                 controller: 'signUpController',
                 controllerAs: 'signUpCtrl'
             });
+        $routeProvider.when('/SignUp/:message',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+                controller: 'signUpController',
+                controllerAs: 'signUpCtrl'
+            });
         $routeProvider.when('/Error/:httpCode/:message',
             <ng.route.IRoute>
             {

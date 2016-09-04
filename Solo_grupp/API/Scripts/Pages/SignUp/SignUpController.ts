@@ -4,17 +4,24 @@ import {SignUpService} from './SignUpService.ts'
 export class SignUpController {
 
     public model: Registration = new Registration();
+    public error: string;
+
     private elem: JQuery;
 
     public static $inject: string[] =
     [
-        'signUpService'
+        'signUpService',
+        '$routeParams'
     ];
 
     constructor(
-        private service: SignUpService
+        private service: SignUpService,
+        params: ng.route.IRouteParamsService
     ) {
+        this.error = params['message'];
 
+        if (this.error == undefined)
+            this.error = '';
     }
 
     public emailValidate(): boolean {
@@ -169,7 +176,7 @@ export class SignUpController {
             return false;
         }
         else {
-            let regex: RegExp = new RegExp('с\.[A-Za-zА-Яа-яЁё]+ г\.[A-Za-zА-Яа-яЁё]');
+            let regex: RegExp = new RegExp('с\.[A-Za-zА-Яа-яЁё]+ г\.[A-Za-zА-Яа-яЁё]+');
 
             if (regex.test(adress)) {
                 this.clearError();
