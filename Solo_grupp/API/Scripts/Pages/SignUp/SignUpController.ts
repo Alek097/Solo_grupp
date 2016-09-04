@@ -237,7 +237,7 @@ export class SignUpController {
         if (valid) {
             this.service.Registration(this.model)
                 .success((data) => {
-
+                    //TODO: Перенаправление
                 });
         }
     }
