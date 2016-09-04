@@ -2,9 +2,6 @@
 {
 	#region Using
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Net;
 	using System.Net.Http;
 	using System.Web.Http;
 	using Data;
@@ -15,6 +12,8 @@
 	using Data.Models;
 	using Data.Repositories.Interfaces;
 	using Data.Repositories;
+	using System.Web.Http.ModelBinding;
+	using System.Net;
 	#endregion
 	public class UserController : ApiController
 	{
@@ -34,6 +33,25 @@
 		[HttpPost]
 		public async Task<HttpResponseMessage> SignUp(RegistrationModel model)
 		{
+			if (!ModelState.IsValid)
+			{
+				string errorMessage = "";
+
+				foreach (ModelState modelState in ModelState.Values)
+				{
+					foreach (ModelError error in modelState.Errors)
+					{
+						errorMessage = string.Format("{0}\n{1}");
+					}
+				}
+
+				HttpResponseMessage responce = new HttpResponseMessage(HttpStatusCode.Moved);
+
+				responce.Headers.Location = new Uri(string.Format("{0}/#/SignUp/{1}", Repository.DNS, errorMessage));
+
+				return responce;
+			}
+
 			NotActiveUser user = new NotActiveUser(model);
 			RepositoryResult result = await this.repository.RegistartionAsync(user);
 

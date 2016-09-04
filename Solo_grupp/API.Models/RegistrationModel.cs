@@ -18,11 +18,11 @@
 		[Compare("Password", ErrorMessage = "Пароли не совпадают")]
 		public string RepeatedPassword { get; set; }
 		[Required(ErrorMessage = "Отсутствует адрес")]
-		[RegularExpression(@"с\.[A-Za-zА-Яа-яЁё]+ г\.[A-Za-zА-Яа-яЁё]")]
+		[RegularExpression(@"с\.[A-Za-zА-Яа-яЁё]+ г\.[A-Za-zА-Яа-яЁё]+", ErrorMessage = "Не правильный формат адреса")]
 		public string Adress { get; set; }
 		[Required(ErrorMessage = "Отсутствует E-mail")]
+		[RegularExpression(@"^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$")]
 		public string Email { get; set; }
-		[RegularExpression("^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$")]
 		[Required(ErrorMessage = "Отсутствует номер телефона")]
 		public string PhoneNumber { get; set; }
 	}
