@@ -40,7 +40,7 @@
 			return result.Responce;
 		}
 		[AllowAnonymous]
-		[HttpPost]
+		[HttpGet]
 		public async Task<HttpResponseMessage> Activation(Guid id)
 		{
 			RepositoryResult<User> result = await this.repository.Activation(id);

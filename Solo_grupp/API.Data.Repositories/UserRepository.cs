@@ -45,7 +45,7 @@
 				await this.context.SaveChangesAsync();
 
 
-				this.logger.WriteInformation(string.Format("Пользователь с id = {0} и ФИО = {1} успешно активировался, теперь id = {3}",
+				this.logger.WriteInformation(string.Format("Пользователь с id = {0} и ФИО = {1} успешно активировался, теперь id = {2}",
 					notActiveUser.Id,
 					newUser.FullName,
 					newUser.Id));
@@ -67,7 +67,7 @@
 			context.Add(user);
 			int changes = await context.SaveChangesAsync();
 
-			if(changes == 0)
+			if (changes == 0)
 			{
 				result.Responce = new HttpResponseMessage(HttpStatusCode.Moved);
 				result.Responce.Headers.Location = new Uri(base.MovedError(500, "Ошибка на серевере"));
@@ -89,7 +89,8 @@
 
 				m.Subject = "Solo-grupp подтверждение аккаунта";
 
-				m.Body = string.Format("http://localhost:11799/api/User/Activation?id={0}", user.Id);
+				m.Body = string.Format("<a href={0}>{0}</a>",
+					string.Format("http://localhost:11799/api/User/Activation?id={0}", user.Id));
 				m.IsBodyHtml = true;
 
 				SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 25);
@@ -100,7 +101,7 @@
 
 				smtp.Credentials = new NetworkCredential(email, password);
 
-				await smtp.SendMailAsync(m);
+				smtp.Send(m);
 
 				this.logger.WriteInformation(string.Format("Зарегестрировался новый пользователь id = {0}. Письмо подтверждения отправлено на {1}.", user.Id, user.Email));
 

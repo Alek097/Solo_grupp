@@ -22,6 +22,7 @@
 		public string Adress { get; set; }
 		[Required(ErrorMessage = "Отсутствует E-mail")]
 		public string Email { get; set; }
+		[RegularExpression("^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$")]
 		[Required(ErrorMessage = "Отсутствует номер телефона")]
 		public string PhoneNumber { get; set; }
 	}
