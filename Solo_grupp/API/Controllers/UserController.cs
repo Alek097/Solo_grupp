@@ -31,12 +31,16 @@
 			this.repository = repository;
 		}
 		[AllowAnonymous]
-		public async Task SignUp(RegistrationModel model)
+		[HttpPost]
+		public async Task<HttpResponseMessage> SignUp(RegistrationModel model)
 		{
 			NotActiveUser user = new NotActiveUser(model);
-			await this.repository.RegistartionAsync(user);
+			RepositoryResult result = await this.repository.RegistartionAsync(user);
+
+			return result.Responce;
 		}
 		[AllowAnonymous]
+		[HttpPost]
 		public async Task<HttpResponseMessage> Activation(Guid id)
 		{
 			RepositoryResult<User> result = await this.repository.Activation(id);

@@ -41,7 +41,6 @@
 			else
 			{
 				User newUser = new User(notActiveUser);
-				this.context.Add(newUser);
 				this.context.Delete(notActiveUser);
 				await this.context.SaveChangesAsync();
 
@@ -61,10 +60,21 @@
 			return result;
 		}
 
-		public async Task RegistartionAsync(NotActiveUser user)
+		public async Task<RepositoryResult> RegistartionAsync(NotActiveUser user)
 		{
+			RepositoryResult result = new RepositoryResult();
+
 			context.Add(user);
-			await context.SaveChangesAsync();
+			int changes = await context.SaveChangesAsync();
+
+			if(changes == 0)
+			{
+				result.Responce = new HttpResponseMessage(HttpStatusCode.Moved);
+				result.Responce.Headers.Location = new Uri(base.MovedError(500, "Ошибка на серевере"));
+				result.ResultType = RepositoryResultType.Bad;
+
+				return result;
+			}
 
 			string email = "epamprojectChudo-pechka@yandex.ru";
 			string password = "epamProject";
@@ -93,11 +103,29 @@
 				await smtp.SendMailAsync(m);
 
 				this.logger.WriteInformation(string.Format("Зарегестрировался новый пользователь id = {0}. Письмо подтверждения отправлено на {1}.", user.Id, user.Email));
+
+				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
+
+				response.Headers.Location = new Uri(base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email)));
+
+				result.Responce = response;
+
+				result.ResultType = RepositoryResultType.OK;
 			}
 			catch (Exception ex)
 			{
 				this.logger.WriteError(ex, string.Format("Ошибка при отправке сообщения на {0} с {1}.", user.Email, email));
+
+				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
+
+				response.Headers.Location = new Uri(base.MovedError(500, string.Format("Не удалось отправить письмо на {0}", user.Email)));
+
+				result.Responce = response;
+
+				result.ResultType = RepositoryResultType.Bad;
 			}
+
+			return result;
 		}
 	}
 }

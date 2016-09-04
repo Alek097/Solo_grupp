@@ -7,7 +7,7 @@
 	#endregion
 	public interface IUserRepository
 	{
-		Task RegistartionAsync(NotActiveUser user);
+		Task<RepositoryResult> RegistartionAsync(NotActiveUser user);
 		Task<RepositoryResult<User>> Activation(Guid id);
 	}
 }
