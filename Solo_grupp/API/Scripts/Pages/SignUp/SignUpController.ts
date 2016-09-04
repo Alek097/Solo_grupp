@@ -1,4 +1,5 @@
 ﻿import {Registration} from '../../Common/Models/Registration.ts'
+import {SignUpService} from './SignUpService.ts'
 
 export class SignUpController {
 
@@ -7,8 +8,14 @@ export class SignUpController {
 
     public static $inject: string[] =
     [
-
+        'signUpService'
     ];
+
+    constructor(
+        private service: SignUpService
+    ) {
+
+    }
 
     public emailValidate(email: string): boolean {
         if (email === undefined)
@@ -38,7 +45,7 @@ export class SignUpController {
 
         this.elem = angular.element('#error-password');
 
-        if (password == undefined || password.length == 0 ) {
+        if (password == undefined || password.length == 0) {
             this.writeError('Введите пароль')
             return false;
         }
@@ -80,7 +87,7 @@ export class SignUpController {
 
         this.elem = angular.element('#error-lastName');
 
-        if (lastName == undefined || lastName.length === 0 ) {
+        if (lastName == undefined || lastName.length === 0) {
             this.writeError('Введите Фамилию');
             return false;
         }
@@ -94,7 +101,7 @@ export class SignUpController {
 
         this.elem = angular.element('#error-firstName');
 
-        if (firstName == undefined || firstName.length === 0 ) {
+        if (firstName == undefined || firstName.length === 0) {
             this.writeError('Введите Имя');
             return false;
         }
@@ -196,7 +203,7 @@ export class SignUpController {
         valid = valid && this.repeatedPasswordValidate(this.model.RepeatedPassword);
 
         if (valid) {
-            //TODO: Send model
+            this.service.Registration(this.model);
         }
     }
 
