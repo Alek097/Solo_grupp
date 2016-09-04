@@ -17,7 +17,9 @@ export class SignUpController {
 
     }
 
-    public emailValidate(email: string): boolean {
+    public emailValidate(): boolean {
+        let email: string = angular.element('#email').val();
+
         if (email === undefined)
             return;
 
@@ -36,11 +38,23 @@ export class SignUpController {
         }
         else {
             this.clearError();
+        }
+
+        let Regex: RegExp = new RegExp('^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$');
+
+        if (Regex.test(email)) {
+            this.clearError();
             return true;
+        }
+        else {
+            this.writeError('Введите Email в правильном формате');
+            return false;
         }
     }
 
-    public passwordValidate(password: string): boolean {
+    public passwordValidate(): boolean {
+        let password: string = angular.element('#password').val();
+
         this.model.Password = password;
 
         this.elem = angular.element('#error-password');
@@ -63,7 +77,9 @@ export class SignUpController {
         }
     }
 
-    public repeatedPasswordValidate(repeatedPassword: string): boolean {
+    public repeatedPasswordValidate(): boolean {
+        let repeatedPassword: string = angular.element('#repeatedPassword').val();;
+
         this.model.RepeatedPassword = repeatedPassword;
 
         this.elem = angular.element('#error-repeatedPassword');
@@ -82,7 +98,8 @@ export class SignUpController {
         }
     }
 
-    public lastNameValidate(lastName: string): boolean {
+    public lastNameValidate(): boolean {
+        let lastName: string = angular.element('#lastName').val();
         this.model.LastName = lastName;
 
         this.elem = angular.element('#error-lastName');
@@ -96,7 +113,9 @@ export class SignUpController {
             return true;
         }
     }
-    public firstNameValidate(firstName: string): boolean {
+    public firstNameValidate(): boolean {
+        let firstName: string = angular.element('#firstName').val();
+
         this.model.FirstName = firstName;
 
         this.elem = angular.element('#error-firstName');
@@ -110,7 +129,9 @@ export class SignUpController {
             return true;
         }
     }
-    public patronymicValidate(patronymic: string): boolean {
+    public patronymicValidate(): boolean {
+        let patronymic: string = angular.element('#patronymic').val();
+
         this.model.Patronymic = patronymic;
 
         this.elem = angular.element('#error-patronymic');
@@ -125,7 +146,9 @@ export class SignUpController {
         }
     }
 
-    public adressValidate(adress: string): boolean {
+    public adressValidate(): boolean {
+        let adress: string = angular.element('#adress').val();
+
         if (adress === undefined)
             return;
 
@@ -160,7 +183,9 @@ export class SignUpController {
 
     }
 
-    public phoneNumberValidate(phoneNumber: string): boolean {
+    public phoneNumberValidate(): boolean {
+        let phoneNumber: string = angular.element('#phoneNumber').val();
+
         if (phoneNumber === undefined)
             return;
 
@@ -186,24 +211,27 @@ export class SignUpController {
     }
 
     public submit(): void {
-        let valid: boolean = this.adressValidate(this.model.Adress);
+        let valid: boolean = this.adressValidate();
 
-        valid = valid && this.emailValidate(this.model.Email);
+        valid = valid && this.emailValidate();
 
-        valid = valid && this.firstNameValidate(this.model.FirstName);
+        valid = valid && this.firstNameValidate();
 
-        valid = valid && this.lastNameValidate(this.model.LastName);
+        valid = valid && this.lastNameValidate();
 
-        valid = valid && this.passwordValidate(this.model.Password);
+        valid = valid && this.passwordValidate();
 
-        valid = valid && this.patronymicValidate(this.model.Patronymic);
+        valid = valid && this.patronymicValidate();
 
-        valid = valid && this.phoneNumberValidate(this.model.PhoneNumber);
+        valid = valid && this.phoneNumberValidate();
 
-        valid = valid && this.repeatedPasswordValidate(this.model.RepeatedPassword);
+        valid = valid && this.repeatedPasswordValidate();
 
         if (valid) {
-            this.service.Registration(this.model);
+            this.service.Registration(this.model)
+                .success((data) => {
+
+                });
         }
     }
 
