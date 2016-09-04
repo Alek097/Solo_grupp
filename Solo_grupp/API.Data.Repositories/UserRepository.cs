@@ -9,6 +9,7 @@
 	using System.Threading.Tasks;
 	using System.Net.Http;
 	using System.Net;
+	using System.Linq;
 	#endregion
 	public class UserRepository : Repository, IUserRepository
 	{
@@ -64,7 +65,24 @@
 		{
 			RepositoryResult result = new RepositoryResult();
 
+			NotActiveUser isHaveUser = context.GetAll<NotActiveUser>().FirstOrDefault((u) => u.Email == user.Email);
+
+			if (isHaveUser != null)
+			{
+				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
+
+				response.Headers.Location = new Uri(this.MovedSignUpError(string.Format("Почта {0} уже занята.", user.Email)));
+
+				result.Responce = response;
+
+				result.ResultType = RepositoryResultType.Bad;
+
+				return result;
+			}
+
 			context.Add(user);
+
+
 			int changes = await context.SaveChangesAsync();
 
 			if (changes == 0)
@@ -127,6 +145,11 @@
 			}
 
 			return result;
+		}
+
+		private string MovedSignUpError(string message)
+		{
+			return string.Format("{0}/#/SignUp/{1}", DNS, message);
 		}
 	}
 }
