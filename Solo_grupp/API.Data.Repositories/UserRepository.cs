@@ -11,6 +11,8 @@
 	using System.Net;
 	using System.Linq;
 	using API.Models;
+	using System.Text;
+	using System.Security.Cryptography;
 	#endregion
 	public class UserRepository : Repository, IUserRepository
 	{
@@ -171,13 +173,27 @@
 					}
 					else
 					{
-						result.ResultType = RepositoryResultType.OK;
-						result.Value = usr;
-						result.Responce = new MoveTo()
+						string hashPassword = User.HshPassword(model.Password, usr.Salt);
+
+						if (usr.PasswordHash == hashPassword)
 						{
-							IsMoving = true,
-							Location = base.MovedHome()
-						};
+							result.ResultType = RepositoryResultType.OK;
+							result.Value = usr;
+							result.Responce = new MoveTo()
+							{
+								IsMoving = true,
+								Location = base.MovedHome()
+							};
+						}
+						else
+						{
+							result.ResultType = RepositoryResultType.Bad;
+							result.Responce = new MoveTo()
+							{
+								IsMoving = true,
+								Location = this.MovedSignInError("Неверный логин или пароль")
+							};
+						}
 					}
 
 					return result;

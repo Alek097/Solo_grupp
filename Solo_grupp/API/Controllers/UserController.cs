@@ -59,7 +59,7 @@
 
 			return result.Responce;
 		}
-		public void SignIn()
+		public Task<RepositoryResult<UserInformation, MoveTo>> SignIn(SignIn model)
 		{
 
 		}
