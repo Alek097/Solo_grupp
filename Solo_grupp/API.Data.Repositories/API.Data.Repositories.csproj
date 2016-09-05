@@ -74,6 +74,10 @@
       <Project>{7066849a-3cd0-4639-bee6-5f2fe9cbeb91}</Project>
       <Name>API.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\API.Models\API.Models.csproj">
+      <Project>{E1A5F029-8CAF-43ED-8453-2E6FE48F00F1}</Project>
+      <Name>API.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

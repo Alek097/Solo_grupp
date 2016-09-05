@@ -234,6 +234,7 @@
     <Content Include="Scripts\Pages\Error\ErrorView.html" />
     <Content Include="Scripts\Common\Menu\MenuView.html" />
     <Content Include="Scripts\Pages\Home\HomeView.html" />
+    <Content Include="Scripts\Pages\Message\MessageView.html" />
     <Content Include="Scripts\Pages\SignUp\SignUpView.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -263,6 +264,8 @@
     <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeController.ts" />
     <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\CommonModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\MoveTo.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\Registration.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuModule.ts" />
@@ -270,6 +273,8 @@
     <TypeScriptCompile Include="Scripts\Common\Models\User.ts" />
     <TypeScriptCompile Include="Scripts\Main.ts" />
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuDirective.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Message\MessageController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Message\MessageModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpModule.ts" />

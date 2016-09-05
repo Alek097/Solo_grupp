@@ -1,7 +1,9 @@
 ﻿namespace API.App_Start
 {
-	using Data;
 	#region Using
+	using Data;
+	using Data.Repositories;
+	using Data.Repositories.Interfaces;
 	using Infrastructure;
 	using Logging;
 	using Microsoft.Practices.Unity;
@@ -31,6 +33,7 @@
 		{
 			container.RegisterType<ILogger, Logger>();
 			container.RegisterType<IContext, ApplicationContext>();
+			container.RegisterType<IUserRepository, UserRepository>();
 		}
 	}
 }

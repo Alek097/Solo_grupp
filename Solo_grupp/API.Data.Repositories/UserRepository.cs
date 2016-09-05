@@ -9,6 +9,8 @@
 	using System.Threading.Tasks;
 	using System.Net.Http;
 	using System.Net;
+	using System.Linq;
+	using API.Models;
 	#endregion
 	public class UserRepository : Repository, IUserRepository
 	{
@@ -20,13 +22,12 @@
 			this.logger = logger;
 		}
 
-		public async Task<RepositoryResult<User>> Activation(Guid id)
+		public async Task<RepositoryResult<User, HttpResponseMessage>> Activation(Guid id)
 		{
-			RepositoryResult<User> result = new RepositoryResult<User>();
+			RepositoryResult<User, HttpResponseMessage> result = new RepositoryResult<User, HttpResponseMessage>();
 
 			NotActiveUser notActiveUser = this.context.Get<NotActiveUser, Guid>(id);
 
-			//TODO: Исправить
 			if (notActiveUser == null)
 			{
 				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
@@ -41,12 +42,11 @@
 			else
 			{
 				User newUser = new User(notActiveUser);
-				this.context.Add(newUser);
 				this.context.Delete(notActiveUser);
 				await this.context.SaveChangesAsync();
 
 
-				this.logger.WriteInformation(string.Format("Пользователь с id = {0} и ФИО = {1} успешно активировался, теперь id = {3}",
+				this.logger.WriteInformation(string.Format("Пользователь с id = {0} и ФИО = {1} успешно активировался, теперь id = {2}",
 					notActiveUser.Id,
 					newUser.FullName,
 					newUser.Id));
@@ -61,10 +61,43 @@
 			return result;
 		}
 
-		public async Task RegistartionAsync(NotActiveUser user)
+		public async Task<RepositoryResult<MoveTo>> RegistartionAsync(NotActiveUser user)
 		{
+			RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
+
+			NotActiveUser isHaveUser = context.GetAll<NotActiveUser>().FirstOrDefault((u) => u.Email == user.Email);
+
+			if (isHaveUser != null)
+			{
+
+				result.ResultType = RepositoryResultType.Bad;
+
+				result.Responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = this.MovedSignUpError(string.Format("Почта {0} уже занята.", user.Email))
+				};
+
+				return result;
+			}
+
 			context.Add(user);
-			await context.SaveChangesAsync();
+
+
+			int changes = await context.SaveChangesAsync();
+
+			if (changes == 0)
+			{
+				result.ResultType = RepositoryResultType.Bad;
+
+				result.Responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = base.MovedError(500, "Ошибка на серевере")
+				};
+
+				return result;
+			}
 
 			string email = "epamprojectChudo-pechka@yandex.ru";
 			string password = "epamProject";
@@ -79,7 +112,8 @@
 
 				m.Subject = "Solo-grupp подтверждение аккаунта";
 
-				m.Body = string.Format("http://localhost:11799/api/User/Activation?id={0}", user.Id);
+				m.Body = string.Format("<a href={0}>{0}</a>",
+					string.Format("http://localhost:11799/api/User/Activation?id={0}", user.Id));
 				m.IsBodyHtml = true;
 
 				SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 25);
@@ -90,14 +124,37 @@
 
 				smtp.Credentials = new NetworkCredential(email, password);
 
-				await smtp.SendMailAsync(m);
+				smtp.Send(m);
 
 				this.logger.WriteInformation(string.Format("Зарегестрировался новый пользователь id = {0}. Письмо подтверждения отправлено на {1}.", user.Id, user.Email));
+
+				result.ResultType = RepositoryResultType.OK;
+
+				result.Responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email))
+				};
 			}
 			catch (Exception ex)
 			{
 				this.logger.WriteError(ex, string.Format("Ошибка при отправке сообщения на {0} с {1}.", user.Email, email));
+
+				result.ResultType = RepositoryResultType.Bad;
+
+				result.Responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = base.MovedError(500, string.Format("Не удалось отправить письмо на {0}", user.Email))
+				};
 			}
+
+			return result;
+		}
+
+		private string MovedSignUpError(string message)
+		{
+			return string.Format("{0}/#/SignUp/{1}", DNS, message);
 		}
 	}
 }
