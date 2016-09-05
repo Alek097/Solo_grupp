@@ -11,5 +11,6 @@
 	{
 		Task<RepositoryResult<MoveTo>> RegistartionAsync(NotActiveUser user);
 		Task<RepositoryResult<User, HttpResponseMessage>> Activation(Guid id);
+		Task<RepositoryResult<User, MoveTo>> SignIn(SignIn model);
 	}
 }

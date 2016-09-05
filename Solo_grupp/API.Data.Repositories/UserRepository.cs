@@ -152,9 +152,43 @@
 			return result;
 		}
 
+		public async Task<RepositoryResult<User, MoveTo>> SignIn(SignIn model)
+		{
+			return await Task.Run<RepositoryResult<User, MoveTo>>(() =>
+				{
+					RepositoryResult<User, MoveTo> result = new RepositoryResult<User, MoveTo>();
+
+					User usr = this.context.GetAll<User>().FirstOrDefault((u) => u.Email == model.Email);
+
+					if (usr == null)
+					{
+						result.Responce = new MoveTo()
+						{
+							IsMoving = true,
+							Location = this.MovedSignInError("Неверный логин или пароль")
+						};
+					}
+					else
+					{
+						result.Value = usr;
+						result.Responce = new MoveTo()
+						{
+							IsMoving = true,
+							Location = base.MovedHome()
+						};
+					}
+
+					return result;
+				});
+		}
+
 		private string MovedSignUpError(string message)
 		{
 			return string.Format("{0}/#/SignUp/{1}", DNS, message);
+		}
+		private string MovedSignInError(string message)
+		{
+			return string.Format("{0}/#/SignIn/{1}", DNS, message);
 		}
 	}
 }
