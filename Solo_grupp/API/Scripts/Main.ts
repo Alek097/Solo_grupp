@@ -47,10 +47,10 @@ angular.module('main',
                 controller: 'messageController',
                 controllerAs: 'messageCtrl'
             });
-        $routeProvider.when('/SignUp',
+        $routeProvider.when('/SignIn',
             <ng.route.IRoute>
             {
-                templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+                templateUrl: '../Scripts/Pages/SignIn/SignInView.html',
                 controller: 'signUpController',
                 controllerAs: 'signUpCtrl'
             });
