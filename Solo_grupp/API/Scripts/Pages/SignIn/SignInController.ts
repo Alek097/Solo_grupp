@@ -1,4 +1,7 @@
 ﻿import {SignIn} from '../../Common/Models/SignIn.ts'
+import {MoveTo} from '../../Common/Models/MoveTo.ts'
+import {User} from '../../Common/Models/User.ts'
+import {RepositoryResultValue} from '../../Common/Models/RepositoryResult.ts'
 import {SignInService} from './SignInService.ts'
 
 export class SignInController {
@@ -74,6 +77,26 @@ export class SignInController {
         else {
             this.clearError();
             return true;
+        }
+    }
+
+    public submit(): void {
+        let valid: boolean = this.emailValidate();
+        valid = valid && this.passwordValidate();
+
+        if (valid) {
+            this.service.SignIn(this.model)
+                .success((data: RepositoryResultValue<User, MoveTo>) => {
+                    if (data.Responce.IsMoving) {
+
+                        if (data.Value != undefined) {
+                            window.localStorage.setItem('user', JSON.stringify(data.Value));
+                        }
+
+
+                        window.location.href = data.Responce.Location;
+                    }
+                });
         }
     }
 
