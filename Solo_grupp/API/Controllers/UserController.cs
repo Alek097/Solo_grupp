@@ -13,7 +13,6 @@
 	using Data.Repositories.Interfaces;
 	using Data.Repositories;
 	using System.Web.Http.ModelBinding;
-	using System.Net;
 	#endregion
 	public class UserController : ApiController
 	{
@@ -59,9 +58,35 @@
 
 			return result.Responce;
 		}
-		public Task<RepositoryResult<UserInformation, MoveTo>> SignIn(SignIn model)
+		[AllowAnonymous]
+		[HttpPost]
+		public async Task<RepositoryResult<UserInformation, MoveTo>> SignIn(SignIn model)
 		{
+			RepositoryResult<UserInformation, MoveTo> result = new RepositoryResult<UserInformation, MoveTo>();
 
+			RepositoryResult<User, MoveTo> repoResult = await this.repository.SignIn(model);
+
+			result.Responce = repoResult.Responce;
+
+			if (repoResult.Value == null)
+			{
+				return result;
+			}
+			else
+			{
+				result.Value = new UserInformation()
+				{
+					Adress = repoResult.Value.Adress,
+					Email = repoResult.Value.Email,
+					FirstName = repoResult.Value.FirstName,
+					FullName = repoResult.Value.FullName,
+					Id = repoResult.Value.Id,
+					LastName = repoResult.Value.LastName,
+					Patronymic = repoResult.Value.Patronymic
+				};
+
+				return result;
+			}
 		}
 		[AllowAnonymous]
 		[HttpGet]
