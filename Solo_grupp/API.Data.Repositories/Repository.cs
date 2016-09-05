@@ -11,5 +11,9 @@
 		{
 			return string.Format("{0}/#/Message/{1}", DNS, message);
 		}
+		public string MovedHome()
+		{
+			return string.Format("{0}/#/Home");
+		}
 	}
 }
