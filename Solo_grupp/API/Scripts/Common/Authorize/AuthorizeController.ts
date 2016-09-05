@@ -6,7 +6,7 @@ export class AuthorizeController {
     public fullName: string = null;
     constructor()
     {
-        let user: User = window.localStorage.getItem('user');
+        let user: User = JSON.parse(window.localStorage.getItem('user'));
 
         if (user === null || user === undefined) {
             this.isAuth = false;
