@@ -28,7 +28,6 @@
 
 			NotActiveUser notActiveUser = this.context.Get<NotActiveUser, Guid>(id);
 
-			//TODO: Исправить
 			if (notActiveUser == null)
 			{
 				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
@@ -62,25 +61,20 @@
 			return result;
 		}
 
-		public async Task<RepositoryResult<ControllerResult>> RegistartionAsync(NotActiveUser user)
+		public async Task<RepositoryResult<MoveTo>> RegistartionAsync(NotActiveUser user)
 		{
-			RepositoryResult<ControllerResult> result = new RepositoryResult<ControllerResult>();
+			RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
 
 			NotActiveUser isHaveUser = context.GetAll<NotActiveUser>().FirstOrDefault((u) => u.Email == user.Email);
 
 			if (isHaveUser != null)
 			{
-				//HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
-
-				//response.Headers.Location = new Uri(this.MovedSignUpError(string.Format("Почта {0} уже занята.", user.Email)));
-
-				//result.Responce = response;
 
 				result.ResultType = RepositoryResultType.Bad;
 
-				result.Responce = new ControllerResult()
+				result.Responce = new MoveTo()
 				{
-					Code = ControllerResultType.Moved,
+					IsMoving = true,
 					Location = this.MovedSignUpError(string.Format("Почта {0} уже занята.", user.Email))
 				};
 
@@ -94,15 +88,11 @@
 
 			if (changes == 0)
 			{
-				//result.Responce = new HttpResponseMessage(HttpStatusCode.Moved);
-				//result.Responce.Headers.Location = new Uri(base.MovedError(500, "Ошибка на серевере"));
-
-
 				result.ResultType = RepositoryResultType.Bad;
 
-				result.Responce = new ControllerResult()
+				result.Responce = new MoveTo()
 				{
-					Code = ControllerResultType.Moved,
+					IsMoving = true,
 					Location = base.MovedError(500, "Ошибка на серевере")
 				};
 
@@ -138,17 +128,11 @@
 
 				this.logger.WriteInformation(string.Format("Зарегестрировался новый пользователь id = {0}. Письмо подтверждения отправлено на {1}.", user.Id, user.Email));
 
-				//HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
-
-				//response.Headers.Location = new Uri(base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email)));
-
-				//result.Responce = response;
-
 				result.ResultType = RepositoryResultType.OK;
 
-				result.Responce = new ControllerResult()
+				result.Responce = new MoveTo()
 				{
-					Code = ControllerResultType.Moved,
+					IsMoving = true,
 					Location = base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email))
 				};
 			}
@@ -156,17 +140,12 @@
 			{
 				this.logger.WriteError(ex, string.Format("Ошибка при отправке сообщения на {0} с {1}.", user.Email, email));
 
-				//HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
-
-				//response.Headers.Location = new Uri(base.MovedError(500, string.Format("Не удалось отправить письмо на {0}", user.Email)));
-
-				//result.Responce = response;
-
 				result.ResultType = RepositoryResultType.Bad;
 
-				result.Responce = new ControllerResult()
+				result.Responce = new MoveTo()
 				{
-					Code
+					IsMoving = true,
+					Location = base.MovedError(500, string.Format("Не удалось отправить письмо на {0}", user.Email))
 				};
 			}
 

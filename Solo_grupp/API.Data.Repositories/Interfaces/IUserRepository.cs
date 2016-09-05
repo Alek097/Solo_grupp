@@ -9,7 +9,7 @@
 	#endregion
 	public interface IUserRepository
 	{
-		Task<RepositoryResult<ControllerResult>> RegistartionAsync(NotActiveUser user);
+		Task<RepositoryResult<MoveTo>> RegistartionAsync(NotActiveUser user);
 		Task<RepositoryResult<User, HttpResponseMessage>> Activation(Guid id);
 	}
 }

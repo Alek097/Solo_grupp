@@ -31,7 +31,7 @@
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<HttpResponseMessage> SignUp(RegistrationModel model)
+		public async Task<MoveTo> SignUp(RegistrationModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -45,15 +45,17 @@
 					}
 				}
 
-				HttpResponseMessage responce = new HttpResponseMessage(HttpStatusCode.Moved);
-
-				responce.Headers.Location = new Uri(string.Format("{0}/#/SignUp/{1}", Repository.DNS, errorMessage));
+				MoveTo responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = string.Format("{0}/#/SignUp/{1}", Repository.DNS, errorMessage)
+				};
 
 				return responce;
 			}
 
 			NotActiveUser user = new NotActiveUser(model);
-			RepositoryResult result = await this.repository.RegistartionAsync(user);
+			RepositoryResult<MoveTo> result = await this.repository.RegistartionAsync(user);
 
 			return result.Responce;
 		}
@@ -61,7 +63,7 @@
 		[HttpGet]
 		public async Task<HttpResponseMessage> Activation(Guid id)
 		{
-			RepositoryResult<User> result = await this.repository.Activation(id);
+			RepositoryResult<User, HttpResponseMessage> result = await this.repository.Activation(id);
 
 			if (result.ResultType == RepositoryResultType.OK)
 			{

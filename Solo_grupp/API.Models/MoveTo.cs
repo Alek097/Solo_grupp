@@ -1,8 +1,8 @@
 ﻿namespace API.Models
 {
-	public class ControllerResult
+	public class MoveTo
 	{
 		public string Location { get; set; }
-		public bool IsSucces { get; set; }
+		public bool IsMoving { get; set; }
 	}
 }
