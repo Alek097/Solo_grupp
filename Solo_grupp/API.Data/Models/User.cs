@@ -14,6 +14,7 @@
 		public string Patronymic { get; set; }
 		public string FullName { get; set; }
 		public string Adress { get; set; }
+		public new string PasswordHash { get; set; }
 		public virtual Salt Salt { get; set; }
 		public virtual ICollection<Resolution> Permission { get; set; }
 		public virtual ICollection<News> News { get; set; }
@@ -32,17 +33,18 @@
 			this.Adress = user.Adress;
 			this.Email = user.Email;
 			this.PhoneNumber = user.PhoneNumber;
+			this.FullName = string.Format("{0} {1} {2}", this.LastName, this.FirstName, this.Patronymic);
 
 			this.Salt = new Salt();
 
-			this.PasswordHash = User.HshPassword(user.Password, this.Salt);
+			this.PasswordHash = User.HashPassword(user.Password, this.Salt);
 
 			this.Permission = new List<Resolution>() {
 				new Resolution() {ResolutionType = ResolutionType.AddComment }
 			};
 		}
 
-		public static string HshPassword(string password, Salt salt)
+		public static string HashPassword(string password, Salt salt)
 		{
 
 			byte[] bytesPaassword = Encoding.UTF8.GetBytes(password);

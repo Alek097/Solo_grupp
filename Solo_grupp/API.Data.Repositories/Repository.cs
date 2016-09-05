@@ -13,7 +13,7 @@
 		}
 		public string MovedHome()
 		{
-			return string.Format("{0}/#/Home");
+			return string.Format("{0}/#/Home", DNS);
 		}
 	}
 }

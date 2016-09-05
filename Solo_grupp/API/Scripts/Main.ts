@@ -51,8 +51,8 @@ angular.module('main',
             <ng.route.IRoute>
             {
                 templateUrl: '../Scripts/Pages/SignIn/SignInView.html',
-                controller: 'signUpController',
-                controllerAs: 'signUpCtrl'
+                controller: 'signInController',
+                controllerAs: 'signInCtrl'
             });
         $routeProvider.when('/SignIn/:message',
             <ng.route.IRoute>

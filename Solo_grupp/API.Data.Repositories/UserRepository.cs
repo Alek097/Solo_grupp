@@ -83,24 +83,6 @@
 				return result;
 			}
 
-			context.Add(user);
-
-
-			int changes = await context.SaveChangesAsync();
-
-			if (changes == 0)
-			{
-				result.ResultType = RepositoryResultType.Bad;
-
-				result.Responce = new MoveTo()
-				{
-					IsMoving = true,
-					Location = base.MovedError(500, "Ошибка на серевере")
-				};
-
-				return result;
-			}
-
 			string email = "epamprojectChudo-pechka@yandex.ru";
 			string password = "epamProject";
 
@@ -137,6 +119,23 @@
 					IsMoving = true,
 					Location = base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email))
 				};
+
+				context.Add(user);
+
+				int changes = await context.SaveChangesAsync();
+
+				if (changes == 0)
+				{
+					result.ResultType = RepositoryResultType.Bad;
+
+					result.Responce = new MoveTo()
+					{
+						IsMoving = true,
+						Location = base.MovedError(500, "Ошибка на серевере")
+					};
+
+					return result;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -173,7 +172,7 @@
 					}
 					else
 					{
-						string hashPassword = User.HshPassword(model.Password, usr.Salt);
+						string hashPassword = User.HashPassword(model.Password, usr.Salt);
 
 						if (usr.PasswordHash == hashPassword)
 						{
