@@ -11,6 +11,8 @@
 	using System.Net;
 	using System.Linq;
 	using API.Models;
+	using System.Text;
+	using System.Security.Cryptography;
 	#endregion
 	public class UserRepository : Repository, IUserRepository
 	{
@@ -81,24 +83,6 @@
 				return result;
 			}
 
-			context.Add(user);
-
-
-			int changes = await context.SaveChangesAsync();
-
-			if (changes == 0)
-			{
-				result.ResultType = RepositoryResultType.Bad;
-
-				result.Responce = new MoveTo()
-				{
-					IsMoving = true,
-					Location = base.MovedError(500, "Ошибка на серевере")
-				};
-
-				return result;
-			}
-
 			string email = "epamprojectChudo-pechka@yandex.ru";
 			string password = "epamProject";
 
@@ -135,6 +119,23 @@
 					IsMoving = true,
 					Location = base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email))
 				};
+
+				context.Add(user);
+
+				int changes = await context.SaveChangesAsync();
+
+				if (changes == 0)
+				{
+					result.ResultType = RepositoryResultType.Bad;
+
+					result.Responce = new MoveTo()
+					{
+						IsMoving = true,
+						Location = base.MovedError(500, "Ошибка на серевере")
+					};
+
+					return result;
+				}
 			}
 			catch (Exception ex)
 			{
@@ -152,9 +153,59 @@
 			return result;
 		}
 
+		public async Task<RepositoryResult<User, MoveTo>> SignIn(SignIn model)
+		{
+			return await Task.Run<RepositoryResult<User, MoveTo>>(() =>
+				{
+					RepositoryResult<User, MoveTo> result = new RepositoryResult<User, MoveTo>();
+
+					User usr = this.context.GetAll<User>().FirstOrDefault((u) => u.Email == model.Email);
+
+					if (usr == null)
+					{
+						result.ResultType = RepositoryResultType.Bad;
+						result.Responce = new MoveTo()
+						{
+							IsMoving = true,
+							Location = this.MovedSignInError("Неверный логин или пароль")
+						};
+					}
+					else
+					{
+						string hashPassword = User.HashPassword(model.Password, usr.Salt);
+
+						if (usr.PasswordHash == hashPassword)
+						{
+							result.ResultType = RepositoryResultType.OK;
+							result.Value = usr;
+							result.Responce = new MoveTo()
+							{
+								IsMoving = true,
+								Location = base.MovedHome()
+							};
+						}
+						else
+						{
+							result.ResultType = RepositoryResultType.Bad;
+							result.Responce = new MoveTo()
+							{
+								IsMoving = true,
+								Location = this.MovedSignInError("Неверный логин или пароль")
+							};
+						}
+					}
+
+					return result;
+				});
+		}
+
 		private string MovedSignUpError(string message)
 		{
 			return string.Format("{0}/#/SignUp/{1}", DNS, message);
+		}
+		private string MovedSignInError(string message)
+		{
+			return string.Format("{0}/#/SignIn/{1}", DNS, message);
 		}
 	}
 }

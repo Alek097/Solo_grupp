@@ -108,8 +108,18 @@
     }
 }
 
-#signUpContainer {
+#signUpContainer, #signInContainer {
     padding-top: @navbar-Size;
+}
+
+#signInContainer {
+    div > form {
+        margin-top: 25%;
+
+        @media(max-width: @Tablet-Size) {
+            margin-top: 0px;
+        }
+    }
 }
 
 .error {
@@ -124,4 +134,7 @@
 
 #signUpError {
     margin-top: 15px;
+}
+.navbar-collapse{
+    max-height: initial !important;
 }

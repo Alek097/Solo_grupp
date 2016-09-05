@@ -14,6 +14,7 @@
 		public string Patronymic { get; set; }
 		public string FullName { get; set; }
 		public string Adress { get; set; }
+		public new string PasswordHash { get; set; }
 		public virtual Salt Salt { get; set; }
 		public virtual ICollection<Resolution> Permission { get; set; }
 		public virtual ICollection<News> News { get; set; }
@@ -32,17 +33,31 @@
 			this.Adress = user.Adress;
 			this.Email = user.Email;
 			this.PhoneNumber = user.PhoneNumber;
+			this.FullName = string.Format("{0} {1} {2}", this.LastName, this.FirstName, this.Patronymic);
 
 			this.Salt = new Salt();
 
-			byte[] bytesPaassword = Encoding.UTF8.GetBytes(user.Password);
-			SHA256Managed sha256 = new SHA256Managed();
-			byte[] hashPass = sha256.ComputeHash(bytesPaassword);
-			this.PasswordHash = Encoding.UTF8.GetString(hashPass);
+			this.PasswordHash = User.HashPassword(user.Password, this.Salt);
 
 			this.Permission = new List<Resolution>() {
 				new Resolution() {ResolutionType = ResolutionType.AddComment }
 			};
+		}
+
+		public static string HashPassword(string password, Salt salt)
+		{
+
+			byte[] bytesPaassword = Encoding.UTF8.GetBytes(password);
+			SHA256Managed sha256 = new SHA256Managed();
+			byte[] bytesHashPass = sha256.ComputeHash(bytesPaassword);
+			string hashPassword = Encoding.UTF8.GetString(bytesHashPass);
+
+			hashPassword += salt.Value;
+
+			bytesPaassword = Encoding.UTF8.GetBytes(hashPassword);
+			bytesHashPass = sha256.ComputeHash(bytesPaassword);
+
+			return Encoding.UTF8.GetString(bytesHashPass);
 		}
 	}
 }
