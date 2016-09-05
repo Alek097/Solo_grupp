@@ -20,7 +20,7 @@
 		{
 
 		}
-		public NotActiveUser(RegistrationModel model)
+		public NotActiveUser(SignUp model)
 		{
 			this.Id = Guid.NewGuid();
 			this.firstUpper(model.FirstName);

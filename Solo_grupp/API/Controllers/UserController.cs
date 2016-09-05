@@ -31,7 +31,7 @@
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<MoveTo> SignUp(RegistrationModel model)
+		public async Task<MoveTo> SignUp(SignUp model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -58,6 +58,10 @@
 			RepositoryResult<MoveTo> result = await this.repository.RegistartionAsync(user);
 
 			return result.Responce;
+		}
+		public void SignIn()
+		{
+
 		}
 		[AllowAnonymous]
 		[HttpGet]
