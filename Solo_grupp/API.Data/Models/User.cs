@@ -35,14 +35,27 @@
 
 			this.Salt = new Salt();
 
-			byte[] bytesPaassword = Encoding.UTF8.GetBytes(user.Password);
-			SHA256Managed sha256 = new SHA256Managed();
-			byte[] hashPass = sha256.ComputeHash(bytesPaassword);
-			this.PasswordHash = Encoding.UTF8.GetString(hashPass);
+			this.PasswordHash = User.HshPassword(user.Password, this.Salt);
 
 			this.Permission = new List<Resolution>() {
 				new Resolution() {ResolutionType = ResolutionType.AddComment }
 			};
+		}
+
+		public static string HshPassword(string password, Salt salt)
+		{
+
+			byte[] bytesPaassword = Encoding.UTF8.GetBytes(password);
+			SHA256Managed sha256 = new SHA256Managed();
+			byte[] bytesHashPass = sha256.ComputeHash(bytesPaassword);
+			string hashPassword = Encoding.UTF8.GetString(bytesHashPass);
+
+			hashPassword += salt.Value;
+
+			bytesPaassword = Encoding.UTF8.GetBytes(hashPassword);
+			bytesHashPass = sha256.ComputeHash(bytesPaassword);
+
+			return Encoding.UTF8.GetString(bytesHashPass);
 		}
 	}
 }
