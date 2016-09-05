@@ -276,6 +276,7 @@
     <TypeScriptCompile Include="Scripts\Pages\Message\MessageController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Message\MessageModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\SignIn\SignInModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpService.ts" />
