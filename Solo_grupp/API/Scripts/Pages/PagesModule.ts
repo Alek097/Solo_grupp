@@ -1,6 +1,10 @@
-﻿import './Error/ErrorModule.ts';
+﻿import './Error/ErrorModule.ts'
+import './SignUp/SignUpModule.ts'
+import './Message/MessageModule.ts'
 
 angular.module('pages',
     [
-        'error'
+        'error',
+        'signUp',
+        'message'
     ]);

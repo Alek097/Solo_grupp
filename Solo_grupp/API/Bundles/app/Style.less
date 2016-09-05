@@ -83,8 +83,7 @@
     padding-top: @navbar-Size;
 
     @media(max-width : @Tablet-Size) {
-        padding-top: 0px;
-        padding-left: @homeList-Size;
+        padding: 0px;
     }
 }
 
@@ -95,16 +94,34 @@
 #httpCode {
     font-size: 150pt;
     color: @BrandColor;
+
+    @media(max-width: 332px) {
+        font-size: 120pt;
+    }
 }
 
 #errorMessage {
     font-size: 30pt;
-}
-.container {
-    padding-left: @homeList-Size;
-    padding-top: @navbar-Size;
 
-    @media(max-width : @Tablet-Size) {
-        padding: 0px;
+    @media(max-width: 332px) {
+        font-size: 15pt;
     }
+}
+
+#signUpContainer {
+    padding-top: @navbar-Size;
+}
+
+.error {
+    color: red;
+    font-size: 14pt;
+}
+
+#messageContainer {
+    text-align: center;
+    padding-top: @navbar-Size;
+}
+
+#signUpError {
+    margin-top: 15px;
 }

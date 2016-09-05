@@ -2,9 +2,6 @@
 {
 	#region Using
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Net;
 	using System.Net.Http;
 	using System.Web.Http;
 	using Data;
@@ -15,6 +12,8 @@
 	using Data.Models;
 	using Data.Repositories.Interfaces;
 	using Data.Repositories;
+	using System.Web.Http.ModelBinding;
+	using System.Net;
 	#endregion
 	public class UserController : ApiController
 	{
@@ -31,15 +30,40 @@
 			this.repository = repository;
 		}
 		[AllowAnonymous]
-		public async Task SignUp(RegistrationModel model)
+		[HttpPost]
+		public async Task<MoveTo> SignUp(RegistrationModel model)
 		{
+			if (!ModelState.IsValid)
+			{
+				string errorMessage = "";
+
+				foreach (ModelState modelState in ModelState.Values)
+				{
+					foreach (ModelError error in modelState.Errors)
+					{
+						errorMessage = string.Format("{0}\n{1}");
+					}
+				}
+
+				MoveTo responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = string.Format("{0}/#/SignUp/{1}", Repository.DNS, errorMessage)
+				};
+
+				return responce;
+			}
+
 			NotActiveUser user = new NotActiveUser(model);
-			await this.repository.RegistartionAsync(user);
+			RepositoryResult<MoveTo> result = await this.repository.RegistartionAsync(user);
+
+			return result.Responce;
 		}
 		[AllowAnonymous]
+		[HttpGet]
 		public async Task<HttpResponseMessage> Activation(Guid id)
 		{
-			RepositoryResult<User> result = await this.repository.Activation(id);
+			RepositoryResult<User, HttpResponseMessage> result = await this.repository.Activation(id);
 
 			if (result.ResultType == RepositoryResultType.OK)
 			{

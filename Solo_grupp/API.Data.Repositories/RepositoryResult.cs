@@ -3,10 +3,13 @@
 	#region Using
 	using System.Net.Http;
 	#endregion
-	public class RepositoryResult<TValue>
+	public class RepositoryResult<TValue,TResult> : RepositoryResult<TResult>
 	{
 		public TValue Value { get; set; }
-		public HttpResponseMessage Responce { get; set; }
+	}
+	public class RepositoryResult<TResult>
+	{
+		public TResult Responce { get; set; }
 		public RepositoryResultType ResultType { get; set; }
 	}
 }

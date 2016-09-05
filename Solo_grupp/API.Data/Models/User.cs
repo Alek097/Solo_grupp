@@ -5,6 +5,7 @@
 	using Microsoft.AspNet.Identity.EntityFramework;
 	using System.Security.Cryptography;
 	using System.Text;
+	using System;
 	#endregion
 	public class User : IdentityUser
 	{
@@ -24,6 +25,7 @@
 
 		public User(NotActiveUser user)
 		{
+			this.UserName = Guid.NewGuid().ToString().Replace("-", string.Empty);
 			this.FirstName = user.FirstName;
 			this.LastName = user.LastName;
 			this.Patronymic = user.Patronymic;
