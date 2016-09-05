@@ -6,18 +6,24 @@ import {SignInService} from './SignInService.ts'
 
 export class SignInController {
     public model: SignIn = new SignIn();
+    public error: string;
 
     private elem: JQuery;
 
     public static $inject: string[] =
     [
-        'signInService'
+        'signInService',
+        '$routeParams'
     ];
 
     constructor(
-        private service: SignInService
+        private service: SignInService,
+        params: ng.route.IRouteParamsService
     ) {
+        this.error = params['message'];
 
+        if (this.error == undefined)
+            this.error = '';
     }
 
     public emailValidate(): boolean {
