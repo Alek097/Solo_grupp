@@ -10,6 +10,7 @@
 	using System.Net.Http;
 	using System.Net;
 	using System.Linq;
+	using API.Models;
 	#endregion
 	public class UserRepository : Repository, IUserRepository
 	{
@@ -21,9 +22,9 @@
 			this.logger = logger;
 		}
 
-		public async Task<RepositoryResult<User>> Activation(Guid id)
+		public async Task<RepositoryResult<User, HttpResponseMessage>> Activation(Guid id)
 		{
-			RepositoryResult<User> result = new RepositoryResult<User>();
+			RepositoryResult<User, HttpResponseMessage> result = new RepositoryResult<User, HttpResponseMessage>();
 
 			NotActiveUser notActiveUser = this.context.Get<NotActiveUser, Guid>(id);
 
@@ -61,21 +62,27 @@
 			return result;
 		}
 
-		public async Task<RepositoryResult> RegistartionAsync(NotActiveUser user)
+		public async Task<RepositoryResult<ControllerResult>> RegistartionAsync(NotActiveUser user)
 		{
-			RepositoryResult result = new RepositoryResult();
+			RepositoryResult<ControllerResult> result = new RepositoryResult<ControllerResult>();
 
 			NotActiveUser isHaveUser = context.GetAll<NotActiveUser>().FirstOrDefault((u) => u.Email == user.Email);
 
 			if (isHaveUser != null)
 			{
-				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
+				//HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
 
-				response.Headers.Location = new Uri(this.MovedSignUpError(string.Format("Почта {0} уже занята.", user.Email)));
+				//response.Headers.Location = new Uri(this.MovedSignUpError(string.Format("Почта {0} уже занята.", user.Email)));
 
-				result.Responce = response;
+				//result.Responce = response;
 
 				result.ResultType = RepositoryResultType.Bad;
+
+				result.Responce = new ControllerResult()
+				{
+					Code = ControllerResultType.Moved,
+					Location = this.MovedSignUpError(string.Format("Почта {0} уже занята.", user.Email))
+				};
 
 				return result;
 			}
@@ -87,9 +94,17 @@
 
 			if (changes == 0)
 			{
-				result.Responce = new HttpResponseMessage(HttpStatusCode.Moved);
-				result.Responce.Headers.Location = new Uri(base.MovedError(500, "Ошибка на серевере"));
+				//result.Responce = new HttpResponseMessage(HttpStatusCode.Moved);
+				//result.Responce.Headers.Location = new Uri(base.MovedError(500, "Ошибка на серевере"));
+
+
 				result.ResultType = RepositoryResultType.Bad;
+
+				result.Responce = new ControllerResult()
+				{
+					Code = ControllerResultType.Moved,
+					Location = base.MovedError(500, "Ошибка на серевере")
+				};
 
 				return result;
 			}
@@ -123,25 +138,36 @@
 
 				this.logger.WriteInformation(string.Format("Зарегестрировался новый пользователь id = {0}. Письмо подтверждения отправлено на {1}.", user.Id, user.Email));
 
-				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
+				//HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
 
-				response.Headers.Location = new Uri(base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email)));
+				//response.Headers.Location = new Uri(base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email)));
 
-				result.Responce = response;
+				//result.Responce = response;
 
 				result.ResultType = RepositoryResultType.OK;
+
+				result.Responce = new ControllerResult()
+				{
+					Code = ControllerResultType.Moved,
+					Location = base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email))
+				};
 			}
 			catch (Exception ex)
 			{
 				this.logger.WriteError(ex, string.Format("Ошибка при отправке сообщения на {0} с {1}.", user.Email, email));
 
-				HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
+				//HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.Moved);
 
-				response.Headers.Location = new Uri(base.MovedError(500, string.Format("Не удалось отправить письмо на {0}", user.Email)));
+				//response.Headers.Location = new Uri(base.MovedError(500, string.Format("Не удалось отправить письмо на {0}", user.Email)));
 
-				result.Responce = response;
+				//result.Responce = response;
 
 				result.ResultType = RepositoryResultType.Bad;
+
+				result.Responce = new ControllerResult()
+				{
+					Code
+				};
 			}
 
 			return result;

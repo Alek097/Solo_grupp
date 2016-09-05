@@ -236,8 +236,11 @@ export class SignUpController {
 
         if (valid) {
             this.service.Registration(this.model)
-                .success((data) => {
-                    //TODO: Перенаправление
+                .success((data, status: number, headers: ng.IHttpHeadersGetter) => {
+                    let a: any = headers;
+                })
+                .error((data, status: number, headers: ng.IHttpHeadersGetter) => {
+                    let a: any = headers;
                 });
         }
     }
