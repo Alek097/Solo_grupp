@@ -235,6 +235,7 @@
     <Content Include="Scripts\Common\Menu\MenuView.html" />
     <Content Include="Scripts\Pages\Home\HomeView.html" />
     <Content Include="Scripts\Pages\Message\MessageView.html" />
+    <Content Include="Scripts\Pages\SignIn\SignInView.html" />
     <Content Include="Scripts\Pages\SignUp\SignUpView.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
