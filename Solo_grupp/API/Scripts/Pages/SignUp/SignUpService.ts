@@ -1,5 +1,5 @@
 ﻿import {Registration} from '../../Common/Models/Registration.ts'
-
+import {MoveTo} from '../../Common/Models/MoveTo.ts'
 export class SignUpService {
     public static $inject: string[] =
     [
@@ -12,7 +12,7 @@ export class SignUpService {
 
     }
 
-    public Registration(model: Registration): ng.IHttpPromise<any> {
+    public Registration(model: Registration): ng.IHttpPromise<MoveTo> {
         return this.http.post('/api/user/signup', model);
     }
 }

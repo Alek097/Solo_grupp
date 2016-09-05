@@ -1,4 +1,5 @@
 ﻿import {Registration} from '../../Common/Models/Registration.ts'
+import {MoveTo} from '../../Common/Models/MoveTo.ts'
 import {SignUpService} from './SignUpService.ts'
 
 export class SignUpController {
@@ -236,11 +237,10 @@ export class SignUpController {
 
         if (valid) {
             this.service.Registration(this.model)
-                .success((data, status: number, headers: ng.IHttpHeadersGetter) => {
-                    let a: any = headers;
-                })
-                .error((data, status: number, headers: ng.IHttpHeadersGetter) => {
-                    let a: any = headers;
+                .success((data: MoveTo) => {
+                    if (data.IsMoving) {
+                        window.location.href = data.Location;
+                    }
                 });
         }
     }
