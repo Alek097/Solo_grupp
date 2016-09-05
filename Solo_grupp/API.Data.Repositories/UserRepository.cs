@@ -162,6 +162,7 @@
 
 					if (usr == null)
 					{
+						result.ResultType = RepositoryResultType.Bad;
 						result.Responce = new MoveTo()
 						{
 							IsMoving = true,
@@ -170,6 +171,7 @@
 					}
 					else
 					{
+						result.ResultType = RepositoryResultType.OK;
 						result.Value = usr;
 						result.Responce = new MoveTo()
 						{
