@@ -47,4 +47,18 @@ angular.module('main',
                 controller: 'messageController',
                 controllerAs: 'messageCtrl'
             });
+        $routeProvider.when('/SignUp',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+                controller: 'signUpController',
+                controllerAs: 'signUpCtrl'
+            });
+        $routeProvider.when('/SignIn/:message',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/SignIn/SignInView.html',
+                controller: 'signInController',
+                controllerAs: 'signInCtrl'
+            });
     });
