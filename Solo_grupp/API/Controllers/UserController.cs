@@ -107,5 +107,25 @@
 
 			return result.Responce;
 		}
+		[AllowAnonymous]
+		[HttpGet]
+		public async Task<UserInformation> Authentification()
+		{
+			return await Task.Run<UserInformation>(() =>
+			{
+				User currentUser = this.UserManager.FindById(this.User.Identity.GetUserId());
+
+				return new UserInformation
+				{
+					Id = currentUser.Id,
+					Adress = currentUser.Adress,
+					Email = currentUser.Email,
+					FirstName = currentUser.FirstName,
+					FullName = currentUser.FullName,
+					LastName = currentUser.LastName,
+					Patronymic = currentUser.Patronymic
+				};
+			});
+		}
 	}
 }
