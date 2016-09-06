@@ -4,19 +4,8 @@ import {Authentification} from '../Models/Authentification.ts'
 export class AuthorizeController {
     public isAuth: boolean;
     public fullName: string = null;
-    constructor()
-    {
-        let user: User = JSON.parse(window.localStorage.getItem('user'));
-
-        if (user === null || user === undefined) {
-            this.isAuth = false;
-            Authentification.isAuthentification = false;
-        }
-        else {
-            this.isAuth = true;
-            Authentification.isAuthentification = true;
-            Authentification.user = user;
-            this.fullName = user.FullName;
-        }
+    constructor() {
+        this.isAuth = Authentification.isAuthentification;
+        this.fullName = Authentification.user.FullName;
     }
 }
