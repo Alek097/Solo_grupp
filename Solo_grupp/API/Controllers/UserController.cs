@@ -13,6 +13,8 @@
 	using Data.Repositories.Interfaces;
 	using Data.Repositories;
 	using System.Web.Http.ModelBinding;
+	using Microsoft.Owin.Security;
+	using System.Security.Claims;
 	#endregion
 	public class UserController : ApiController
 	{
@@ -22,6 +24,13 @@
 			get
 			{
 				return this.ControllerContext.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+			}
+		}
+		private IAuthenticationManager AuthenticationManager
+		{
+			get
+			{
+				return this.ControllerContext.Request.GetOwinContext().Authentication;
 			}
 		}
 		public UserController(IUserRepository repository)
@@ -74,6 +83,14 @@
 			}
 			else
 			{
+				ClaimsIdentity claim = await UserManager.CreateIdentityAsync(repoResult.Value,
+									DefaultAuthenticationTypes.ApplicationCookie);
+				AuthenticationManager.SignOut();
+				AuthenticationManager.SignIn(new AuthenticationProperties
+				{
+					IsPersistent = true
+				}, claim);
+
 				result.Value = new UserInformation()
 				{
 					Adress = repoResult.Value.Adress,

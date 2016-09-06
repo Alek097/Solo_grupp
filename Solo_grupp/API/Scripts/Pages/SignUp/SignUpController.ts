@@ -1,6 +1,7 @@
 ﻿import {Registration} from '../../Common/Models/Registration.ts'
 import {MoveTo} from '../../Common/Models/MoveTo.ts'
 import {SignUpService} from './SignUpService.ts'
+import {Authentification} from '../../Common/Models/Authentification.ts'
 
 export class SignUpController {
 
@@ -19,6 +20,11 @@ export class SignUpController {
         private service: SignUpService,
         params: ng.route.IRouteParamsService
     ) {
+        if (Authentification.isAuthentification) {
+            location.href = '/#/Home';
+            return;
+        }
+
         this.error = params['message'];
 
         if (this.error == undefined)

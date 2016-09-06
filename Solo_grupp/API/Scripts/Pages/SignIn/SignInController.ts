@@ -3,6 +3,7 @@ import {MoveTo} from '../../Common/Models/MoveTo.ts'
 import {User} from '../../Common/Models/User.ts'
 import {RepositoryResultValue} from '../../Common/Models/RepositoryResult.ts'
 import {SignInService} from './SignInService.ts'
+import {Authentification} from '../../Common/Models/Authentification.ts'
 
 export class SignInController {
     public model: SignIn = new SignIn();
@@ -20,6 +21,11 @@ export class SignInController {
         private service: SignInService,
         params: ng.route.IRouteParamsService
     ) {
+        if (Authentification.isAuthentification) {
+            location.href = '/#/Home';
+            return;
+        }
+
         this.error = params['message'];
 
         if (this.error == undefined)
