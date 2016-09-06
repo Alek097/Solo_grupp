@@ -3,7 +3,7 @@ import './Common/CommonModule.ts'
 import {Authentification} from './Common/Models/Authentification.ts'
 import {User} from './Common/Models/User.ts'
 
-$.get('/api/uses/authentification',
+$.get('/api/user/authentification',
     (data: User) => {
 
         if (data == undefined) {
