@@ -1,7 +1,7 @@
 ﻿import {SignIn} from '../../Common/Models/SignIn.ts'
 import {MoveTo} from '../../Common/Models/MoveTo.ts'
 import {User} from '../../Common/Models/User.ts'
-import {RepositoryResultValue} from '../../Common/Models/RepositoryResult.ts'
+import {RepositoryResult} from '../../Common/Models/RepositoryResult.ts'
 import {SignInService} from './SignInService.ts'
 import {Authentification} from '../../Common/Models/Authentification.ts'
 
@@ -98,14 +98,8 @@ export class SignInController {
 
         if (valid) {
             this.service.SignIn(this.model)
-                .success((data: RepositoryResultValue<User, MoveTo>) => {
+                .success((data: RepositoryResult<MoveTo>) => {
                     if (data.Responce.IsMoving) {
-
-                        if (data.Value != undefined) {
-                            window.localStorage.setItem('user', JSON.stringify(data.Value));
-                        }
-
-
                         window.location.href = data.Responce.Location;
                     }
                 });

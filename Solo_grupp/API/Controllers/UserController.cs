@@ -69,9 +69,9 @@
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<RepositoryResult<UserInformation, MoveTo>> SignIn(SignIn model)
+		public async Task<RepositoryResult<MoveTo>> SignIn(SignIn model)
 		{
-			RepositoryResult<UserInformation, MoveTo> result = new RepositoryResult<UserInformation, MoveTo>();
+			RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
 
 			RepositoryResult<User, MoveTo> repoResult = await this.repository.SignIn(model);
 
@@ -90,17 +90,6 @@
 				{
 					IsPersistent = true
 				}, claim);
-
-				result.Value = new UserInformation()
-				{
-					Adress = repoResult.Value.Adress,
-					Email = repoResult.Value.Email,
-					FirstName = repoResult.Value.FirstName,
-					FullName = repoResult.Value.FullName,
-					Id = repoResult.Value.Id,
-					LastName = repoResult.Value.LastName,
-					Patronymic = repoResult.Value.Patronymic
-				};
 
 				return result;
 			}
