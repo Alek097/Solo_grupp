@@ -1,18 +1,24 @@
 ﻿@BrandColor: #ec7f3a;
 
-@NameWidth-All: 196.813px;
+@NameWidth-All: 195.813px;
 @NameWidth-Mobile-S: 318px;
 
 @homeList-Size: 230px;
 @navbar-Size: 50px;
 
 @Mobile-S-Size: 320px;
-@Tablet-Size: 768px;
+@Tablet-Size: 767px;
 
 #brand {
-    width: @navbar-Size;
-    height: auto;
-    border-radius: 100%;
+    a {
+        padding: 0px;
+
+        img {
+            width: @navbar-Size;
+            height: auto;
+            border-radius: 100%;
+        }
+    }
 }
 
 #brand-href {
@@ -24,30 +30,29 @@
 #nav {
     background-color: @BrandColor;
     margin: 0px;
+    min-width: 875px;
+
+    @media(max-width: @Tablet-Size) {
+        min-width: initial;
+    }
 }
 
 .pageList {
     font-size: 12pt;
     background-color: @BrandColor;
-}
 
-.pageList > li > a {
-    color: white !important;
+    li > a {
+        color: white !important;
 
-    &:hover {
-        color: black !important;
+        &:hover {
+            color: black !important;
+        }
     }
 }
 
 .pageList > tbody > tr > th {
     padding-bottom: 25px;
     padding-top: 25px;
-}
-
-#userName {
-    max-width: @NameWidth-All;
-    overflow-x: hidden;
-    white-space: pre;
 }
 
 #homeList {
@@ -73,7 +78,6 @@
         a {
             padding-top: 20px;
             padding-bottom: 20px;
-            font-size: 14pt;
         }
     }
 }
@@ -135,6 +139,7 @@
 #signUpError {
     margin-top: 15px;
 }
-.navbar-collapse{
+
+.navbar-collapse {
     max-height: initial !important;
 }

@@ -6,3 +6,5 @@ angular.module('common',
         'menu',
         'authorize',
     ]);
+
+import './Other/OtherStart.ts'

@@ -3,7 +3,7 @@ import {MoveTo} from '../../Common/Models/MoveTo.ts'
 import {User} from '../../Common/Models/User.ts'
 import {RepositoryResult} from '../../Common/Models/RepositoryResult.ts'
 import {SignInService} from './SignInService.ts'
-import {Authentification} from '../../Common/Models/Authentification.ts'
+import {AuthorizeService} from '../../Common/Authorize/AuthorizeService.ts'
 
 export class SignInController {
     public model: SignIn = new SignIn();
@@ -14,17 +14,27 @@ export class SignInController {
     public static $inject: string[] =
     [
         'signInService',
-        '$routeParams'
+        '$routeParams',
+        'authorizeService'
     ];
 
     constructor(
         private service: SignInService,
-        params: ng.route.IRouteParamsService
+        params: ng.route.IRouteParamsService,
+        authorizeService: AuthorizeService
     ) {
-        if (Authentification.isAuthentification) {
-            location.href = '/#/Home';
-            return;
-        }
+        authorizeService.Authentification()
+            .success((data: User) => {
+                if (data == undefined) {
+                    return;
+                }
+                else {
+                    window.location.href = '/#/Home';
+                }
+            })
+            .error(() => {
+                window.location.href = '/#/Home';
+            });
 
         this.error = params['message'];
 
@@ -101,6 +111,7 @@ export class SignInController {
                 .success((data: RepositoryResult<MoveTo>) => {
                     if (data.Responce.IsMoving) {
                         window.location.href = data.Responce.Location;
+                        window.location.reload();
                     }
                 });
         }

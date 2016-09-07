@@ -1,7 +1,8 @@
 ﻿import {Registration} from '../../Common/Models/Registration.ts'
 import {MoveTo} from '../../Common/Models/MoveTo.ts'
 import {SignUpService} from './SignUpService.ts'
-import {Authentification} from '../../Common/Models/Authentification.ts'
+import {AuthorizeService} from '../../Common/Authorize/AuthorizeService.ts'
+import {User} from '../../Common/Models/User.ts'
 
 export class SignUpController {
 
@@ -13,17 +14,27 @@ export class SignUpController {
     public static $inject: string[] =
     [
         'signUpService',
-        '$routeParams'
+        '$routeParams',
+        'authorizeService'
     ];
 
     constructor(
         private service: SignUpService,
-        params: ng.route.IRouteParamsService
+        params: ng.route.IRouteParamsService,
+        authorizeService: AuthorizeService
     ) {
-        if (Authentification.isAuthentification) {
-            location.href = '/#/Home';
-            return;
-        }
+        authorizeService.Authentification()
+            .success((data: User) => {
+                if (data == undefined) {
+                    return;
+                }
+                else {
+                    window.location.href = '/#/Home';
+                }
+            })
+            .error(() => {
+                window.location.href = '/#/Home';
+            });
 
         this.error = params['message'];
 

@@ -115,17 +115,33 @@
 			{
 				User currentUser = this.UserManager.FindById(this.User.Identity.GetUserId());
 
-				return new UserInformation
+				if (currentUser == null)
 				{
-					Id = currentUser.Id,
-					Adress = currentUser.Adress,
-					Email = currentUser.Email,
-					FirstName = currentUser.FirstName,
-					FullName = currentUser.FullName,
-					LastName = currentUser.LastName,
-					Patronymic = currentUser.Patronymic
-				};
+					return null;
+				}
+				else
+				{
+					return new UserInformation
+					{
+						Id = currentUser.Id,
+						Adress = currentUser.Adress,
+						Email = currentUser.Email,
+						FirstName = currentUser.FirstName,
+						FullName = currentUser.FullName,
+						LastName = currentUser.LastName,
+						Patronymic = currentUser.Patronymic
+					};
+				}
 			});
+		}
+		[AllowAnonymous]
+		[HttpGet]
+		public async Task SignOut()
+		{
+			await Task.Run(() =>
+				{
+					AuthenticationManager.SignOut();
+				});
 		}
 	}
 }
