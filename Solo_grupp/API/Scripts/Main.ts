@@ -62,4 +62,18 @@ angular.module('main',
                 controller: 'signInController',
                 controllerAs: 'signInCtrl'
             });
+        $routeProvider.when('/Replace',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/Replace/ReplaceView.html',
+                controller: 'replaceController',
+                controllerAs: 'replace'
+            });
+        $routeProvider.when('/Replace/:message',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/Replace/ReplaceView.html',
+                controller: 'replaceController',
+                controllerAs: 'replace'
+            });
     });
