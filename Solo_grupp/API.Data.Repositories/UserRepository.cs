@@ -189,9 +189,9 @@
 			return string.Format("{0}/#/SignIn/{1}", DNS, message);
 		}
 
-		private string MovedReplaceOnePartError(string message)
+		private string MovedReplaceError(string message)
 		{
-			return string.Format("{0}/#/Replace/1/{1}", DNS, message);
+			return string.Format("{0}/#/Replace/{1}", DNS, message);
 		}
 
 		public async Task<RepositoryResult<MoveTo>> Replace(string email)
@@ -206,7 +206,7 @@
 				result.Responce = new MoveTo()
 				{
 					IsMoving = true,
-					Location = this.MovedReplaceOnePartError(string.Format("Пользователь с почтой {0} не найден."))
+					Location = this.MovedReplaceError(string.Format("Пользователь с почтой {0} не найден."))
 				};
 
 			}
