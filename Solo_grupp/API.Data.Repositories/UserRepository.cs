@@ -206,16 +206,33 @@
 				result.Responce = new MoveTo()
 				{
 					IsMoving = true,
-					Location = this.MovedReplaceOnePartError(string.Format("Пользователь с почтой {0} не найден"))
+					Location = this.MovedReplaceOnePartError(string.Format("Пользователь с почтой {0} не найден."))
 				};
 
 			}
 			else
 			{
 				Guid replaceCode = Guid.NewGuid();
+
+				user.ReplaceCode = replaceCode;
+
+				this.context.Update(user);
+
+				int changes = await this.context.SaveChangesAsync();
+
+				if(changes == 0)
+				{
+					result.ResultType = RepositoryResultType.Bad;
+					result.Responce = new MoveTo()
+					{
+						IsMoving = true,
+						Location = this.MovedError(500, "Ошибка на сервере.")
+					};
+				}
+
 				base.SendMessage(
 					user.Email,
-					"Solo-grupp  смена пароля.",
+					"Solo-grupp смена пароля.",
 
 					string.Format("<span>Ваш код подтверждения: {0}</span><br/><span>Если вы не запрашивали смены пароля, перейдите по ссылке : <a href=\"{1}\">{1}</a></span>",
 						replaceCode,
@@ -228,7 +245,7 @@
 				result.ResultType = RepositoryResultType.OK;
 				result.Responce = new MoveTo()
 				{
-					IsMoving = true
+					IsMoving = false
 				};
 			}
 
