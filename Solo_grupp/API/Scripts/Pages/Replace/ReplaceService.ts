@@ -14,6 +14,6 @@ export class ReplaceService {
     }
 
     public Replace(email: string): ng.IHttpPromise<RepositoryResult<MoveTo>> {
-        return this.http.post('/api/user/replace', email);
+        return this.http.post('/api/user/replace?email=' + email, null);
     }
 }

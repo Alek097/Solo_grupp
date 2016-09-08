@@ -144,8 +144,8 @@
 				});
 		}
 		[AllowAnonymous]
-		[HttpGet]
-		public async Task<RepositoryResult<MoveTo>> Replace(string email)
+		[HttpPost]
+		public async Task<RepositoryResult<MoveTo>> Replace([FromUri]string email)
 		{
 			return await this.repository.Replace(email);
 		}

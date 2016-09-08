@@ -230,6 +230,8 @@
 						IsMoving = true,
 						Location = this.MovedError(500, "Ошибка на сервере.")
 					};
+
+					return result;
 				}
 
 				base.SendMessage(
