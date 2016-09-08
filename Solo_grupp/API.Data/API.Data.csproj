@@ -71,6 +71,16 @@
   <ItemGroup>
     <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="IContext.cs" />
+    <Compile Include="MigrationsContextFactory.cs" />
+    <Compile Include="Migrations\201609071827520_InitialCreate.cs" />
+    <Compile Include="Migrations\201609071827520_InitialCreate.Designer.cs">
+      <DependentUpon>201609071827520_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609081543295_Added_Property_ReplaceCode.cs" />
+    <Compile Include="Migrations\201609081543295_Added_Property_ReplaceCode.Designer.cs">
+      <DependentUpon>201609081543295_Added_Property_ReplaceCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\NotActiveUser.cs" />
@@ -93,6 +103,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609071827520_InitialCreate.resx">
+      <DependentUpon>201609071827520_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609081543295_Added_Property_ReplaceCode.resx">
+      <DependentUpon>201609081543295_Added_Property_ReplaceCode.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
