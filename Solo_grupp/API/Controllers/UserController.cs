@@ -143,5 +143,11 @@
 					AuthenticationManager.SignOut();
 				});
 		}
+		//[AllowAnonymous]
+		//[HttpGet]
+		//public async Task<RepositoryResult<MoveTo>> Replace(string email)
+		//{
+
+		//}
 	}
 }
