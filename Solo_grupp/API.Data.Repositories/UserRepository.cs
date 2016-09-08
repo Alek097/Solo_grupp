@@ -85,10 +85,12 @@
 
 			try
 			{
+				string href = string.Format("{0}/api/User/Activation?id={1}", DNS, user.Id);
+
 				base.SendMessage(
 					user.Email,
 					"Solo-grupp подтверждение аккаунта",
-					string.Format("{0}/api/User/Activation?id={0}", DNS, user.Id),
+					string.Format("<a href=\"{0}\">{0}</a>", href),
 					true);
 
 				this.logger.WriteInformation(string.Format("Зарегестрировался новый пользователь id = {0}. Письмо подтверждения отправлено на {1}.", user.Id, user.Email));
@@ -220,7 +222,7 @@
 
 				int changes = await this.context.SaveChangesAsync();
 
-				if(changes == 0)
+				if (changes == 0)
 				{
 					result.ResultType = RepositoryResultType.Bad;
 					result.Responce = new MoveTo()
