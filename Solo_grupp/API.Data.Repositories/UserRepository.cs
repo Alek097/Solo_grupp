@@ -83,32 +83,13 @@
 				return result;
 			}
 
-			string email = "epamprojectChudo-pechka@yandex.ru";
-			string password = "epamProject";
-
 			try
 			{
-				MailAddress from = new MailAddress(email, "Chudo-Pechka");
-
-				MailAddress to = new MailAddress(user.Email);
-
-				MailMessage m = new MailMessage(from, to);
-
-				m.Subject = "Solo-grupp подтверждение аккаунта";
-
-				m.Body = string.Format("<a href={0}>{0}</a>",
-					string.Format("http://localhost:11799/api/User/Activation?id={0}", user.Id));
-				m.IsBodyHtml = true;
-
-				SmtpClient smtp = new SmtpClient("smtp.yandex.ru", 25);
-
-				smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-				smtp.UseDefaultCredentials = false;
-				smtp.EnableSsl = true;
-
-				smtp.Credentials = new NetworkCredential(email, password);
-
-				smtp.Send(m);
+				base.SendMessage(
+					user.Email,
+					"Solo-grupp подтверждение аккаунта",
+					string.Format("{0}/api/User/Activation?id={0}", DNS, user.Id),
+					true);
 
 				this.logger.WriteInformation(string.Format("Зарегестрировался новый пользователь id = {0}. Письмо подтверждения отправлено на {1}.", user.Id, user.Email));
 
@@ -139,7 +120,7 @@
 			}
 			catch (Exception ex)
 			{
-				this.logger.WriteError(ex, string.Format("Ошибка при отправке сообщения на {0} с {1}.", user.Email, email));
+				this.logger.WriteError(ex, string.Format("Ошибка при отправке сообщения на {0}.", user.Email));
 
 				result.ResultType = RepositoryResultType.Bad;
 
@@ -206,6 +187,52 @@
 		private string MovedSignInError(string message)
 		{
 			return string.Format("{0}/#/SignIn/{1}", DNS, message);
+		}
+
+		private string MovedReplaceOnePartError(string message)
+		{
+			return string.Format("{0}/#/Replace/1/{1}", DNS, message);
+		}
+
+		public async Task<RepositoryResult<MoveTo>> Replace(string email)
+		{
+			User user = this.context.GetAll<User>().FirstOrDefault(u => u.Email == email);
+
+			RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
+
+			if (user == null)
+			{
+				result.ResultType = RepositoryResultType.Bad;
+				result.Responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = this.MovedReplaceOnePartError(string.Format("Пользователь с почтой {0} не найден"))
+				};
+
+			}
+			else
+			{
+				Guid replaceCode = Guid.NewGuid();
+				base.SendMessage(
+					user.Email,
+					"Solo-grupp  смена пароля.",
+
+					string.Format("<span>Ваш код подтверждения: {0}</span><br/><span>Если вы не запрашивали смены пароля, перейдите по ссылке : <a href=\"{1}\">{1}</a></span>",
+						replaceCode,
+						string.Format("{0}/api/user/cancelReplace?replaceCode={1}", DNS, replaceCode)),
+
+					true
+					);
+
+
+				result.ResultType = RepositoryResultType.OK;
+				result.Responce = new MoveTo()
+				{
+					IsMoving = true
+				};
+			}
+
+			return result;
 		}
 	}
 }
