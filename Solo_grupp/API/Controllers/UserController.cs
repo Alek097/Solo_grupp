@@ -149,5 +149,13 @@
 		{
 			return await this.repository.Replace(email);
 		}
+		[AllowAnonymous]
+		[HttpGet]
+		public async Task<HttpResponseMessage> CancelReplace(Guid replaceCode)
+		{
+			RepositoryResult<HttpResponseMessage> result = await this.repository.CancelReplace(replaceCode);
+
+			return result.Responce;
+		}
 	}
 }

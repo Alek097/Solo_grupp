@@ -255,5 +255,19 @@
 
 			return result;
 		}
+
+		public async Task<RepositoryResult<HttpResponseMessage>> CancelReplace(Guid replaceCode)
+		{
+			RepositoryResult<HttpResponseMessage> result = new RepositoryResult<HttpResponseMessage>();
+			result.Responce = new HttpResponseMessage(HttpStatusCode.Moved);
+			result.Responce.Headers.Location = new Uri(string.Format("{0}/#/Home", DNS));
+
+			User user = this.context.GetAll<User>().FirstOrDefault(u => u.ReplaceCode == replaceCode);
+			user.ReplaceCode = Guid.Empty;
+
+			await this.context.SaveChangesAsync();
+
+			return result;
+		}
 	}
 }

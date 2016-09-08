@@ -13,5 +13,6 @@
 		Task<RepositoryResult<User, HttpResponseMessage>> Activation(Guid id);
 		Task<RepositoryResult<User, MoveTo>> SignIn(SignIn model);
 		Task<RepositoryResult<MoveTo>> Replace(string email);
+		Task<RepositoryResult<HttpResponseMessage>> CancelReplace(Guid replaceCode);
 	}
 }
