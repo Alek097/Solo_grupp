@@ -1,4 +1,7 @@
-﻿export class ReplaceService {
+﻿import {MoveTo} from '../../Common/Models/MoveTo.ts'
+import {RepositoryResult} from '../../Common/Models/RepositoryResult.ts'
+
+export class ReplaceService {
     public static $inject: string[] =
     [
         '$http'
@@ -10,7 +13,7 @@
 
     }
 
-    public Replace(email: string): ng.IHttpPromise<any> {
+    public Replace(email: string): ng.IHttpPromise<RepositoryResult<MoveTo>> {
         return this.http.post('/api/user/replace', email);
     }
 }
