@@ -1,0 +1,75 @@
+﻿<div class="container-fluid" id="signInContainer">
+    <div class="col-md-3"></div>
+    <div class="col-md-9">
+        <form id="display-firstForm" role="form" ng-submit="replace.submit()">
+            <div class="col-xs-12 col-md-6 information">
+                <span>Введите электронную почту под которой вы регестрировались. После чего на вашу почту придёт код подтверждения.</span>
+            </div>
+            <div class="form-group col-xs-12">
+                <div class="col-xs-12">
+                    <label for="email">Электронная почта/Email</label>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-push-6 col-lg-push-6">
+                    <p class="error" id="error-email"></p>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
+                    <input ng-keyup="replace.emailValidate()" type="text" class="form-control" id="email" autocomplete="off" placeholder="Введите email">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-3 submit-btn">
+                <button type="submit" class="btn btn-success btn-block col-xs-12">Отправить</button>
+            </div>
+
+        </form>
+
+        <form id="display-secondForm" role="form" ng-submit="replace.submitPass()">
+            <div class="col-xs-12 col-md-6 information">
+                <span>На вашу почту был отапрвлен код подтверждения</span>
+            </div>
+            <div class="form-group col-xs-12">
+                <div class="col-xs-12">
+                    <label for="pass">Код подтверждения</label>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-push-6 col-lg-push-6">
+                    <p class="error" id="error-replaceCode"></p>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
+                    <input ng-keyup="replace.replaceCodeValidate()" type="text" class="form-control" id="replaceCode" autocomplete="off" placeholder="Пароль">
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <div class="col-xs-12">
+                    <label for="pass">Пароль</label>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-push-6 col-lg-push-6">
+                    <p class="error" id="error-password"></p>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
+                    <input ng-keyup="replace.passwordValidate()" type="password" class="form-control" id="password" autocomplete="off" placeholder="Пароль">
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+                <div class="col-xs-12">
+                    <label for="repeatedPassword">Повторить пароль</label>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-push-6 col-lg-push-6">
+                    <p class="error" id="error-repeatedPassword"></p>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
+                    <input ng-keyup="replace.repeatedPasswordValidate()" type="password" class="form-control" id="repeatedPassword" autocomplete="off" placeholder="Повторить пароль">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-3 submit-btn">
+                <button type="submit" class="btn btn-success btn-block col-xs-12">Сменить</button>
+            </div>
+
+        </form>
+
+        <div class="col-xs-12">
+            <p class="error" id="signUpError">{{replace.error}}</p>
+        </div>
+    </div>
+</div>

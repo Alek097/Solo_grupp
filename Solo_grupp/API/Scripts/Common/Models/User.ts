@@ -1,9 +1,9 @@
 ﻿export class User {
-    public Id: string;
-    public FirstName: string;
-    public LastName: string;
-    public Patronymic: string;
-    public FullName: string;
-    public Email: string;
-    public Adress: string;
+    public Id: string = null;
+    public FirstName: string = null;
+    public LastName: string = null;
+    public Patronymic: string = null;
+    public FullName: string = null;
+    public Email: string = null;
+    public Adress: string = null;
 }

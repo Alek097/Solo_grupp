@@ -1,29 +1,18 @@
-﻿import {SignIn} from '../../Common/Models/SignIn.ts'
-import {MoveTo} from '../../Common/Models/MoveTo.ts'
-import {User} from '../../Common/Models/User.ts'
-import {RepositoryResultValue} from '../../Common/Models/RepositoryResult.ts'
-import {SignInService} from './SignInService.ts'
-
-export class SignInController {
-    public model: SignIn = new SignIn();
+﻿export class Validate {
     public error: string;
 
-    private elem: JQuery;
-
-    public static $inject: string[] =
-    [
-        'signInService',
-        '$routeParams'
-    ];
+    public elem: JQuery;
 
     constructor(
-        private service: SignInService,
-        params: ng.route.IRouteParamsService
+        public model: any
     ) {
-        this.error = params['message'];
+    }
 
-        if (this.error == undefined)
-            this.error = '';
+    public writeError(text: string): void {
+        this.elem.text(text + '.');
+    }
+    public clearError(): void {
+        this.elem.text('');
     }
 
     public emailValidate(): boolean {
@@ -86,30 +75,24 @@ export class SignInController {
         }
     }
 
-    public submit(): void {
-        let valid: boolean = this.emailValidate();
-        valid = valid && this.passwordValidate();
+    public repeatedPasswordValidate(): boolean {
+        let repeatedPassword: string = angular.element('#repeatedPassword').val();;
 
-        if (valid) {
-            this.service.SignIn(this.model)
-                .success((data: RepositoryResultValue<User, MoveTo>) => {
-                    if (data.Responce.IsMoving) {
+        this.model.RepeatedPassword = repeatedPassword;
 
-                        if (data.Value != undefined) {
-                            window.localStorage.setItem('user', JSON.stringify(data.Value));
-                        }
+        this.elem = angular.element('#error-repeatedPassword');
 
-
-                        window.location.href = data.Responce.Location;
-                    }
-                });
+        if (repeatedPassword == undefined) {
+            this.writeError('Повторите пароль');
         }
-    }
 
-    private writeError(text: string): void {
-        this.elem.text(text + '.');
-    }
-    private clearError(): void {
-        this.elem.text('');
+        if (repeatedPassword !== this.model.Password) {
+            this.writeError('Пароли не совпадают');
+            return false;
+        }
+        else {
+            this.clearError();
+            return true;
+        }
     }
 }

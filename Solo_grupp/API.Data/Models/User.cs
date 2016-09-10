@@ -15,6 +15,7 @@
 		public string FullName { get; set; }
 		public string Adress { get; set; }
 		public new string PasswordHash { get; set; }
+		public Guid ReplaceCode { get; set; }
 		public virtual Salt Salt { get; set; }
 		public virtual ICollection<Resolution> Permission { get; set; }
 		public virtual ICollection<News> News { get; set; }

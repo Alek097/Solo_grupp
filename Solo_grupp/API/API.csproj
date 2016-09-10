@@ -235,8 +235,9 @@
     <Content Include="Scripts\Common\Menu\MenuView.html" />
     <Content Include="Scripts\Pages\Home\HomeView.html" />
     <Content Include="Scripts\Pages\Message\MessageView.html" />
-    <Content Include="Scripts\Pages\SignIn\SignInView.html" />
-    <Content Include="Scripts\Pages\SignUp\SignUpView.html" />
+    <Content Include="Scripts\Pages\Authentification\Replace\ReplaceView.html" />
+    <Content Include="Scripts\Pages\Authentification\SignIn\SignInView.html" />
+    <Content Include="Scripts\Pages\Authentification\SignUp\SignUpView.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -262,29 +263,35 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeController.ts" />
-    <TypeScriptCompile Include="Scripts\Common\Authorize\AuthorizeModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Menu\MenuController.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Menu\AuthorizeService.ts" />
     <TypeScriptCompile Include="Scripts\Common\CommonModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\MoveTo.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Registration.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\Replace.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\RepositoryResult.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\SignIn.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Other\OtherStart.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\AuthentificationModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\Validate.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuModule.ts" />
-    <TypeScriptCompile Include="Scripts\Common\Models\Authentification.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\User.ts" />
     <TypeScriptCompile Include="Scripts\Main.ts" />
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuDirective.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Message\MessageController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Message\MessageModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\SignIn\SignInController.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\SignIn\SignInModule.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\SignIn\SignInService.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpController.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpModule.ts" />
-    <TypeScriptCompile Include="Scripts\Pages\SignUp\SignUpService.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceService.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\SignIn\SignInController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\SignIn\SignInModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\SignIn\SignInService.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\SignUp\SignUpController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\SignUp\SignUpModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\SignUp\SignUpService.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
