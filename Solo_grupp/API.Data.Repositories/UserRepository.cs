@@ -5,14 +5,11 @@
 	using Models;
 	using Interfaces;
 	using Logging;
-	using System.Net.Mail;
 	using System.Threading.Tasks;
 	using System.Net.Http;
 	using System.Net;
 	using System.Linq;
 	using API.Models;
-	using System.Text;
-	using System.Security.Cryptography;
 	#endregion
 	public class UserRepository : Repository, IUserRepository
 	{
