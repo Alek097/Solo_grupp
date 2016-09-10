@@ -43,7 +43,7 @@
 		{
 			if (!ModelState.IsValid)
 			{
-				string errorMessage = "";
+				string errorMessage = string.Empty;
 
 				foreach (ModelState modelState in ModelState.Values)
 				{
@@ -142,6 +142,38 @@
 				{
 					AuthenticationManager.SignOut();
 				});
+		}
+		[AllowAnonymous]
+		[HttpPost]
+		public async Task<RepositoryResult<MoveTo>> Replace(Replace model)
+		{
+			if (!ModelState.IsValid)
+			{
+				string errorMessage = string.Empty; ;
+
+				foreach (ModelState modelState in ModelState.Values)
+				{
+					foreach (ModelError error in modelState.Errors)
+					{
+						errorMessage = string.Format("{0}\n{1}");
+					}
+				}
+
+				MoveTo responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = string.Format("{0}/#/Replace/{1}", Repository.DNS, errorMessage)
+				};
+
+				RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
+				result.Responce = responce;
+				result.ResultType = RepositoryResultType.Bad;
+
+				return result;
+			}
+
+			return await this.repository.Replace(model);
+
 		}
 		[AllowAnonymous]
 		[HttpPost]

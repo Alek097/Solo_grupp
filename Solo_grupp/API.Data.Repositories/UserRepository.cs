@@ -269,5 +269,55 @@
 
 			return result;
 		}
+
+		public async Task<RepositoryResult<MoveTo>> Replace(Replace model)
+		{
+			User user = this.context.GetAll<User>().FirstOrDefault(u => u.ReplaceCode == model.ReplaceCode);
+
+			RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
+
+			if (user == null || user.ReplaceCode == Guid.Empty)
+			{
+				result.ResultType = RepositoryResultType.Bad;
+				result.Responce = new MoveTo()
+				{
+					IsMoving = true,
+					Location = this.MovedReplaceError("Код не найден, проверьте правильность введённого кода. Если всё правильно попробуйте повторить операцию. Если ошибка не исчезает обратитесь в техническую поддержку.")
+				};
+			}
+			else
+			{
+				Salt salt = user.Salt;
+
+				this.context.Delete(salt);
+
+				user.Salt = new Salt();
+				user.PasswordHash = User.HashPassword(model.Password, user.Salt);
+				user.ReplaceCode = Guid.Empty;
+
+				int changes = await this.context.SaveChangesAsync();
+
+				if (changes == 0)
+				{
+					result.ResultType = RepositoryResultType.Bad;
+					result.Responce = new MoveTo()
+					{
+						IsMoving = true,
+						Location = base.MovedError(500, "Ошибка на сервере.")
+					};
+				}
+				else
+				{
+					result.ResultType = RepositoryResultType.OK;
+					result.Responce = new MoveTo()
+					{
+						IsMoving = true,
+						Location = "/#/SignIn"
+					};
+				}
+			}
+
+			return result;
+		}
 	}
 }
