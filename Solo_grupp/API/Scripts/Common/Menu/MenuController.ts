@@ -1,7 +1,7 @@
 ﻿import {User} from '../Models/User.ts'
 import {AuthorizeService} from './AuthorizeService.ts'
 
-export class AuthorizeController {
+export class MenuController {
     public static $inject: string[] =
     [
         'authorizeService'

@@ -1,4 +1,4 @@
-﻿<nav id="nav" class="navbar navbar-default navbar-fixed-top" ng-controller="authorizeController as auth">
+﻿<nav id="nav" class="navbar navbar-default navbar-fixed-top" ng-controller="menuController as menu">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -42,12 +42,12 @@
                 </li>
                 <li><a href="#">Каталог</a></li>
                 <li><a href="#">Корзина</a></li>
-                <li ng-show="!auth.isAuth"><a href="/#/SignIn">Войти</a></li>
-                <li ng-show="!auth.isAuth"><a href="/#/SignUp">Регистрация</a></li>
-                <li ng-show="auth.isAuth" id="userName">
+                <li ng-show="!menu.isAuth"><a href="/#/SignIn">Войти</a></li>
+                <li ng-show="!menu.isAuth"><a href="/#/SignUp">Регистрация</a></li>
+                <li ng-show="menu.isAuth" id="userName">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <span class="caret"></span>
-                        {{auth.fullName}}
+                        {{menu.fullName}}
                     </a>
                     <ul class="dropdown-menu pageList">
 
@@ -55,7 +55,7 @@
 
                         <li role="separator" class="divider"></li>
 
-                        <li><a ng-click="auth.SignOut()">Выйти</a></li>
+                        <li><a ng-click="menu.SignOut()">Выйти</a></li>
 
                         <li role="separator" class="divider"></li>
 
