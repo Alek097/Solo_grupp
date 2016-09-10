@@ -174,7 +174,12 @@ export class ReplaceController {
         valid = valid && this.repeatedPasswordValidate();
 
         if (valid) {
-
+            this.service.ReplacePassword(this.model)
+                .success((data) => {
+                    if (data.Responce.IsMoving) {
+                        window.location.href = data.Responce.Location;
+                    }
+                });
         }
     }
 
