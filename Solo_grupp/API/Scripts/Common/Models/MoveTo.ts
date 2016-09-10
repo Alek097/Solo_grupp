@@ -1,4 +1,4 @@
 ﻿export class MoveTo {
-    public Location: string;
-    public IsMoving: boolean;
+    public Location: string = null;
+    public IsMoving: boolean = false;
 }

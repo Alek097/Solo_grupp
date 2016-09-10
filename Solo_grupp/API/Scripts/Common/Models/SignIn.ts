@@ -1,4 +1,4 @@
 ﻿export class SignIn {
-    public Email: string;
-    public Password: string;
+    public Email: string = null;
+    public Password: string = null;
 }

@@ -1,5 +1,5 @@
 ﻿export class Replace {
-    public ReplaceCode: string;
-    public Password: string;
-    public RepeatedPassword: string;
+    public ReplaceCode: string = null;
+    public Password: string = null;
+    public RepeatedPassword: string = null;
 }
