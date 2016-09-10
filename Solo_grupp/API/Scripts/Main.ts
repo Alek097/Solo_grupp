@@ -23,14 +23,14 @@ angular.module('main',
         $routeProvider.when('/SignUp',
             <ng.route.IRoute>
             {
-                templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+                templateUrl: '../Scripts/Pages/Authentification/SignUp/SignUpView.html',
                 controller: 'signUpController',
                 controllerAs: 'signUpCtrl'
             });
         $routeProvider.when('/SignUp/:message',
             <ng.route.IRoute>
             {
-                templateUrl: '../Scripts/Pages/SignUp/SignUpView.html',
+                templateUrl: '../Scripts/Pages/Authentification/SignUp/SignUpView.html',
                 controller: 'signUpController',
                 controllerAs: 'signUpCtrl'
             });
@@ -51,28 +51,28 @@ angular.module('main',
         $routeProvider.when('/SignIn',
             <ng.route.IRoute>
             {
-                templateUrl: '../Scripts/Pages/SignIn/SignInView.html',
+                templateUrl: '../Scripts/Pages/Authentification/SignIn/SignInView.html',
                 controller: 'signInController',
                 controllerAs: 'signInCtrl'
             });
         $routeProvider.when('/SignIn/:message',
             <ng.route.IRoute>
             {
-                templateUrl: '../Scripts/Pages/SignIn/SignInView.html',
+                templateUrl: '../Scripts/Pages/Authentification/SignIn/SignInView.html',
                 controller: 'signInController',
                 controllerAs: 'signInCtrl'
             });
         $routeProvider.when('/Replace',
             <ng.route.IRoute>
             {
-                templateUrl: '../Scripts/Pages/Replace/ReplaceView.html',
+                templateUrl: '../Scripts/Pages/Authentification/Replace/ReplaceView.html',
                 controller: 'replaceController',
                 controllerAs: 'replace'
             });
         $routeProvider.when('/Replace/:message',
             <ng.route.IRoute>
             {
-                templateUrl: '../Scripts/Pages/Replace/ReplaceView.html',
+                templateUrl: '../Scripts/Pages/Authentification/Replace/ReplaceView.html',
                 controller: 'replaceController',
                 controllerAs: 'replace'
             });
