@@ -208,7 +208,7 @@
 				result.Responce = new MoveTo()
 				{
 					IsMoving = true,
-					Location = this.MovedReplaceError(string.Format("Пользователь с почтой {0} не найден."))
+					Location = this.MovedReplaceError(string.Format("Пользователь с почтой {0} не найден.", email))
 				};
 
 			}

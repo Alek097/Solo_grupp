@@ -1,7 +1,7 @@
 ﻿<div class="container-fluid" id="signInContainer">
     <div class="col-md-3"></div>
     <div class="col-md-9">
-        <form role="form" ng-view="replace.isFirst" ng-submit="replace.submit()">
+        <form id="display-firstForm" role="form" ng-submit="replace.submit()">
             <div class="col-xs-12 col-md-6 information">
                 <span>Введите электронную почту под которой вы регестрировались. После чего на вашу почту придёт код подтверждения.</span>
             </div>
@@ -23,7 +23,7 @@
 
         </form>
 
-        <form role="form" ng-view="!replace.isFirst" ng-submit="replace.submitPass()">
+        <form id="display-secondForm" role="form" ng-submit="replace.submitPass()">
             <div class="col-xs-12 col-md-6 information">
                 <span>На вашу почту был отапрвлен код подтверждения</span>
             </div>
@@ -35,7 +35,7 @@
                     <p class="error" id="error-replaceCode"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-keyup="replace.replaceCodeValidate()" type="password" class="form-control" id="replaceCode" autocomplete="off" placeholder="Пароль">
+                    <input ng-keyup="replace.replaceCodeValidate()" type="text" class="form-control" id="replaceCode" autocomplete="off" placeholder="Пароль">
                 </div>
             </div>
             <div class="form-group col-xs-12">

@@ -8,11 +8,10 @@ import {Replace} from '../../Common/Models/Replace.ts'
 export class ReplaceController {
 
     public error: string;
-    public isFirst: boolean = true;
 
     private email: string;
     private elem: JQuery;
-    private model: Replace;
+    private model: Replace = new Replace();
 
     public static $inject: string[] =
     [
@@ -134,7 +133,7 @@ export class ReplaceController {
         this.elem = angular.element('#error-replaceCode');
 
         if (replaceCode == undefined || replaceCode.length == 0) {
-            this.writeError('Повторите пароль');
+            this.writeError('Введите код');
             return false;
         }
         else {
@@ -145,6 +144,7 @@ export class ReplaceController {
 
         if (regex.test(replaceCode)) {
             this.clearError();
+            return true;
         }
         else {
             this.writeError('Неправильный код');
@@ -162,7 +162,8 @@ export class ReplaceController {
                         window.location.href = data.Responce.Location;
                     }
                     else {
-                        this.isFirst = false;
+                        angular.element('#display-firstForm').css('display', 'none');
+                        angular.element('#display-secondForm').css('display', 'block');
                     }
                 });
         }
