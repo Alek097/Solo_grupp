@@ -273,6 +273,7 @@
     <TypeScriptCompile Include="Scripts\Common\Models\SignIn.ts" />
     <TypeScriptCompile Include="Scripts\Common\Other\OtherStart.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\AuthentificationModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\Authentification\Validate.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuModule.ts" />
