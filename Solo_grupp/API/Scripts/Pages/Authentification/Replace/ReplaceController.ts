@@ -1,9 +1,9 @@
 ﻿import {ReplaceService} from './ReplaceService.ts'
-import {AuthorizeService} from '../../Common/Menu/AuthorizeService.ts'
-import {User} from '../../Common/Models/User.ts'
-import {MoveTo} from '../../Common/Models/MoveTo.ts'
-import {RepositoryResult} from '../../Common/Models/RepositoryResult.ts'
-import {Replace} from '../../Common/Models/Replace.ts'
+import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
+import {User} from '../../../Common/Models/User.ts'
+import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {RepositoryResult} from '../../../Common/Models/RepositoryResult.ts'
+import {Replace} from '../../../Common/Models/Replace.ts'
 
 export class ReplaceController {
 

@@ -1,5 +1,5 @@
-﻿import {Registration} from '../../Common/Models/Registration.ts'
-import {MoveTo} from '../../Common/Models/MoveTo.ts'
+﻿import {Registration} from '../../../Common/Models/Registration.ts'
+import {MoveTo} from '../../../Common/Models/MoveTo.ts'
 export class SignUpService {
     public static $inject: string[] =
     [

@@ -1,14 +1,10 @@
 ﻿import './Error/ErrorModule.ts'
-import './SignUp/SignUpModule.ts'
 import './Message/MessageModule.ts'
-import './SignIn/SignInModule.ts'
-import './Replace/ReplaceModule.ts'
+import './Authentification/AuthentificationModule.ts'
 
 angular.module('pages',
     [
+        'authentification',
         'error',
-        'signUp',
         'message',
-        'signIn',
-        'replace'
     ]);

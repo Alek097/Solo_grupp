@@ -1,8 +1,8 @@
-﻿import {Registration} from '../../Common/Models/Registration.ts'
-import {MoveTo} from '../../Common/Models/MoveTo.ts'
+﻿import {Registration} from '../../../Common/Models/Registration.ts'
+import {MoveTo} from '../../../Common/Models/MoveTo.ts'
 import {SignUpService} from './SignUpService.ts'
-import {AuthorizeService} from '../../Common/Menu/AuthorizeService.ts'
-import {User} from '../../Common/Models/User.ts'
+import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
+import {User} from '../../../Common/Models/User.ts'
 
 export class SignUpController {
 

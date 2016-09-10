@@ -1,9 +1,9 @@
-﻿import {SignIn} from '../../Common/Models/SignIn.ts'
-import {MoveTo} from '../../Common/Models/MoveTo.ts'
-import {User} from '../../Common/Models/User.ts'
-import {RepositoryResult} from '../../Common/Models/RepositoryResult.ts'
+﻿import {SignIn} from '../../../Common/Models/SignIn.ts'
+import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {User} from '../../../Common/Models/User.ts'
+import {RepositoryResult} from '../../../Common/Models/RepositoryResult.ts'
 import {SignInService} from './SignInService.ts'
-import {AuthorizeService} from '../../Common/Menu/AuthorizeService.ts'
+import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
 
 export class SignInController {
     public model: SignIn = new SignIn();
