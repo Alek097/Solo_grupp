@@ -4,12 +4,9 @@ import {User} from '../../../Common/Models/User.ts'
 import {RepositoryResult} from '../../../Common/Models/RepositoryResult.ts'
 import {SignInService} from './SignInService.ts'
 import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
+import {Validate} from '../Validate.ts'
 
-export class SignInController {
-    public model: SignIn = new SignIn();
-    public error: string;
-
-    private elem: JQuery;
+export class SignInController extends Validate {
 
     public static $inject: string[] =
     [
@@ -23,6 +20,7 @@ export class SignInController {
         params: ng.route.IRouteParamsService,
         authorizeService: AuthorizeService
     ) {
+        super(new SignIn);
         authorizeService.Authentification()
             .success((data: User) => {
                 if (data == undefined) {
@@ -42,66 +40,6 @@ export class SignInController {
             this.error = '';
     }
 
-    public emailValidate(): boolean {
-        let email: string = angular.element('#email').val();
-
-        if (email === undefined)
-            return;
-
-        this.elem = angular.element('#error-email');
-
-        if (email == undefined) {
-            this.writeError('Введите Email');
-            return false;
-        }
-
-        this.model.Email = email;
-
-        if (email.length === 0) {
-            this.writeError('Введите Email');
-            return false;
-        }
-        else {
-            this.clearError();
-        }
-
-        let Regex: RegExp = new RegExp('^[-._a-z0-9]+@(?:[a-z0-9][-a-z0-9]+\.)+[a-z]{2,6}$');
-
-        if (Regex.test(email)) {
-            this.clearError();
-            return true;
-        }
-        else {
-            this.writeError('Введите Email в правильном формате');
-            return false;
-        }
-    }
-
-    public passwordValidate(): boolean {
-        let password: string = angular.element('#password').val();
-
-        this.model.Password = password;
-
-        this.elem = angular.element('#error-password');
-
-        if (password == undefined || password.length == 0) {
-            this.writeError('Введите пароль')
-            return false;
-        }
-        else {
-            this.clearError();
-        }
-
-        if (password.length < 5) {
-            this.writeError('Пароль меньше 5 символов');
-            return false;
-        }
-        else {
-            this.clearError();
-            return true;
-        }
-    }
-
     public submit(): void {
         let valid: boolean = this.emailValidate();
         valid = valid && this.passwordValidate();
@@ -115,12 +53,5 @@ export class SignInController {
                     }
                 });
         }
-    }
-
-    private writeError(text: string): void {
-        this.elem.text(text + '.');
-    }
-    private clearError(): void {
-        this.elem.text('');
     }
 }
