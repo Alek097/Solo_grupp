@@ -152,6 +152,8 @@
 							IsMoving = true,
 							Location = this.MovedSignInError("Неверный логин или пароль")
 						};
+
+						logger.WriteError(string.Format("Пользователь с почтой {0} не найден.", model.Email));
 					}
 					else
 					{
@@ -166,6 +168,8 @@
 								IsMoving = true,
 								Location = base.MovedHome()
 							};
+
+							logger.WriteInformation(string.Format("Пользователь с почтой {0} успешно вошёл в систему.", model.Email));
 						}
 						else
 						{
@@ -175,6 +179,8 @@
 								IsMoving = true,
 								Location = this.MovedSignInError("Неверный логин или пароль")
 							};
+
+							logger.WriteError("Хэши паролей не совпадают");
 						}
 					}
 
@@ -231,19 +237,35 @@
 						Location = this.MovedError(500, "Ошибка на сервере.")
 					};
 
+					logger.WriteError("Данные не были сохранены.");
+
 					return result;
 				}
 
-				base.SendMessage(
-					user.Email,
-					"Solo-grupp смена пароля.",
+				try
+				{
+					base.SendMessage(
+						user.Email,
+						"Solo-grupp смена пароля.",
 
-					string.Format("<span>Ваш код подтверждения: {0}</span><br/><span>Если вы не запрашивали смены пароля, перейдите по ссылке : <a href=\"{1}\">{1}</a></span>",
-						replaceCode,
-						string.Format("{0}/api/user/cancelReplace?replaceCode={1}", DNS, replaceCode)),
+						string.Format("<span>Ваш код подтверждения: {0}</span><br/><span>Если вы не запрашивали смены пароля, перейдите по ссылке : <a href=\"{1}\">{1}</a></span>",
+							replaceCode,
+							string.Format("{0}/api/user/cancelReplace?replaceCode={1}", DNS, replaceCode)),
 
-					true
-					);
+						true
+						);
+				}
+				catch (Exception ex)
+				{
+					logger.WriteError(ex, string.Format("Не удалось отправить сообщение с кодом подтверждения на {0}.", email));
+
+					result.ResultType = RepositoryResultType.Bad;
+					result.Responce = new MoveTo()
+					{
+						IsMoving = true,
+						Location = this.MovedError(500, "Ошибка на сервере.")
+					};
+				}
 
 
 				result.ResultType = RepositoryResultType.OK;
@@ -252,6 +274,8 @@
 					IsMoving = false
 				};
 			}
+
+			logger.WriteInformation(string.Format("Отправлено письмо с кодом подтверждения на {0}", email));
 
 			return result;
 		}
@@ -263,9 +287,24 @@
 			result.Responce.Headers.Location = new Uri(string.Format("{0}/#/Home", DNS));
 
 			User user = this.context.GetAll<User>().FirstOrDefault(u => u.ReplaceCode == replaceCode);
-			user.ReplaceCode = Guid.Empty;
 
-			await this.context.SaveChangesAsync();
+			if (user == null)
+			{
+				result.ResultType = RepositoryResultType.Bad;
+
+				logger.WriteError(string.Format("Пользователь с кодом подтверждения {0} не найден.", replaceCode));
+			}
+			else
+			{
+				result.ResultType = RepositoryResultType.OK;
+
+				user.ReplaceCode = Guid.Empty;
+
+				await this.context.SaveChangesAsync();
+
+
+				logger.WriteInformation(string.Format("Произведена отмена смены пароля пользователя с кодом подтверждения {0}", replaceCode));
+			}
 
 			return result;
 		}
@@ -278,6 +317,8 @@
 
 			if (user == null || user.ReplaceCode == Guid.Empty)
 			{
+				logger.WriteError(string.Format("Пользователь с кодом подтверждения {0} не найден.", model.ReplaceCode));
+
 				result.ResultType = RepositoryResultType.Bad;
 				result.Responce = new MoveTo()
 				{
@@ -299,6 +340,8 @@
 
 				if (changes == 0)
 				{
+					logger.WriteError("Данные не были сохранены.");
+
 					result.ResultType = RepositoryResultType.Bad;
 					result.Responce = new MoveTo()
 					{
@@ -308,6 +351,8 @@
 				}
 				else
 				{
+					logger.WriteInformation("Пароль успешно изменён.");
+
 					result.ResultType = RepositoryResultType.OK;
 					result.Responce = new MoveTo()
 					{

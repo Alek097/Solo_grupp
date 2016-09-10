@@ -15,10 +15,12 @@
 	using System.Web.Http.ModelBinding;
 	using Microsoft.Owin.Security;
 	using System.Security.Claims;
+	using Logging;
 	#endregion
 	public class UserController : ApiController
 	{
 		private readonly IUserRepository repository;
+		private readonly ILogger logger;
 		private ApplicationUserManager UserManager
 		{
 			get
@@ -33,9 +35,10 @@
 				return this.ControllerContext.Request.GetOwinContext().Authentication;
 			}
 		}
-		public UserController(IUserRepository repository)
+		public UserController(IUserRepository repository, ILogger logger)
 		{
 			this.repository = repository;
+			this.logger = logger;
 		}
 		[AllowAnonymous]
 		[HttpPost]
@@ -138,10 +141,14 @@
 		[HttpGet]
 		public async Task SignOut()
 		{
+			User currentUser = this.UserManager.FindById(this.User.Identity.GetUserId());
+
+			logger.WriteInformation(string.Format("Пользователь с почтой {0} вышел из системы.", currentUser.Email));
+
 			await Task.Run(() =>
-				{
-					AuthenticationManager.SignOut();
-				});
+			{
+				AuthenticationManager.SignOut();
+			});
 		}
 		[AllowAnonymous]
 		[HttpPost]
@@ -179,12 +186,15 @@
 		[HttpPost]
 		public async Task<RepositoryResult<MoveTo>> Replace([FromUri]string email)
 		{
+			logger.WriteInformation(string.Format("Зпрос на смену пароля пользователя с почтой {0}", email));
 			return await this.repository.Replace(email);
 		}
 		[AllowAnonymous]
 		[HttpGet]
 		public async Task<HttpResponseMessage> CancelReplace(Guid replaceCode)
 		{
+			logger.WriteInformation(string.Format("Отмена запроса на смена пароля пользователя с кодом подтверждения {0}", replaceCode));
+
 			RepositoryResult<HttpResponseMessage> result = await this.repository.CancelReplace(replaceCode);
 
 			return result.Responce;
