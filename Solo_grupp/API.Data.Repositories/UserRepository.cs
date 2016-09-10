@@ -361,5 +361,10 @@
 
 			return result;
 		}
+
+		public void Dispose()
+		{
+			this.context.Dispose();
+		}
 	}
 }

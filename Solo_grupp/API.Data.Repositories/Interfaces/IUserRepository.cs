@@ -7,7 +7,7 @@
 	using API.Models;
 	using System.Net.Http;
 	#endregion
-	public interface IUserRepository
+	public interface IUserRepository : IDisposable
 	{
 		Task<RepositoryResult<MoveTo>> RegistartionAsync(NotActiveUser user);
 		Task<RepositoryResult<User, HttpResponseMessage>> Activation(Guid id);

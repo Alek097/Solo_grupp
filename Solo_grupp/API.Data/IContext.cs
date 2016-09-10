@@ -2,11 +2,12 @@
 {
 	#region Using
 	using Models;
+	using System;
 	using System.Collections.Generic;
 	using System.Data.Entity;
 	using System.Threading.Tasks;
 	#endregion
-	public interface IContext
+	public interface IContext : IDisposable
 	{
 		DbSet<News> News { get; set; }
 		DbSet<Resolution> Permission { get; set; }
