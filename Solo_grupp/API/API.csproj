@@ -282,6 +282,9 @@
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuDirective.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Message\MessageController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Message\MessageModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\CreateNews\CreateNewsModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\NewsModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\News\NewsModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceModule.ts" />
