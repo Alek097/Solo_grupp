@@ -4,5 +4,5 @@ import './CreateNews/CreateNewsModule.ts'
 angular.module('mainNews',
     [
         'news',
-        'createModules'
+        'createModule'
     ]);
