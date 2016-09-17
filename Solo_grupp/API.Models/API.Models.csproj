@@ -46,6 +46,7 @@
     <Compile Include="Replace.cs" />
     <Compile Include="SignIn.cs" />
     <Compile Include="SignUp.cs" />
+    <Compile Include="UploadResult.cs" />
     <Compile Include="UserInformation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
