@@ -76,4 +76,12 @@ angular.module('main',
                 controller: 'replaceController',
                 controllerAs: 'replace'
             });
+
+        $routeProvider.when('/CreateNews',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/News/CreateNews/CreateNewsView.html',
+                controller: 'createNewsController',
+                controllerAs: 'createNews'
+            });
     });
