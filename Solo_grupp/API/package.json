@@ -21,6 +21,7 @@
     "angular-animate": "^1.5.8",
     "angular-route": "^1.5.8",
     "bootstrap": "^3.3.7",
+    "font-awesome": "^4.6.3",
     "jquery": "^3.1.0",
     "less": "^2.7.1",
     "textangular": "^1.5.10"

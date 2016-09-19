@@ -31,6 +31,7 @@ module.exports = {
             myFilesInjection: {
                 css: [
                     GetBundles('lib/bootstrap/dist/css/bootstrap.min.css'),
+                    GetBundles('lib/font-awesome/css/font-awesome.min.css'),
                     GetBundles('lib/textangular/dist/textAngular.css')
                 ],
                 less: [
@@ -57,7 +58,8 @@ module.exports = {
             { from: 'node_modules/bootstrap', to: 'lib/bootstrap' },
             { from: 'node_modules/jquery', to: 'lib/jquery' },
             { from: 'node_modules/less', to: 'lib/less' },
-            { from: 'node_modules/textangular', to: 'lib/textangular' }
+            { from: 'node_modules/textangular', to: 'lib/textangular' },
+            { from: 'node_modules/font-awesome', to: 'lib/font-awesome' }
         ])
     ]
 };
