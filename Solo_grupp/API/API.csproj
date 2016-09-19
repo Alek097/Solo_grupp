@@ -221,6 +221,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\UnityResolver.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CreateNewsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DependencyContainer.cs" />
     <Compile Include="Filters\ResolutionAttribute.cs" />
@@ -240,6 +241,7 @@
     <Content Include="Scripts\Pages\Authentification\Replace\ReplaceView.html" />
     <Content Include="Scripts\Pages\Authentification\SignIn\SignInView.html" />
     <Content Include="Scripts\Pages\Authentification\SignUp\SignUpView.html" />
+    <Content Include="Scripts\Pages\News\CreateNews\CreateNewsView.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -284,6 +286,7 @@
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuDirective.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Message\MessageController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Message\MessageModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\CreateNews\CreateNewsController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\News\CreateNews\CreateNewsModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\News\NewsModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\News\News\NewsModule.ts" />
