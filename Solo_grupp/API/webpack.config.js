@@ -35,7 +35,8 @@ module.exports = {
                     GetBundles('lib/textangular/dist/textAngular.css')
                 ],
                 less: [
-                    GetBundles('app/style.less')
+                    GetBundles('app/style.less'),
+                    GetBundles('app/createNewsStyle.less')
                 ],
                 js: [
                    GetBundles('lib/less/dist/less.min.js'),
