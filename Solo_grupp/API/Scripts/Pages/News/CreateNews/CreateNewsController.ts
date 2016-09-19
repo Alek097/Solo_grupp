@@ -1,4 +1,19 @@
 ﻿export class CreateNewsController {
+
+    public static $inject: string[] =
+    [
+        '$timeout'
+    ];
+
+    public imgUrls: string[] = [];
+    public content: string = null;
+
+    constructor(
+        private timeout: ng.ITimeoutService
+    ) {
+
+    }
+
     public submit(): void {
         let input: JQuery = angular.element('input[type=file]');
 

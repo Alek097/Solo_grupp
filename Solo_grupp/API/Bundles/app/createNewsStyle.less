@@ -1,3 +1,56 @@
-﻿#upload-imgs-container {
+﻿@Tablet-Size: 767px;
+@blur: 2px;
+
+#upload-imgs-container {
     padding: 30px 15px 10px 15px;
+}
+
+#add-image {
+    text-align: center;
+    margin-left: 10px;
+
+    &:hover {
+        -webkit-filter: blur(@blur);
+        -moz-filter: blur(@blur);
+        -ms-filter: blur(@blur);
+        filter: blur(@blur);
+    }
+
+    @media(max-width: @Tablet-Size) {
+        margin-left: 0px;
+    }
+}
+
+.upload-img {
+    padding: 10px;
+
+    img {
+        margin-bottom: 20px;
+
+        &:hover {
+            -webkit-filter: blur(@blur);
+            -moz-filter: blur(@blur);
+            -ms-filter: blur(@blur);
+            filter: blur(@blur);
+        }
+    }
+
+    div {
+        padding: 0px;
+
+        div {
+            padding: 0px;
+
+            label {
+                @media(min-width: @Tablet-Size) {
+                    text-align: center;
+                }
+            }
+
+            input {
+                width: 100%;
+                overflow-x: hidden;
+            }
+        }
+    }
 }
