@@ -23,4 +23,8 @@
             data.append('file' + i, input[i]);
         }
     }
+
+    public uploadFile(): void {
+
+    }
 }
