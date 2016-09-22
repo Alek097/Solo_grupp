@@ -20,9 +20,9 @@
                     </div>
 
                 </div>
-                <div id="add-image" class="col-sm-2 col-xs-12 well" ng-click="uploadFile()">
+                <div id="add-image" class="col-sm-2 col-xs-12 well">
                     <i class="fa fa-plus-square-o fa-5x" aria-hidden="true"></i>
-                    <input type="file" multiple />
+                    <input id="uploadFile" type="file" multiple onchange="angular.element(this).controller().uploadFile()" accept="image/*"/>
                 </div>
             </div>
         </div>
