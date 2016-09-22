@@ -1,4 +1,5 @@
 ﻿import {CreateNewsService} from './CreateNewsService.ts'
+import {UploadResult} from '../../../Common/Models/UploadResult.ts'
 
 export class CreateNewsController {
 
@@ -38,11 +39,13 @@ export class CreateNewsController {
         }
 
         this.service.uploadImage(data)
-            .success((data: string[]) => {
-                for (let i: number = 0; i < data.length; i++) {
-                    this.imgUrls[this.imgUrls.length] = data[i];
+            .done((data: UploadResult) => {
+                if (data.IsUploading) {
+                    for (let i: number = 0; i < data.Urls.length; i++) {
+                        this.imgUrls[this.imgUrls.length] = data.Urls[i];
 
-                    this.timeout();
+                        this.timeout();
+                    }
                 }
             });
     }

@@ -10,7 +10,14 @@
 
     }
 
-    public uploadImage(data: FormData): ng.IHttpPromise<string[]> {
-        return this.http.post('/api/CreateNews/UploadImage', data);
+    public uploadImage(data: FormData): JQueryXHR {
+
+        return $.ajax({
+            type: "POST",
+            url: '/api/CreateNews/UploadImage',
+            contentType: false,
+            processData: false,
+            data: data
+        });
     }
 }
