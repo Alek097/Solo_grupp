@@ -223,7 +223,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CreateNewsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="DependencyContainer.cs" />
     <Compile Include="Filters\ResolutionAttribute.cs" />
     <Compile Include="Infrastructure\UnityControllerActivator.cs" />
     <Compile Include="Infrastructure\UnityHttpControllerActivator.cs" />

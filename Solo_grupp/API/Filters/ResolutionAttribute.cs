@@ -3,6 +3,7 @@
 	#region Using
 	using Data;
 	using Data.Models;
+	using Logging;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Net;
@@ -14,7 +15,6 @@
 	public class ResolutionAttribute : AuthorizeAttribute
 	{
 		private List<ResolutionType> permission;
-		private ApplicationContext context = DependencyContainer.GetType<ApplicationContext>();
 
 		public ResolutionAttribute(params ResolutionType[] permission)
 		{
@@ -28,35 +28,36 @@
 			{
 				string userName = HttpContext.Current.User.Identity.Name;
 
-				User user = context.GetAll<User>().FirstOrDefault(u => u.UserName == userName);
-
-				if (user == null)
+				using (ApplicationContext context = new ApplicationContext(new Logger()))
 				{
-					actionContext.Response = new HttpResponseMessage(HttpStatusCode.NotFound);
 
-					this.context.Dispose();
+					User user = context.GetAll<User>().FirstOrDefault(u => u.UserName == userName);
 
-					return;
-				}
-				else
-				{
-					bool succes = true;
-
-					foreach (Resolution resolution in user.Permission)
+					if (user == null)
 					{
-						succes = succes && this.permission.Contains(resolution.ResolutionType);
-					}
+						actionContext.Response = new HttpResponseMessage(HttpStatusCode.NotFound);
 
-					if (!succes)
+						return;
+					}
+					else
 					{
-						actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+						bool succes = true;
+
+						foreach (ResolutionType resolutionType in this.permission)
+						{
+							Resolution resolution = user.Permission.FirstOrDefault(p=>p.ResolutionType == resolutionType);
+
+							succes = succes && (resolution != null);
+						}
+
+						if (!succes)
+						{
+							actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+						}
+
 					}
-
 				}
-
 			}
-
-			this.context.Dispose();
 
 		}
 	}

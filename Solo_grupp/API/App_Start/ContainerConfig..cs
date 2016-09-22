@@ -27,8 +27,6 @@
 			GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), httpControllerActivator);
 
 			config.DependencyResolver = new UnityResolver(container);
-
-			DependencyContainer.Container = container;
 		}
 
 		private static void MapTypes(IUnityContainer container)
