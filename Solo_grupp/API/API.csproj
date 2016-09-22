@@ -254,6 +254,7 @@
     <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Bundles\app\img\tmp\" />
     <Folder Include="Bundles\lib\" />
   </ItemGroup>
   <ItemGroup>
