@@ -38,6 +38,10 @@ export class CreateNewsController {
             data.append('file' + i, files[i]);
         }
 
+        angular.element('#uploadFile').remove();
+
+        angular.element('#add-image').append('<input id="uploadFile" type="file" multiple onchange="angular.element(this).controller().uploadFile()" accept="image/*"/>');
+
         this.service.uploadImage(data)
             .done((data: UploadResult) => {
                 if (data.IsUploading) {
