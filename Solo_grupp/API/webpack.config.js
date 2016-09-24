@@ -62,7 +62,8 @@ module.exports = {
             { from: 'node_modules/less', to: 'lib/less' },
             { from: 'node_modules/textangular', to: 'lib/textangular' },
             { from: 'node_modules/font-awesome', to: 'lib/font-awesome' },
-            { from: 'node_modules/angular-bootstrap-npm', to: 'lib/angular-bootstrap-npm' }
+            { from: 'node_modules/angular-bootstrap-npm', to: 'lib/angular-bootstrap-npm' },
+            { from: 'node_modules/country-city', to: 'lib/country-city' },
         ])
     ]
 };
