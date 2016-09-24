@@ -14,12 +14,28 @@ export class SignUpController extends Validate {
         'authorizeService'
     ];
 
+    private countries: Object[];
+    public countriesName: string[] = [];
+    public selectCountry: string;
+
+    public citiesName: string[] = [];
+    public selectCity: string;
+
     constructor(
         private service: SignUpService,
         params: ng.route.IRouteParamsService,
         authorizeService: AuthorizeService
     ) {
         super(new Registration());
+
+        $.getJSON('Bundles/lib/country-city/data.json', (data: any) => {
+            this.countries = data.countries;
+
+            for (let name in this.countries) {
+                this.countriesName[this.countriesName.length] = name;
+            }
+        })
+
         authorizeService.Authentification()
             .success((data: User) => {
                 if (data == undefined) {
@@ -87,42 +103,42 @@ export class SignUpController extends Validate {
         }
     }
 
-    public adressValidate(): boolean {
-        let adress: string = angular.element('#adress').val();
+    //public adressValidate(): boolean {
+    //    let adress: string = angular.element('#adress').val();
 
-        if (adress === undefined)
-            return;
+    //    if (adress === undefined)
+    //        return;
 
-        this.elem = angular.element('#error-adress');
+    //    this.elem = angular.element('#error-adress');
 
 
-        if (adress == undefined) {
+    //    if (adress == undefined) {
 
-            this.writeError('Укажите адрес');
+    //        this.writeError('Укажите адрес');
 
-            return false;
-        }
+    //        return false;
+    //    }
 
-        this.model.Adress = adress;
+    //    this.model.Adress = adress;
 
-        if (adress.length === 0) {
-            this.writeError('Укажите адрес');
-            return false;
-        }
-        else {
-            let regex: RegExp = new RegExp('с\.[A-Za-zА-Яа-яЁё]+ г\.[A-Za-zА-Яа-яЁё]+');
+    //    if (adress.length === 0) {
+    //        this.writeError('Укажите адрес');
+    //        return false;
+    //    }
+    //    else {
+    //        let regex: RegExp = new RegExp('с\.[A-Za-zА-Яа-яЁё]+ г\.[A-Za-zА-Яа-яЁё]+');
 
-            if (regex.test(adress)) {
-                this.clearError();
-                return true;
-            }
-            else {
-                this.writeError('Введите адрес в указанном формате');
-                return false;
-            }
-        }
+    //        if (regex.test(adress)) {
+    //            this.clearError();
+    //            return true;
+    //        }
+    //        else {
+    //            this.writeError('Введите адрес в указанном формате');
+    //            return false;
+    //        }
+    //    }
 
-    }
+    //}
 
     public phoneNumberValidate(): boolean {
         let phoneNumber: string = angular.element('#phoneNumber').val();
@@ -152,21 +168,23 @@ export class SignUpController extends Validate {
     }
 
     public submit(): void {
-        let valid: boolean = this.adressValidate();
+        let valid: boolean = this.emailValidate();
 
-        valid = valid && this.emailValidate();
+        valid = this.firstNameValidate() && valid;
 
-        valid = valid && this.firstNameValidate();
+        valid = this.lastNameValidate() && valid;
 
-        valid = valid && this.lastNameValidate();
+        valid = this.passwordValidate() && valid;
 
-        valid = valid && this.passwordValidate();
+        valid = this.patronymicValidate() && valid;
 
-        valid = valid && this.patronymicValidate();
+        valid = this.phoneNumberValidate() && valid;
 
-        valid = valid && this.phoneNumberValidate();
+        valid = this.repeatedPasswordValidate() && valid;
 
-        valid = valid && this.repeatedPasswordValidate();
+        valid = this.changeCity() && valid;
+
+        valid = this.changeCountry() && valid;
 
         if (valid) {
             this.service.Registration(this.model)
@@ -176,5 +194,39 @@ export class SignUpController extends Validate {
                     }
                 });
         }
+    }
+
+    public changeCountry(): boolean {
+        this.elem = angular.element('#error-country');
+
+
+        if (this.selectCountry == undefined || this.selectCountry === '') {
+            this.writeError('Выберите страну');
+            return false;
+        }
+        else {
+            this.clearError();
+        }
+
+        this.citiesName = this.countries[this.selectCountry];
+        this.model.Country = this.selectCountry;
+        return true;
+
+    }
+
+    public changeCity(): boolean {
+        this.elem = angular.element('#error-city');
+
+
+        if (this.selectCity == undefined || this.selectCity === '') {
+            this.writeError('Выберите город');
+            return false;
+        }
+        else {
+            this.clearError();
+        }
+
+        this.model.City = this.selectCity;
+        return true;
     }
 }
