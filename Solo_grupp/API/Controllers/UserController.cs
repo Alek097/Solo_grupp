@@ -52,7 +52,7 @@
 				{
 					foreach (ModelError error in modelState.Errors)
 					{
-						errorMessage = string.Format("{0}\n{1}");
+						errorMessage = string.Format("{0}\n{1}",errorMessage,error.ErrorMessage);
 					}
 				}
 
