@@ -1,12 +1,14 @@
 ﻿import {CreateNewsService} from './CreateNewsService.ts'
 import {UploadResult} from '../../../Common/Models/UploadResult.ts'
+import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 
 export class CreateNewsController {
 
     public static $inject: string[] =
     [
         '$timeout',
-        'createNewsService'
+        'createNewsService',
+        'modalMessageService'
     ];
 
     public imgUrls: string[] = [];
@@ -14,7 +16,8 @@ export class CreateNewsController {
 
     constructor(
         private timeout: ng.ITimeoutService,
-        private service: CreateNewsService
+        private service: CreateNewsService,
+        private modalService: ModalMessageService
     ) {
 
     }
@@ -50,6 +53,9 @@ export class CreateNewsController {
 
                         this.timeout();
                     }
+                }
+                else {
+                    this.modalService.open('Произошла ошибка при загрузке файла. Убедитесь что файл имеет формат изображения.', 'Ошибка!');
                 }
             });
     }

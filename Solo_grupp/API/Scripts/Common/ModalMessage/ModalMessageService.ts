@@ -11,14 +11,16 @@
     }
 
     public open(message: string, title: string): void {
-        let modalInstance: any = this.uibModal.open({
+        this.uibModal.open({
             animation: true,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            templateUrl: '../../../Common/ModalMessage/ModalMessageView.html',
+            templateUrl: '/Scripts/Common/ModalMessage/ModalMessageView.html',
             controller: 'modalMessageController',
             controllerAs: 'message',
             size: 'lg',
+            backdrop: '/Bundles/lib/angular-bootstrap-npm/dist/template/modal/backdrop.html',
+            windowTemplateUrl: '/Bundles/lib/angular-bootstrap-npm/dist/template/modal/window.html',
             resolve: {
                 title: (): string => {
                     return title;

@@ -1,6 +1,8 @@
 ﻿export class ModalMessageController {
     public static $inject: string[] = [
-        '$uibModalInstance' 
+        '$uibModalInstance',
+        'title',
+        'message'
     ];
 
     constructor(
