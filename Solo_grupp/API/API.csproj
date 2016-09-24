@@ -233,6 +233,7 @@
     <Content Include="Bundles\app\bundle.js" />
     <Content Include="Bundles\app\img\Logo.jpg" />
     <Content Include="Index_Template.html" />
+    <Content Include="Scripts\Common\ModalMessage\ModalMessageView.html" />
     <Content Include="Scripts\Pages\Error\ErrorView.html" />
     <Content Include="Scripts\Common\Menu\MenuView.html" />
     <Content Include="Scripts\Pages\Home\HomeView.html" />
@@ -270,6 +271,9 @@
     <TypeScriptCompile Include="Scripts\Common\Menu\MenuController.ts" />
     <TypeScriptCompile Include="Scripts\Common\Menu\AuthorizeService.ts" />
     <TypeScriptCompile Include="Scripts\Common\CommonModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageController.ts" />
+    <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageModule.ts" />
+    <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageService.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\MoveTo.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Registration.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Replace.ts" />
