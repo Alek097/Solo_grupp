@@ -48,6 +48,7 @@ module.exports = {
                    GetBundles('lib/textangular/dist/textAngular-rangy.min.js'),
                    GetBundles('lib/textangular/dist/textAngular-sanitize.min.js'),
                    GetBundles('lib/textangular/dist/textAngular.min.js'),
+                   GetBundles('lib/angular-bootstrap-npm/dist/angular-bootstrap.min.js'),
                    GetBundles('app/bundle.js')
                 ]
             }
@@ -60,7 +61,8 @@ module.exports = {
             { from: 'node_modules/jquery', to: 'lib/jquery' },
             { from: 'node_modules/less', to: 'lib/less' },
             { from: 'node_modules/textangular', to: 'lib/textangular' },
-            { from: 'node_modules/font-awesome', to: 'lib/font-awesome' }
+            { from: 'node_modules/font-awesome', to: 'lib/font-awesome' },
+            { from: 'node_modules/angular-bootstrap-npm', to: 'lib/angular-bootstrap-npm' }
         ])
     ]
 };
