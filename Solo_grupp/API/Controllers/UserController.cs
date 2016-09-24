@@ -127,7 +127,8 @@
 					return new UserInformation
 					{
 						Id = currentUser.Id,
-						Adress = currentUser.Adress,
+						Country = currentUser.Country,
+						City = currentUser.City,
 						Email = currentUser.Email,
 						FirstName = currentUser.FirstName,
 						FullName = currentUser.FullName,
