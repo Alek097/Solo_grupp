@@ -2,6 +2,7 @@
 {
 	#region Using
 	using Data.Models;
+	using Data.Repositories.Interfaces;
 	using Filters;
 	using Models;
 	using System;
@@ -15,6 +16,12 @@
 	[Authorize]
 	public class CreateNewsController : ApiController
 	{
+		public readonly ICreateNewsRepository repository;
+		public CreateNewsController(ICreateNewsRepository repository)
+		{
+			this.repository = repository;
+		}
+
 		[HttpPost]
 		[Resolution(ResolutionType.AddNews)]
 		public async Task<UploadResult> UploadImage()
@@ -66,7 +73,7 @@
 						Guid.NewGuid(),
 						fileExtension);
 
-					urls.Add(string.Format("../../../Bundles/app/img/tmp/{0}", fileName));
+					urls.Add(string.Format("/Bundles/app/img/tmp/{0}", fileName));
 
 					byte[] fileArray = await file.ReadAsByteArrayAsync();
 
@@ -82,6 +89,12 @@
 				IsUploading = true,
 				Urls = urls
 			};
+		}
+		[HttpPost]
+		[Resolution(ResolutionType.AddNews)]
+		public async Task<MoveTo> Create(CreateNews model)
+		{
+			return await this.repository.CreateNews(model);
 		}
 	}
 }
