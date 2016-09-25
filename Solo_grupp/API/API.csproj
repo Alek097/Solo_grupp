@@ -254,6 +254,7 @@
     <Content Include="webpack.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Bundles\app\img\news\" />
     <Folder Include="Bundles\app\img\tmp\" />
     <Folder Include="Bundles\lib\" />
   </ItemGroup>
@@ -274,6 +275,7 @@
     <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageController.ts" />
     <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageService.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\CreateNews.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\MoveTo.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Registration.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Replace.ts" />
