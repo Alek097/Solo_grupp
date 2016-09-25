@@ -1,6 +1,7 @@
 ﻿import {CreateNewsService} from './CreateNewsService.ts'
 import {UploadResult} from '../../../Common/Models/UploadResult.ts'
 import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
+import {CreateNews} from '../../../Common/Models/CreateNews.ts'
 
 export class CreateNewsController {
 
@@ -23,13 +24,12 @@ export class CreateNewsController {
     }
 
     public submit(): void {
-        let input: JQuery = angular.element('input[type=file]');
+        let data: CreateNews = new CreateNews();
 
-        let data = new FormData();
+        data.Content = this.content;
+        data.Urls = this.imgUrls;
 
-        for (let i: number = 0; i < input.length; i++) {
-            data.append('file' + i, input[i]);
-        }
+        this.service.createNews(data);
     }
 
     public uploadFile(): void {
