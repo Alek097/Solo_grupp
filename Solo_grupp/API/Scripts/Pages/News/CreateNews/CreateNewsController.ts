@@ -3,6 +3,7 @@ import {UploadResult} from '../../../Common/Models/UploadResult.ts'
 import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 import {CreateNews} from '../../../Common/Models/CreateNews.ts'
 import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {PermissionService} from '../../../Common/PermissionService.ts'
 
 export class CreateNewsController {
 
@@ -10,7 +11,8 @@ export class CreateNewsController {
     [
         '$timeout',
         'createNewsService',
-        'modalMessageService'
+        'modalMessageService',
+        'permissionService'
     ];
 
     public imgUrls: string[] = [];
@@ -19,9 +21,13 @@ export class CreateNewsController {
     constructor(
         private timeout: ng.ITimeoutService,
         private service: CreateNewsService,
-        private modalService: ModalMessageService
+        private modalService: ModalMessageService,
+        permissionService: PermissionService
     ) {
-
+        permissionService.IsResolution('addNews')
+            .error(() => {
+                window.location.href = '/#/Home';
+            });
     }
 
     public submit(): void {
