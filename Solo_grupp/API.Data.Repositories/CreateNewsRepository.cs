@@ -123,6 +123,11 @@
 
 			await this.context.SaveChangesAsync();
 
+			foreach (string url in urls)
+			{
+				File.Delete(HttpContext.Current.Server.MapPath(url));
+			}
+
 			return new MoveTo()
 			{
 				IsMoving = true,
