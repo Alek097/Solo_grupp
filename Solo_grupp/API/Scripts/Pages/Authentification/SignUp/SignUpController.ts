@@ -103,43 +103,6 @@ export class SignUpController extends Validate {
         }
     }
 
-    //public adressValidate(): boolean {
-    //    let adress: string = angular.element('#adress').val();
-
-    //    if (adress === undefined)
-    //        return;
-
-    //    this.elem = angular.element('#error-adress');
-
-
-    //    if (adress == undefined) {
-
-    //        this.writeError('Укажите адрес');
-
-    //        return false;
-    //    }
-
-    //    this.model.Adress = adress;
-
-    //    if (adress.length === 0) {
-    //        this.writeError('Укажите адрес');
-    //        return false;
-    //    }
-    //    else {
-    //        let regex: RegExp = new RegExp('с\.[A-Za-zА-Яа-яЁё]+ г\.[A-Za-zА-Яа-яЁё]+');
-
-    //        if (regex.test(adress)) {
-    //            this.clearError();
-    //            return true;
-    //        }
-    //        else {
-    //            this.writeError('Введите адрес в указанном формате');
-    //            return false;
-    //        }
-    //    }
-
-    //}
-
     public phoneNumberValidate(): boolean {
         let phoneNumber: string = angular.element('#phoneNumber').val();
 
