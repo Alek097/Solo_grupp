@@ -2,6 +2,7 @@
 import {UploadResult} from '../../../Common/Models/UploadResult.ts'
 import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 import {CreateNews} from '../../../Common/Models/CreateNews.ts'
+import {MoveTo} from '../../../Common/Models/MoveTo.ts'
 
 export class CreateNewsController {
 
@@ -29,7 +30,18 @@ export class CreateNewsController {
         data.Content = this.content;
         data.Urls = this.imgUrls;
 
-        this.service.createNews(data);
+        this.service.createNews(data)
+            .success((data: MoveTo) => {
+                if (data.IsMoving) {
+                    window.location.href = data.Location;
+                }
+                else {
+                    this.modalService.open(
+                        'Ошибка при созании новости!',
+                        'Упс! Похоже что при загрузке файлов возникла ошибка. Попробуйте ещё раз. Убедитесь что нет файлов с внешних ресурсов так как они могут загружаться с ненадёжного ресурса. Если ошибка не исчезает огбратитесь в техподержку дабы они придумали пытку для разработчика.'
+                    );
+                }
+            });
     }
 
     public uploadFile(): void {
