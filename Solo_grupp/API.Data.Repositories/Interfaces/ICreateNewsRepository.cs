@@ -3,11 +3,12 @@
 
 	#region Using
 	using API.Models;
+	using Models;
 	using System;
 	using System.Threading.Tasks;
 	#endregion
 	public interface ICreateNewsRepository : IDisposable
 	{
-		Task<RepositoryResult<MoveTo>> CreateNews(CreateNews model);
+		Task<RepositoryResult<News, MoveTo>> CreateNews(CreateNews model);
 	}
 }

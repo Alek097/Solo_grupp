@@ -23,9 +23,9 @@
 			this.context = context;
 			this.logger = logger;
 		}
-		public async Task<RepositoryResult<MoveTo>> CreateNews(CreateNews model)
+		public async Task<RepositoryResult<News, MoveTo>> CreateNews(CreateNews model)
 		{
-			RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
+			RepositoryResult<News, MoveTo> result = new RepositoryResult<News, MoveTo>();
 
 			MatchCollection matches = Regex.Matches(model.Content, "<img src=\"" + @".+?" + "\"" + @"[.\s]*/>");
 			List<string> urls = new List<string>(model.Urls);
@@ -167,6 +167,8 @@
 				IsMoving = true,
 				Location = string.Format("/#/News/{0}", news.Id)
 			};
+
+			result.Value = news;
 
 			result.ResultType = RepositoryResultType.Bad;
 

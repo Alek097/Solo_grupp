@@ -100,16 +100,17 @@
 		{
 			this.logger.WriteInformation("Запрос на создание новости");
 
-			RepositoryResult<MoveTo> result = await this.repository.CreateNews(model);
+			RepositoryResult<News, MoveTo> result = await this.repository.CreateNews(model);
 
-			if(result.ResultType == RepositoryResultType.OK)
+			if (result.ResultType == RepositoryResultType.OK)
 			{
-				this.logger.WriteInformation("Новость успешно создана");
+				this.logger.WriteInformation(string.Format("Новость успешно создана id = {0}", result.Value.Id));
 			}
 			else
 			{
-				this.logger.WriteInformation("Ошибка при создании новости");
+				this.logger.WriteError("Ошибка при создании новости");
 			}
+
 			return result.Responce;
 		}
 	}
