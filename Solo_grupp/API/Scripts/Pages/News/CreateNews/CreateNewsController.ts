@@ -4,6 +4,7 @@ import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageServ
 import {CreateNews} from '../../../Common/Models/CreateNews.ts'
 import {MoveTo} from '../../../Common/Models/MoveTo.ts'
 import {PermissionService} from '../../../Common/PermissionService.ts'
+import {ResolutionType} from '../../../Common/Models/ResolutionType.ts'
 
 export class CreateNewsController {
 
@@ -24,7 +25,7 @@ export class CreateNewsController {
         private modalService: ModalMessageService,
         permissionService: PermissionService
     ) {
-        permissionService.IsResolution('addNews')
+        permissionService.IsResolution(ResolutionType.AddNews)
             .error(() => {
                 window.location.href = '/#/Home';
             });
