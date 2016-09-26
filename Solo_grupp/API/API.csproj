@@ -284,6 +284,7 @@
     <TypeScriptCompile Include="Scripts\Common\Models\SignIn.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\UploadResult.ts" />
     <TypeScriptCompile Include="Scripts\Common\Other\OtherStart.ts" />
+    <TypeScriptCompile Include="Scripts\Common\PermissionService.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\AuthentificationModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\Validate.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Error\ErrorController.ts" />
