@@ -87,9 +87,11 @@
 						try
 						{
 							WC.DownloadFile(url, path);
+							this.logger.WriteInformation(string.Format("Загружен файл с внешнего ресурса по ссылке {0}.", url));
 						}
 						catch (Exception ex)
 						{
+							this.logger.WriteError(ex, string.Format("Ошибка при загрузке файла с внешнего ресурса по ссылке {0}.", url));
 							return new MoveTo()
 							{
 								IsMoving = false
