@@ -4,7 +4,8 @@
     public Patronymic: string = null;
     public Password: string = null;
     public RepeatedPassword: string = null;
-    public Adress: string = null;
     public Email: string = null;
     public PhoneNumber: string = null;
+    public Country: string = null;
+    public City: string = null;
 }

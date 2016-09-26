@@ -1,0 +1,69 @@
+﻿@Tablet-Size: 767px;
+@blur: 2px;
+
+#upload-imgs-container {
+    padding: 30px 15px 10px 0px;
+}
+
+#add-image {
+    text-align: center;
+    margin-left: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+        -webkit-filter: blur(@blur);
+        -moz-filter: blur(@blur);
+        -ms-filter: blur(@blur);
+        filter: blur(@blur);
+    }
+
+    @media(max-width: @Tablet-Size) {
+        margin-left: 0px;
+    }
+
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        font-size: 150px;
+        z-index: 20;
+    }
+}
+
+.upload-img {
+    padding: 10px;
+
+    img {
+        margin-bottom: 20px;
+
+        &:hover {
+            -webkit-filter: blur(@blur);
+            -moz-filter: blur(@blur);
+            -ms-filter: blur(@blur);
+            filter: blur(@blur);
+        }
+    }
+
+    div {
+        padding: 0px;
+
+        div {
+            padding: 0px;
+
+            label {
+                @media(min-width: @Tablet-Size) {
+                    text-align: center;
+                }
+            }
+
+            input {
+                width: 100%;
+                overflow-x: hidden;
+            }
+        }
+    }
+}

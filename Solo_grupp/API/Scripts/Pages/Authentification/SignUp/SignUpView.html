@@ -77,13 +77,29 @@
 
             <div class="form-group col-xs-12">
                 <div class="col-xs-12">
-                    <label for="adress">Адрес</label>
+                    <label for="country">Страна</label>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-push-6 col-lg-push-6">
-                    <p class="error" id="error-adress"></p>
+                    <p class="error" id="error-country"></p>
                 </div>
                 <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                    <input ng-keyup="signUpCtrl.adressValidate()" type="text" class="form-control" id="adress" autocomplete="off" placeholder="с.Россия г.Москва ул.Пушкина д.1 кв.1">
+                    <select id="country" class="form-control" ng-model="signUpCtrl.selectCountry" ng-click="signUpCtrl.changeCountry()">
+                        <option ng-repeat="name in signUpCtrl.countriesName">{{name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+                <div class="col-xs-12">
+                    <label for="city">Город</label>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-push-6 col-lg-push-6">
+                    <p class="error" id="error-city"></p>
+                </div>
+                <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
+                    <select id="city" class="form-control" ng-model="signUpCtrl.selectCity" ng-click="signUpCtrl.changeCity()">
+                        <option ng-repeat="cityName in signUpCtrl.citiesName">{{cityName}}</option>
+                    </select>
                 </div>
             </div>
 

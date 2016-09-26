@@ -34,6 +34,7 @@
 			container.RegisterType<ILogger, Logger>();
 			container.RegisterType<IContext, ApplicationContext>();
 			container.RegisterType<IUserRepository, UserRepository>();
+			container.RegisterType<ICreateNewsRepository, CreateNewsRepository>();
 		}
 	}
 }

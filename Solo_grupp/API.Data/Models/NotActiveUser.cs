@@ -12,9 +12,10 @@
 		public string LastName { get; set; }
 		public string Patronymic { get; set; }
 		public string Password { get; set; }
-		public string Adress { get; set; }
 		public string Email { get; set; }
 		public string PhoneNumber { get; set; }
+		public string Country { get; set; }
+		public string City { get; set; }
 
 		public NotActiveUser()
 		{
@@ -30,10 +31,11 @@
 			this.FirstName = model.FirstName;
 			this.LastName = model.LastName;
 			this.Patronymic = model.Patronymic;
-			this.Adress = model.Adress;
 			this.Email = model.Email;
 			this.PhoneNumber = model.PhoneNumber;
 			this.Password = model.Password;
+			this.Country = model.Country;
+			this.City = model.City;
 		}
 		private void firstUpper(string value)
 		{

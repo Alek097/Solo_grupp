@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201609081543295_Added_Property_ReplaceCode.Designer.cs">
       <DependentUpon>201609081543295_Added_Property_ReplaceCode.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609242043217_added_country_and_city.cs" />
+    <Compile Include="Migrations\201609242043217_added_country_and_city.Designer.cs">
+      <DependentUpon>201609242043217_added_country_and_city.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\News.cs" />
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609081543295_Added_Property_ReplaceCode.resx">
       <DependentUpon>201609081543295_Added_Property_ReplaceCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609242043217_added_country_and_city.resx">
+      <DependentUpon>201609242043217_added_country_and_city.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

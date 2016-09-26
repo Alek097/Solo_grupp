@@ -1,0 +1,31 @@
+﻿<div class="container">
+    <form role="form" ng-submit="createNews.submit()">
+        <div class="form-group">
+            <text-angular ng-model="createNews.content"></text-angular>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12" id="upload-imgs-container">
+                <div ng-repeat="img in createNews.imgUrls">
+
+                    <div class="upload-img col-sm-2 col-xs-12 well">
+                        <img class="img-responsive" src="{{img}}" />
+                        <div class="col-xs-12">
+                            <div class="col-xs-2 col-sm-12">
+                                <label>URL:</label>
+                            </div>
+                            <div class="col-xs-10 col-sm-12">
+                                <input type="text" readonly value="{{img}}" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="add-image" class="col-sm-2 col-xs-12 well">
+                    <i class="fa fa-plus-square-o fa-5x" aria-hidden="true"></i>
+                    <input id="uploadFile" type="file" multiple onchange="angular.element(this).controller().uploadFile()" accept="image/*"/>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Опубликовать</button>
+    </form>
+</div>

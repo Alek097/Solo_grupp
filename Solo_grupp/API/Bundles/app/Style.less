@@ -9,6 +9,22 @@
 @Mobile-S-Size: 320px;
 @Tablet-Size: 767px;
 
+@Desktop-Size: 991px;
+
+@font-face {
+    font-family: 'Ubuntu Mono';
+    src: url(./fonts/ubuntumono.ttf);
+}
+
+@font-face {
+    font-family: 'Bebas Neue Bold';
+    src: url(./fonts/bebasneuebold.ttf);
+}
+
+.container{
+    margin-top: 100px;
+}
+
 #brand {
     a {
         padding: 0px;
@@ -19,6 +35,14 @@
             border-radius: 100%;
         }
     }
+}
+
+body {
+    font-family: 'Ubuntu Mono';
+}
+
+nav {
+    font-family: 'Bebas Neue Bold';
 }
 
 #brand-href {
@@ -38,7 +62,7 @@
 }
 
 .pageList {
-    font-size: 12pt;
+    font-size: 14pt;
     background-color: @BrandColor;
 
     li > a {
@@ -147,6 +171,10 @@
 
 #replace-signup {
     padding-top: 7px;
+
+    @media(max-width: @Desktop-Size) {
+            padding-left: 30px;
+    }
 }
 
 .information {
@@ -165,4 +193,12 @@
 
 #display-secondForm {
     display: none;
+}
+
+label {
+    font-size: 14pt;
+
+    @media(max-width: 334px) {
+        font-size: 12pt;
+    }
 }

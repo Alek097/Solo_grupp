@@ -52,7 +52,7 @@
 				{
 					foreach (ModelError error in modelState.Errors)
 					{
-						errorMessage = string.Format("{0}\n{1}");
+						errorMessage = string.Format("{0}\n{1}",errorMessage,error.ErrorMessage);
 					}
 				}
 
@@ -127,7 +127,8 @@
 					return new UserInformation
 					{
 						Id = currentUser.Id,
-						Adress = currentUser.Adress,
+						Country = currentUser.Country,
+						City = currentUser.City,
 						Email = currentUser.Email,
 						FirstName = currentUser.FirstName,
 						FullName = currentUser.FullName,

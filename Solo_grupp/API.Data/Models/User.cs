@@ -13,8 +13,9 @@
 		public string LastName { get; set; }
 		public string Patronymic { get; set; }
 		public string FullName { get; set; }
-		public string Adress { get; set; }
 		public new string PasswordHash { get; set; }
+		public string Country { get; set; }
+		public string City { get; set; }
 		public Guid ReplaceCode { get; set; }
 		public virtual Salt Salt { get; set; }
 		public virtual ICollection<Resolution> Permission { get; set; }
@@ -31,7 +32,8 @@
 			this.FirstName = user.FirstName;
 			this.LastName = user.LastName;
 			this.Patronymic = user.Patronymic;
-			this.Adress = user.Adress;
+			this.Country = user.Country;
+			this.City = user.City;
 			this.Email = user.Email;
 			this.PhoneNumber = user.PhoneNumber;
 			this.FullName = string.Format("{0} {1} {2}", this.LastName, this.FirstName, this.Patronymic);
