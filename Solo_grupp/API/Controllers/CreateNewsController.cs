@@ -5,6 +5,7 @@
 	using Data.Repositories;
 	using Data.Repositories.Interfaces;
 	using Filters;
+	using Logging;
 	using Models;
 	using System;
 	using System.Collections.Generic;
@@ -17,10 +18,12 @@
 	[Authorize]
 	public class CreateNewsController : ApiController
 	{
-		public readonly ICreateNewsRepository repository;
-		public CreateNewsController(ICreateNewsRepository repository)
+		private readonly ICreateNewsRepository repository;
+		private readonly ILogger logger;
+		public CreateNewsController(ICreateNewsRepository repository, ILogger logger)
 		{
 			this.repository = repository;
+			this.logger = logger;
 		}
 
 		[HttpPost]
@@ -95,8 +98,18 @@
 		[Resolution(ResolutionType.AddNews)]
 		public async Task<MoveTo> Create(CreateNews model)
 		{
+			this.logger.WriteInformation("Запрос на создание новости");
+
 			RepositoryResult<MoveTo> result = await this.repository.CreateNews(model);
 
+			if(result.ResultType == RepositoryResultType.OK)
+			{
+				this.logger.WriteInformation("Новость успешно создана");
+			}
+			else
+			{
+				this.logger.WriteInformation("Ошибка при создании новости");
+			}
 			return result.Responce;
 		}
 	}

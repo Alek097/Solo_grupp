@@ -59,9 +59,13 @@
 					try
 					{
 						File.Move(serverPath, newServerPath);
+
+						this.logger.WriteInformation(string.Format("Файл успешно пермещён с {0} в {1}", serverPath, newServerPath));
 					}
-					catch
+					catch (Exception ex)
 					{
+
+						this.logger.WriteError(ex, string.Format("Ошибка при перемещении файла по расположению {0} в {1}", serverPath, newServerPath));
 
 						result.Responce = new MoveTo()
 						{
@@ -72,6 +76,7 @@
 
 						return result;
 					}
+
 					images.Add(new Image()
 					{
 						URL = string.Format("~/Bundles/app/img/news/{0}/{1}", news.Id, fileName)
@@ -143,7 +148,17 @@
 
 			foreach (string url in urls)
 			{
-				File.Delete(HttpContext.Current.Server.MapPath(url));
+				string path = HttpContext.Current.Server.MapPath(url);
+
+				try
+				{
+					File.Delete(path);
+					this.logger.WriteInformation(string.Format("Удалён файл по расположению", path));
+				}
+				catch (Exception ex)
+				{
+					this.logger.WriteError(ex, string.Format("Ошибка удаления файла по расположению", path));
+				}
 			}
 
 
