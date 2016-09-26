@@ -8,6 +8,6 @@
 	#endregion
 	public interface ICreateNewsRepository : IDisposable
 	{
-		Task<MoveTo> CreateNews(CreateNews model);
+		Task<RepositoryResult<MoveTo>> CreateNews(CreateNews model);
 	}
 }

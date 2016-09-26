@@ -2,6 +2,7 @@
 {
 	#region Using
 	using Data.Models;
+	using Data.Repositories;
 	using Data.Repositories.Interfaces;
 	using Filters;
 	using Models;
@@ -94,7 +95,9 @@
 		[Resolution(ResolutionType.AddNews)]
 		public async Task<MoveTo> Create(CreateNews model)
 		{
-			return await this.repository.CreateNews(model);
+			RepositoryResult<MoveTo> result = await this.repository.CreateNews(model);
+
+			return result.Responce;
 		}
 	}
 }

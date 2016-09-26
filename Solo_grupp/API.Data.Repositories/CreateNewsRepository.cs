@@ -23,8 +23,10 @@
 			this.context = context;
 			this.logger = logger;
 		}
-		public async Task<MoveTo> CreateNews(CreateNews model)
+		public async Task<RepositoryResult<MoveTo>> CreateNews(CreateNews model)
 		{
+			RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
+
 			MatchCollection matches = Regex.Matches(model.Content, "<img src=\"" + @".+?" + "\"" + @"[.\s]*/>");
 			List<string> urls = new List<string>(model.Urls);
 
@@ -60,10 +62,15 @@
 					}
 					catch
 					{
-						return new MoveTo()
+
+						result.Responce = new MoveTo()
 						{
 							IsMoving = false
 						};
+
+						result.ResultType = RepositoryResultType.Bad;
+
+						return result;
 					}
 					images.Add(new Image()
 					{
@@ -92,10 +99,15 @@
 						catch (Exception ex)
 						{
 							this.logger.WriteError(ex, string.Format("Ошибка при загрузке файла с внешнего ресурса по ссылке {0}.", url));
-							return new MoveTo()
+
+							result.Responce = new MoveTo()
 							{
 								IsMoving = false
 							};
+
+							result.ResultType = RepositoryResultType.Bad;
+
+							return result;
 						}
 					}
 
@@ -106,10 +118,14 @@
 				}
 				else
 				{
-					return new MoveTo()
+					result.Responce = new MoveTo()
 					{
 						IsMoving = false
 					};
+
+					result.ResultType = RepositoryResultType.Bad;
+
+					return result;
 				}
 			}
 
@@ -130,11 +146,16 @@
 				File.Delete(HttpContext.Current.Server.MapPath(url));
 			}
 
-			return new MoveTo()
+
+			result.Responce = new MoveTo()
 			{
 				IsMoving = true,
 				Location = string.Format("/#/News/{0}", news.Id)
 			};
+
+			result.ResultType = RepositoryResultType.Bad;
+
+			return result;
 		}
 
 		public void Dispose()
