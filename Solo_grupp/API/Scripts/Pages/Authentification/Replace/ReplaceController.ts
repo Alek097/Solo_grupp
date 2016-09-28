@@ -22,7 +22,9 @@ export class ReplaceController extends Validate {
         authorizeService: AuthorizeService,
         params: ng.route.IRouteParamsService
     ) {
-        super(new Replace());
+        super(
+            new Replace(),
+            null);
 
         authorizeService.Authentification()
             .success((data: User) => {

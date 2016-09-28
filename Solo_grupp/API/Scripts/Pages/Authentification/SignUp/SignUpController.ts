@@ -11,7 +11,8 @@ export class SignUpController extends Validate {
     [
         'signUpService',
         '$routeParams',
-        'authorizeService'
+        'authorizeService',
+        '$scope'
     ];
 
     private countries: Object[];
@@ -24,9 +25,28 @@ export class SignUpController extends Validate {
     constructor(
         private service: SignUpService,
         params: ng.route.IRouteParamsService,
-        authorizeService: AuthorizeService
+        authorizeService: AuthorizeService,
+        private scope: ng.IScope
     ) {
-        super(new Registration());
+        super(
+            new Registration(),
+            'solo_grupp_signUp');
+
+        this.scope.$on('$viewContentLoaded', () => {
+            let model: Registration = this.getModel();
+
+            if (model != undefined) {
+                for (let propName in model) {
+                    if (model[propName] != undefined) {
+                        let selector: string = '#' + propName.charAt(0).toLowerCase() + propName.substr(1);
+                        angular.element(selector).val(model[propName]);
+                    }
+                    else {
+                        continue;
+                    }
+                }
+            }
+        });
 
         $.getJSON('Bundles/lib/country-city/data.json', (data: any) => {
             this.countries = data.countries;
@@ -35,6 +55,12 @@ export class SignUpController extends Validate {
                 this.countriesName[this.countriesName.length] = name;
             }
         })
+
+        let model: Registration = this.getModel();
+
+        if (model == undefined) {
+            this.model = model;
+        }
 
         authorizeService.Authentification()
             .success((data: User) => {
@@ -67,6 +93,7 @@ export class SignUpController extends Validate {
         }
         else {
             this.clearError();
+            this.saveModel();
             return true;
         }
     }
@@ -83,6 +110,7 @@ export class SignUpController extends Validate {
         }
         else {
             this.clearError();
+            this.saveModel();
             return true;
         }
     }
@@ -99,6 +127,7 @@ export class SignUpController extends Validate {
         }
         else {
             this.clearError();
+            this.saveModel();
             return true;
         }
     }
@@ -126,6 +155,7 @@ export class SignUpController extends Validate {
         }
         else {
             this.clearError();
+            this.saveModel();
             return true;
         }
     }
@@ -154,6 +184,12 @@ export class SignUpController extends Validate {
                 .success((data: MoveTo) => {
                     if (data.IsMoving) {
                         window.location.href = data.Location;
+
+                        let elseVarible: any = data.Location;
+
+                        if (elseVarible.includes('/#/Message/')) {
+                            this.clearError();
+                        }
                     }
                 });
         }
@@ -173,6 +209,7 @@ export class SignUpController extends Validate {
 
         this.citiesName = this.countries[this.selectCountry];
         this.model.Country = this.selectCountry;
+        this.saveModel();
         return true;
 
     }
@@ -190,6 +227,7 @@ export class SignUpController extends Validate {
         }
 
         this.model.City = this.selectCity;
+        this.saveModel();
         return true;
     }
 }

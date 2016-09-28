@@ -20,7 +20,9 @@ export class SignInController extends Validate {
         params: ng.route.IRouteParamsService,
         authorizeService: AuthorizeService
     ) {
-        super(new SignIn);
+        super(
+            new SignIn,
+            null);
         authorizeService.Authentification()
             .success((data: User) => {
                 if (data == undefined) {
