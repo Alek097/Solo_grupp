@@ -52,7 +52,7 @@
 				{
 					foreach (ModelError error in modelState.Errors)
 					{
-						errorMessage = string.Format("{0}\n{1}",errorMessage,error.ErrorMessage);
+						errorMessage = string.Format("{0}\n{1}", errorMessage, error.ErrorMessage);
 					}
 				}
 
@@ -72,7 +72,7 @@
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<RepositoryResult<ControllerResult>> SignIn(SignIn model)
+		public async Task<ControllerResult> SignIn(SignIn model)
 		{
 			RepositoryResult<ControllerResult> result = new RepositoryResult<ControllerResult>();
 
@@ -82,7 +82,7 @@
 
 			if (repoResult.Value == null)
 			{
-				return result;
+				return result.Responce;
 			}
 			else
 			{
@@ -94,7 +94,7 @@
 					IsPersistent = true
 				}, claim);
 
-				return result;
+				return result.Responce;
 			}
 		}
 		[AllowAnonymous]
@@ -153,7 +153,7 @@
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<RepositoryResult<ControllerResult>> Replace(Replace model)
+		public async Task<ControllerResult> Replace(Replace model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -177,18 +177,18 @@
 				result.Responce = responce;
 				result.ResultType = RepositoryResultType.Bad;
 
-				return result;
+				return result.Responce;
 			}
 
-			return await this.repository.Replace(model);
+			return (await this.repository.Replace(model)).Responce;
 
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<RepositoryResult<ControllerResult>> Replace([FromUri]string email)
+		public async Task<ControllerResult> Replace([FromUri]string email)
 		{
 			logger.WriteInformation(string.Format("Зпрос на смену пароля пользователя с почтой {0}", email));
-			return await this.repository.Replace(email);
+			return (await this.repository.Replace(email)).Responce;
 		}
 		[AllowAnonymous]
 		[HttpGet]

@@ -2,7 +2,6 @@
 import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
 import {User} from '../../../Common/Models/User.ts'
 import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
-import {RepositoryResult} from '../../../Common/Models/RepositoryResult.ts'
 import {Replace} from '../../../Common/Models/Replace.ts'
 import {Validate} from '../Validate.ts'
 
@@ -78,8 +77,8 @@ export class ReplaceController extends Validate {
         if (valid) {
             this.service.Replace(this.email)
                 .success((data) => {
-                    if (data.Responce.IsSucces) {
-                        window.location.href = data.Responce.Message;
+                    if (data.IsSucces) {
+                        window.location.href = data.Message;
                     }
                     else {
                         angular.element('#display-firstForm').css('display', 'none');
@@ -97,8 +96,8 @@ export class ReplaceController extends Validate {
         if (valid) {
             this.service.ReplacePassword(this.model)
                 .success((data) => {
-                    if (data.Responce.IsSucces) {
-                        window.location.href = data.Responce.Message;
+                    if (data.IsSucces) {
+                        window.location.href = data.Message;
                     }
                 });
         }

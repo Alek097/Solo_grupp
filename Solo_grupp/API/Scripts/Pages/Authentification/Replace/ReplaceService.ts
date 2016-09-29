@@ -1,5 +1,4 @@
 ﻿import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
-import {RepositoryResult} from '../../../Common/Models/RepositoryResult.ts'
 import {Replace} from '../../../Common/Models/Replace.ts'
 
 export class ReplaceService {
@@ -14,10 +13,10 @@ export class ReplaceService {
 
     }
 
-    public Replace(email: string): ng.IHttpPromise<RepositoryResult<ControllerResult>> {
+    public Replace(email: string): ng.IHttpPromise<ControllerResult> {
         return this.http.post('/api/user/replace?email=' + email, null);
     }
-    public ReplacePassword(model: Replace): ng.IHttpPromise<RepositoryResult<ControllerResult>> {
+    public ReplacePassword(model: Replace): ng.IHttpPromise<ControllerResult> {
         return this.http.post('/api/user/replace', model);
     }
 }

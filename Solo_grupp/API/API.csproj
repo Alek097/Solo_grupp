@@ -280,7 +280,6 @@
     <TypeScriptCompile Include="Scripts\Common\Models\ControllerResult.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Registration.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\Replace.ts" />
-    <TypeScriptCompile Include="Scripts\Common\Models\RepositoryResult.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\ResolutionType.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\SignIn.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\UploadResult.ts" />
