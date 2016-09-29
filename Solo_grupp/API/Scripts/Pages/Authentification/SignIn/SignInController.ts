@@ -4,6 +4,7 @@ import {User} from '../../../Common/Models/User.ts'
 import {SignInService} from './SignInService.ts'
 import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
 import {Validate} from '../Validate.ts'
+import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 
 export class SignInController extends Validate {
 
@@ -11,13 +12,15 @@ export class SignInController extends Validate {
     [
         'signInService',
         '$routeParams',
-        'authorizeService'
+        'authorizeService',
+        'modalMessageService'
     ];
 
     constructor(
         private service: SignInService,
         params: ng.route.IRouteParamsService,
-        authorizeService: AuthorizeService
+        authorizeService: AuthorizeService,
+        private modalMessageService: ModalMessageService
     ) {
         super(
             new SignIn,
@@ -51,6 +54,11 @@ export class SignInController extends Validate {
                     if (data.IsSucces) {
                         window.location.href = data.Message;
                         window.location.reload();
+                    }
+                    else {
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Упс!');
                     }
                 });
         }

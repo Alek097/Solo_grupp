@@ -4,6 +4,7 @@ import {SignUpService} from './SignUpService.ts'
 import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
 import {User} from '../../../Common/Models/User.ts'
 import {Validate} from '../Validate.ts'
+import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 
 export class SignUpController extends Validate {
 
@@ -12,7 +13,7 @@ export class SignUpController extends Validate {
         'signUpService',
         '$routeParams',
         'authorizeService',
-        '$scope'
+        'modalMessageService'
     ];
 
     private countries: Object[];
@@ -26,27 +27,27 @@ export class SignUpController extends Validate {
         private service: SignUpService,
         params: ng.route.IRouteParamsService,
         authorizeService: AuthorizeService,
-        private scope: ng.IScope
+        private modalMessageService: ModalMessageService
     ) {
         super(
             new Registration(),
             'solo_grupp_signUp');
 
-        this.scope.$on('$viewContentLoaded', () => {
-            let model: Registration = this.getModel();
+        //this.scope.$on('$viewContentLoaded', () => {
+        //    let model: Registration = this.getModel();
 
-            if (model != undefined) {
-                for (let propName in model) {
-                    if (model[propName] != undefined) {
-                        let selector: string = '#' + propName.charAt(0).toLowerCase() + propName.substr(1);
-                        angular.element(selector).val(model[propName]);
-                    }
-                    else {
-                        continue;
-                    }
-                }
-            }
-        });
+        //    if (model != undefined) {
+        //        for (let propName in model) {
+        //            if (model[propName] != undefined) {
+        //                let selector: string = '#' + propName.charAt(0).toLowerCase() + propName.substr(1);
+        //                angular.element(selector).val(model[propName]);
+        //            }
+        //            else {
+        //                continue;
+        //            }
+        //        }
+        //    }
+        //});
 
         $.getJSON('Bundles/lib/country-city/data.json', (data: any) => {
             this.countries = data.countries;
@@ -183,13 +184,15 @@ export class SignUpController extends Validate {
             this.service.Registration(this.model)
                 .success((data: ControllerResult) => {
                     if (data.IsSucces) {
-                        window.location.href = data.Message;
-
-                        let elseVarible: any = data.Message;
-
-                        if (elseVarible.includes('/#/Message/')) {
-                            this.clearError();
-                        }
+                        location.href = '/#/Home';
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Регистрация!');
+                    }
+                    else {
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Упс!');
                     }
                 });
         }
