@@ -5,8 +5,9 @@ import {CreateNews} from '../../../Common/Models/CreateNews.ts'
 import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {PermissionService} from '../../../Common/PermissionService.ts'
 import {ResolutionType} from '../../../Common/Models/ResolutionType.ts'
+import {Validate} from '../../Authentification/Validate.ts'
 
-export class CreateNewsController {
+export class CreateNewsController extends Validate {
 
     public static $inject: string[] =
     [
@@ -25,30 +26,75 @@ export class CreateNewsController {
         private modalService: ModalMessageService,
         permissionService: PermissionService
     ) {
+        super(
+            new CreateNews(),
+            'solo_grupp_create_news');
+
         permissionService.IsResolution(ResolutionType.AddNews)
             .error(() => {
                 window.location.href = '/#/Home';
             });
+
+
+    }
+
+    public titleValidate(): boolean {
+        this.elem = angular.element('#error-title');
+
+        let val: string = angular.element('title').val();
+
+        if (val == undefined) {
+            this.writeError('Введите заголовок');
+            return false;
+        }
+        else {
+            this.clearError();
+            this.saveModel();
+            return true;
+        }
+    }
+
+    public contentValidate(): boolean {
+        this.elem = angular.element('#error-content');
+
+        if (this.content == undefined) {
+            this.writeError('Введите текст новости');
+            return false;
+        }
+        else {
+            this.clearError();
+            this.saveModel();
+            return true;
+        }
     }
 
     public submit(): void {
-        let data: CreateNews = new CreateNews();
+        let valid: boolean = true;
 
-        data.Content = this.content;
-        data.Urls = this.imgUrls;
+        valid = this.contentValidate() && valid;
+        valid = this.titleValidate() && valid;
 
-        this.service.createNews(data)
-            .success((data: ControllerResult) => {
-                if (data.IsSucces) {
-                    window.location.href = data.Message;
-                }
-                else {
-                    this.modalService.open(
-                        data.Message,
-                        'Упс!'
-                    );
-                }
-            });
+        if (valid) {
+
+            let data: CreateNews = new CreateNews();
+
+            data.Title = angular.element('#title').val();
+            data.Content = this.content;
+            data.Urls = this.imgUrls;
+
+            this.service.createNews(data)
+                .success((data: ControllerResult) => {
+                    if (data.IsSucces) {
+                        window.location.href = data.Message;
+                    }
+                    else {
+                        this.modalService.open(
+                            data.Message,
+                            'Упс!'
+                        );
+                    }
+                });
+        }
     }
 
     public uploadFile(): void {
