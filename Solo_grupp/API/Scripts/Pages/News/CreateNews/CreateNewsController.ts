@@ -35,7 +35,19 @@ export class CreateNewsController extends Validate {
                 window.location.href = '/#/Home';
             });
 
+        let model: CreateNews = this.getModel();
 
+        if (model != undefined) {
+            for (let propName in model) {
+                if (model[propName] != undefined) {
+                    let selector: string = '#' + propName.charAt(0).toLowerCase() + propName.substr(1);
+                    angular.element(selector).val(model[propName]);
+                }
+                else {
+                    continue;
+                }
+            }
+        }
     }
 
     public titleValidate(): boolean {
