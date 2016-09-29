@@ -12,14 +12,6 @@ namespace API.Data.Repositories
 		{
 			return string.Format("{0}/#/Error/{1}/{2}", DNS, httpCode, message);
 		}
-		public string MovedMessage(string message)
-		{
-			return string.Format("{0}/#/Message/{1}", DNS, message);
-		}
-		public string MovedHome()
-		{
-			return string.Format("{0}/#/Home", DNS);
-		}
 		public void SendMessage(string email, string subject, string message, bool isHtml)
 		{
 			MailAddress from = new MailAddress(Repository.email, "Solo-grupp");

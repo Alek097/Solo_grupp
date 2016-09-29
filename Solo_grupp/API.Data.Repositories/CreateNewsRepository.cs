@@ -69,7 +69,8 @@
 
 						result.Responce = new ControllerResult()
 						{
-							IsSucces = false
+							IsSucces = false,
+							Message = "Ошибка на серевере. Сервер временно недоступен, приносим свои извинения."
 						};
 
 						result.ResultType = RepositoryResultType.Bad;
@@ -103,11 +104,13 @@
 						}
 						catch (Exception ex)
 						{
-							this.logger.WriteError(ex, string.Format("Ошибка при загрузке файла с внешнего ресурса по ссылке {0}.", url));
+							string error = string.Format("Ошибка при загрузке файла с внешнего ресурса по ссылке {0}.", url);
+							this.logger.WriteError(ex, error);
 
 							result.Responce = new ControllerResult()
 							{
-								IsSucces = false
+								IsSucces = false,
+								Message = error
 							};
 
 							result.ResultType = RepositoryResultType.Bad;
@@ -125,7 +128,8 @@
 				{
 					result.Responce = new ControllerResult()
 					{
-						IsSucces = false
+						IsSucces = false,
+						Message = "Ошибка на серевере. Сервер временно недоступен, приносим свои извинения."
 					};
 
 					result.ResultType = RepositoryResultType.Bad;
