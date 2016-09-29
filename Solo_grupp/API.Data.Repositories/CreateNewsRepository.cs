@@ -30,7 +30,10 @@
 			MatchCollection matches = Regex.Matches(model.Content, "<img src=\"" + @".+?" + "\"" + @"[.\s]*/>");
 			List<string> urls = new List<string>(model.Urls);
 
-			News news = new News();
+			News news = new News()
+			{
+				Title = model.Title
+			};
 
 			List<Image> images = new List<Image>();
 
