@@ -27,13 +27,6 @@ angular.module('main',
                 controller: 'signUpController',
                 controllerAs: 'signUpCtrl'
             });
-        $routeProvider.when('/SignUp/:message',
-            <ng.route.IRoute>
-            {
-                templateUrl: '../Scripts/Pages/Authentification/SignUp/SignUpView.html',
-                controller: 'signUpController',
-                controllerAs: 'signUpCtrl'
-            });
         $routeProvider.when('/Error/:httpCode/:message',
             <ng.route.IRoute>
             {
@@ -55,21 +48,7 @@ angular.module('main',
                 controller: 'signInController',
                 controllerAs: 'signInCtrl'
             });
-        $routeProvider.when('/SignIn/:message',
-            <ng.route.IRoute>
-            {
-                templateUrl: '../Scripts/Pages/Authentification/SignIn/SignInView.html',
-                controller: 'signInController',
-                controllerAs: 'signInCtrl'
-            });
         $routeProvider.when('/Replace',
-            <ng.route.IRoute>
-            {
-                templateUrl: '../Scripts/Pages/Authentification/Replace/ReplaceView.html',
-                controller: 'replaceController',
-                controllerAs: 'replace'
-            });
-        $routeProvider.when('/Replace/:message',
             <ng.route.IRoute>
             {
                 templateUrl: '../Scripts/Pages/Authentification/Replace/ReplaceView.html',
