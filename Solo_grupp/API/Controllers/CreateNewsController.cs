@@ -14,6 +14,7 @@
 	using System.Threading.Tasks;
 	using System.Web;
 	using System.Web.Http;
+	using System.Web.Http.ModelBinding;
 	#endregion
 	[Authorize]
 	public class CreateNewsController : ApiController
@@ -98,6 +99,27 @@
 		[Resolution(ResolutionType.AddNews)]
 		public async Task<ControllerResult> Create(CreateNews model)
 		{
+			if (!ModelState.IsValid)
+			{
+				string errorMessage = string.Empty;
+
+				foreach (ModelState modelState in ModelState.Values)
+				{
+					foreach (ModelError error in modelState.Errors)
+					{
+						errorMessage = string.Format("{0}\n{1}", errorMessage, error.ErrorMessage);
+					}
+				}
+
+				ControllerResult responce = new ControllerResult()
+				{
+					IsSucces = true,
+					Message = string.Format("{0}/#/SignUp/{1}", Repository.DNS, errorMessage)
+				};
+
+				return responce;
+			}
+
 			this.logger.WriteInformation("Запрос на создание новости");
 
 			RepositoryResult<News, ControllerResult> result = await this.repository.CreateNews(model);

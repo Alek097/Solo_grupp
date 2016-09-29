@@ -89,6 +89,7 @@ export class CreateNewsController extends Validate {
                 .success((data: ControllerResult) => {
                     if (data.IsSucces) {
                         window.location.href = data.Message;
+                        this.removeModel();
                     }
                     else {
                         this.modalService.open(
