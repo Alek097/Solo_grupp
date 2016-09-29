@@ -33,22 +33,6 @@ export class SignUpController extends Validate {
             new Registration(),
             'solo_grupp_signUp');
 
-        //this.scope.$on('$viewContentLoaded', () => {
-        //    let model: Registration = this.getModel();
-
-        //    if (model != undefined) {
-        //        for (let propName in model) {
-        //            if (model[propName] != undefined) {
-        //                let selector: string = '#' + propName.charAt(0).toLowerCase() + propName.substr(1);
-        //                angular.element(selector).val(model[propName]);
-        //            }
-        //            else {
-        //                continue;
-        //            }
-        //        }
-        //    }
-        //});
-
         $.getJSON('Bundles/lib/country-city/data.json', (data: any) => {
             this.countries = data.countries;
 
@@ -59,8 +43,16 @@ export class SignUpController extends Validate {
 
         let model: Registration = this.getModel();
 
-        if (model == undefined) {
-            this.model = model;
+        if (model != undefined) {
+            for (let propName in model) {
+                if (model[propName] != undefined) {
+                    let selector: string = '#' + propName.charAt(0).toLowerCase() + propName.substr(1);
+                    angular.element(selector).val(model[propName]);
+                }
+                else {
+                    continue;
+                }
+            }
         }
 
         authorizeService.Authentification()
@@ -188,6 +180,7 @@ export class SignUpController extends Validate {
                         this.modalMessageService.open(
                             data.Message,
                             'Регистрация!');
+                        this.removeModel();
                     }
                     else {
                         this.modalMessageService.open(

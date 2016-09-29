@@ -65,8 +65,9 @@
 			RepositoryResult<ControllerResult> result = new RepositoryResult<ControllerResult>();
 
 			NotActiveUser isHaveUser = context.GetAll<NotActiveUser>().FirstOrDefault((u) => u.Email == user.Email);
+			User isHaveActiveUser = context.GetAll<User>().FirstOrDefault((u) => u.Email == user.Email);
 
-			if (isHaveUser != null)
+			if (isHaveUser != null || isHaveActiveUser != null)
 			{
 
 				result.ResultType = RepositoryResultType.Bad;
@@ -97,7 +98,7 @@
 				result.Responce = new ControllerResult()
 				{
 					IsSucces = true,
-					Message = string.Format("Письмо с подтверждение отправлено на {0}.", user.Email)
+					Message = string.Format("Письмо с подтверждением отправлено на {0}.", user.Email)
 				};
 
 				context.Add(user);
