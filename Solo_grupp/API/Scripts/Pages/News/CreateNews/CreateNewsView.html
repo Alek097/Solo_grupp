@@ -8,7 +8,7 @@
                 <p class="error" id="error-title"></p>
             </div>
             <div class="col-xs-12 col-md-6 col-md-pull-6 col-lg-pull-6">
-                <input ng-keyup="createNews.titleValidate()" type="text" class="form-control" id="titl" autocomplete="off" placeholder="Заголовок">
+                <input ng-keyup="createNews.titleValidate()" type="text" class="form-control" id="title" autocomplete="off" placeholder="Заголовок">
             </div>
         </div>
 
@@ -17,7 +17,7 @@
                 <p class="error" id="error-content"></p>
             </div>
             <div class="col-xs-12">
-                <text-angular ng-model="createNews.content" ng-keyup="createNews.contentValidate()"></text-angular>
+                <text-angular ng-model="createNews.content"></text-angular>
             </div>
         </div>
 
