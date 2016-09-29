@@ -37,25 +37,19 @@ export class CreateNewsController extends Validate {
 
         let model: CreateNews = this.getModel();
 
-        if (model != undefined) {
-            for (let propName in model) {
-                if (model[propName] != undefined) {
-                    let selector: string = '#' + propName.charAt(0).toLowerCase() + propName.substr(1);
-                    angular.element(selector).val(model[propName]);
-                }
-                else {
-                    continue;
-                }
-            }
-        }
+        this.content = model.Content;
+        this.imgUrls = model.Urls;
+        angular.element('#title').val(model.Title);
     }
 
     public titleValidate(): boolean {
         this.elem = angular.element('#error-title');
 
-        let val: string = angular.element('title').val();
+        let val: string = angular.element('#title').val();
 
-        if (val == undefined) {
+        this.model.Title = val;
+
+        if (val == undefined || val === '') {
             this.writeError('Введите заголовок');
             return false;
         }
@@ -69,12 +63,15 @@ export class CreateNewsController extends Validate {
     public contentValidate(): boolean {
         this.elem = angular.element('#error-content');
 
-        if (this.content == undefined) {
+        if (this.content == undefined || this.content === '') {
             this.writeError('Введите текст новости');
             return false;
         }
         else {
             this.clearError();
+
+            this.model.Content = this.content;
+
             this.saveModel();
             return true;
         }
@@ -88,13 +85,7 @@ export class CreateNewsController extends Validate {
 
         if (valid) {
 
-            let data: CreateNews = new CreateNews();
-
-            data.Title = angular.element('#title').val();
-            data.Content = this.content;
-            data.Urls = this.imgUrls;
-
-            this.service.createNews(data)
+            this.service.createNews(this.model)
                 .success((data: ControllerResult) => {
                     if (data.IsSucces) {
                         window.location.href = data.Message;
@@ -127,6 +118,10 @@ export class CreateNewsController extends Validate {
                 if (data.IsUploading) {
                     for (let i: number = 0; i < data.Urls.length; i++) {
                         this.imgUrls[this.imgUrls.length] = data.Urls[i];
+
+                        this.model.Urls = this.imgUrls;
+
+                        this.saveModel();
 
                         this.timeout();
                     }
