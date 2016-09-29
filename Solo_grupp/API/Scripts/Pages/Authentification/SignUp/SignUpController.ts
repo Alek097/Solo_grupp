@@ -1,5 +1,5 @@
 ﻿import {Registration} from '../../../Common/Models/Registration.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {SignUpService} from './SignUpService.ts'
 import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
 import {User} from '../../../Common/Models/User.ts'
@@ -181,11 +181,11 @@ export class SignUpController extends Validate {
 
         if (valid) {
             this.service.Registration(this.model)
-                .success((data: MoveTo) => {
-                    if (data.IsMoving) {
-                        window.location.href = data.Location;
+                .success((data: ControllerResult) => {
+                    if (data.IsSucces) {
+                        window.location.href = data.Message;
 
-                        let elseVarible: any = data.Location;
+                        let elseVarible: any = data.Message;
 
                         if (elseVarible.includes('/#/Message/')) {
                             this.clearError();

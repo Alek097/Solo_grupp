@@ -2,7 +2,7 @@
 import {UploadResult} from '../../../Common/Models/UploadResult.ts'
 import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 import {CreateNews} from '../../../Common/Models/CreateNews.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {PermissionService} from '../../../Common/PermissionService.ts'
 import {ResolutionType} from '../../../Common/Models/ResolutionType.ts'
 
@@ -38,9 +38,9 @@ export class CreateNewsController {
         data.Urls = this.imgUrls;
 
         this.service.createNews(data)
-            .success((data: MoveTo) => {
-                if (data.IsMoving) {
-                    window.location.href = data.Location;
+            .success((data: ControllerResult) => {
+                if (data.IsSucces) {
+                    window.location.href = data.Message;
                 }
                 else {
                     this.modalService.open(

@@ -1,5 +1,5 @@
 ﻿import {SignIn} from '../../../Common/Models/SignIn.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {User} from '../../../Common/Models/User.ts'
 import {RepositoryResult} from '../../../Common/Models/RepositoryResult.ts'
 import {SignInService} from './SignInService.ts'
@@ -48,9 +48,9 @@ export class SignInController extends Validate {
 
         if (valid) {
             this.service.SignIn(this.model)
-                .success((data: RepositoryResult<MoveTo>) => {
-                    if (data.Responce.IsMoving) {
-                        window.location.href = data.Responce.Location;
+                .success((data: RepositoryResult<ControllerResult>) => {
+                    if (data.Responce.IsSucces) {
+                        window.location.href = data.Responce.Message;
                         window.location.reload();
                     }
                 });

@@ -1,5 +1,5 @@
 ﻿import {SignIn} from '../../../Common/Models/SignIn.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {User} from '../../../Common/Models/User.ts'
 import {RepositoryResultValue} from '../../../Common/Models/RepositoryResult.ts'
 
@@ -15,7 +15,7 @@ export class SignInService {
 
     }
 
-    public SignIn(model: SignIn): ng.IHttpPromise<RepositoryResultValue<User,MoveTo>> {
+    public SignIn(model: SignIn): ng.IHttpPromise<RepositoryResultValue<User, ControllerResult>> {
         return this.http.post('/api/user/signin', model);
     }
 }

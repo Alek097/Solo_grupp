@@ -42,7 +42,7 @@
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<MoveTo> SignUp(SignUp model)
+		public async Task<ControllerResult> SignUp(SignUp model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -56,27 +56,27 @@
 					}
 				}
 
-				MoveTo responce = new MoveTo()
+				ControllerResult responce = new ControllerResult()
 				{
-					IsMoving = true,
-					Location = string.Format("{0}/#/SignUp/{1}", Repository.DNS, errorMessage)
+					IsSucces = true,
+					Message = string.Format("{0}/#/SignUp/{1}", Repository.DNS, errorMessage)
 				};
 
 				return responce;
 			}
 
 			NotActiveUser user = new NotActiveUser(model);
-			RepositoryResult<MoveTo> result = await this.repository.RegistartionAsync(user);
+			RepositoryResult<ControllerResult> result = await this.repository.RegistartionAsync(user);
 
 			return result.Responce;
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<RepositoryResult<MoveTo>> SignIn(SignIn model)
+		public async Task<RepositoryResult<ControllerResult>> SignIn(SignIn model)
 		{
-			RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
+			RepositoryResult<ControllerResult> result = new RepositoryResult<ControllerResult>();
 
-			RepositoryResult<User, MoveTo> repoResult = await this.repository.SignIn(model);
+			RepositoryResult<User, ControllerResult> repoResult = await this.repository.SignIn(model);
 
 			result.Responce = repoResult.Responce;
 
@@ -153,7 +153,7 @@
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<RepositoryResult<MoveTo>> Replace(Replace model)
+		public async Task<RepositoryResult<ControllerResult>> Replace(Replace model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -167,13 +167,13 @@
 					}
 				}
 
-				MoveTo responce = new MoveTo()
+				ControllerResult responce = new ControllerResult()
 				{
-					IsMoving = true,
-					Location = string.Format("{0}/#/Replace/{1}", Repository.DNS, errorMessage)
+					IsSucces = true,
+					Message = string.Format("{0}/#/Replace/{1}", Repository.DNS, errorMessage)
 				};
 
-				RepositoryResult<MoveTo> result = new RepositoryResult<MoveTo>();
+				RepositoryResult<ControllerResult> result = new RepositoryResult<ControllerResult>();
 				result.Responce = responce;
 				result.ResultType = RepositoryResultType.Bad;
 
@@ -185,7 +185,7 @@
 		}
 		[AllowAnonymous]
 		[HttpPost]
-		public async Task<RepositoryResult<MoveTo>> Replace([FromUri]string email)
+		public async Task<RepositoryResult<ControllerResult>> Replace([FromUri]string email)
 		{
 			logger.WriteInformation(string.Format("Зпрос на смену пароля пользователя с почтой {0}", email));
 			return await this.repository.Replace(email);

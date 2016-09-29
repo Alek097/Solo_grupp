@@ -96,11 +96,11 @@
 		}
 		[HttpPost]
 		[Resolution(ResolutionType.AddNews)]
-		public async Task<MoveTo> Create(CreateNews model)
+		public async Task<ControllerResult> Create(CreateNews model)
 		{
 			this.logger.WriteInformation("Запрос на создание новости");
 
-			RepositoryResult<News, MoveTo> result = await this.repository.CreateNews(model);
+			RepositoryResult<News, ControllerResult> result = await this.repository.CreateNews(model);
 
 			if (result.ResultType == RepositoryResultType.OK)
 			{
