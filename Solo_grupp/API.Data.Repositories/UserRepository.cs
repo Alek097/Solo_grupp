@@ -73,8 +73,8 @@
 
 				result.Responce = new ControllerResult()
 				{
-					IsSucces = true,
-					Message = this.MovedSignUpError(string.Format("Почта {0} уже занята.", user.Email))
+					IsSucces = false,
+					Message = string.Format("Почта {0} уже занята.", user.Email)
 				};
 
 				return result;
@@ -97,7 +97,7 @@
 				result.Responce = new ControllerResult()
 				{
 					IsSucces = true,
-					Message = base.MovedMessage(string.Format("Письмо с подтверждение отправлено на {0}", user.Email))
+					Message = string.Format("Письмо с подтверждение отправлено на {0}.", user.Email)
 				};
 
 				context.Add(user);
@@ -110,8 +110,8 @@
 
 					result.Responce = new ControllerResult()
 					{
-						IsSucces = true,
-						Message = base.MovedError(500, "Ошибка на серевере")
+						IsSucces = false,
+						Message = "Ошибка на серевере. Сервер временно недоступен, приносим свои извинения."
 					};
 
 					return result;
@@ -125,8 +125,8 @@
 
 				result.Responce = new ControllerResult()
 				{
-					IsSucces = true,
-					Message = base.MovedError(500, string.Format("Не удалось отправить письмо на {0}", user.Email))
+					IsSucces = false,
+					Message = string.Format("Не удалось отправить письмо на {0}.", user.Email)
 				};
 			}
 
@@ -135,7 +135,7 @@
 
 		public async Task<RepositoryResult<User, ControllerResult>> SignIn(SignIn model)
 		{
-			return await Task.Run<RepositoryResult<User, ControllerResult>>(() =>
+			return await Task.Run(() =>
 				{
 					RepositoryResult<User, ControllerResult> result = new RepositoryResult<User, ControllerResult>();
 
@@ -146,8 +146,8 @@
 						result.ResultType = RepositoryResultType.Bad;
 						result.Responce = new ControllerResult()
 						{
-							IsSucces = true,
-							Message = this.MovedSignInError("Неверный логин или пароль")
+							IsSucces = false,
+							Message = "Неверный логин или пароль."
 						};
 
 						logger.WriteError(string.Format("Пользователь с почтой {0} не найден.", model.Email));
@@ -163,7 +163,7 @@
 							result.Responce = new ControllerResult()
 							{
 								IsSucces = true,
-								Message = base.MovedHome()
+								Message = "/#/Home"
 							};
 
 							logger.WriteInformation(string.Format("Пользователь с почтой {0} успешно вошёл в систему.", model.Email));
@@ -173,8 +173,8 @@
 							result.ResultType = RepositoryResultType.Bad;
 							result.Responce = new ControllerResult()
 							{
-								IsSucces = true,
-								Message = this.MovedSignInError("Неверный логин или пароль")
+								IsSucces = false,
+								Message = "Неверный логин или пароль."
 							};
 
 							logger.WriteError("Хэши паролей не совпадают");
@@ -183,20 +183,6 @@
 
 					return result;
 				});
-		}
-
-		private string MovedSignUpError(string message)
-		{
-			return string.Format("{0}/#/SignUp/{1}", DNS, message);
-		}
-		private string MovedSignInError(string message)
-		{
-			return string.Format("{0}/#/SignIn/{1}", DNS, message);
-		}
-
-		private string MovedReplaceError(string message)
-		{
-			return string.Format("{0}/#/Replace/{1}", DNS, message);
 		}
 
 		public async Task<RepositoryResult<ControllerResult>> Replace(string email)
@@ -210,8 +196,8 @@
 				result.ResultType = RepositoryResultType.Bad;
 				result.Responce = new ControllerResult()
 				{
-					IsSucces = true,
-					Message = this.MovedReplaceError(string.Format("Пользователь с почтой {0} не найден.", email))
+					IsSucces = false,
+					Message = string.Format("Пользователь с почтой {0} не найден.", email)
 				};
 
 			}
@@ -230,8 +216,8 @@
 					result.ResultType = RepositoryResultType.Bad;
 					result.Responce = new ControllerResult()
 					{
-						IsSucces = true,
-						Message = this.MovedError(500, "Ошибка на сервере.")
+						IsSucces = false,
+						Message = "Ошибка на серевере. Сервер временно недоступен, приносим свои извинения."
 					};
 
 					logger.WriteError("Данные не были сохранены.");
@@ -259,8 +245,8 @@
 					result.ResultType = RepositoryResultType.Bad;
 					result.Responce = new ControllerResult()
 					{
-						IsSucces = true,
-						Message = this.MovedError(500, "Ошибка на сервере.")
+						IsSucces = false,
+						Message = "Ошибка на серевере. Сервер временно недоступен, приносим свои извинения."
 					};
 				}
 
@@ -268,7 +254,8 @@
 				result.ResultType = RepositoryResultType.OK;
 				result.Responce = new ControllerResult()
 				{
-					IsSucces = false
+					IsSucces = true,
+					Message = string.Format("На вашу почту {0} отправлено письмо с кодом подтверждения.")
 				};
 			}
 
@@ -319,8 +306,8 @@
 				result.ResultType = RepositoryResultType.Bad;
 				result.Responce = new ControllerResult()
 				{
-					IsSucces = true,
-					Message = this.MovedReplaceError("Код не найден, проверьте правильность введённого кода. Если всё правильно попробуйте повторить операцию. Если ошибка не исчезает обратитесь в техническую поддержку.")
+					IsSucces = false,
+					Message = "Код не найден, проверьте правильность введённого кода. Если всё правильно попробуйте повторить операцию. Если ошибка не исчезает обратитесь в техническую поддержку."
 				};
 			}
 			else
@@ -342,8 +329,8 @@
 					result.ResultType = RepositoryResultType.Bad;
 					result.Responce = new ControllerResult()
 					{
-						IsSucces = true,
-						Message = base.MovedError(500, "Ошибка на сервере.")
+						IsSucces = false,
+						Message = "Ошибка на серевере. Сервер временно недоступен, приносим свои извинения."
 					};
 				}
 				else
@@ -354,7 +341,7 @@
 					result.Responce = new ControllerResult()
 					{
 						IsSucces = true,
-						Message = "/#/SignIn"
+						Message = "Пароль успешно сменён, пожалуйста войдите в систему."
 					};
 				}
 			}
