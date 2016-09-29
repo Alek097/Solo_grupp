@@ -1,10 +1,10 @@
 ﻿import {SignIn} from '../../../Common/Models/SignIn.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {User} from '../../../Common/Models/User.ts'
-import {RepositoryResult} from '../../../Common/Models/RepositoryResult.ts'
 import {SignInService} from './SignInService.ts'
 import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
 import {Validate} from '../Validate.ts'
+import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 
 export class SignInController extends Validate {
 
@@ -12,15 +12,19 @@ export class SignInController extends Validate {
     [
         'signInService',
         '$routeParams',
-        'authorizeService'
+        'authorizeService',
+        'modalMessageService'
     ];
 
     constructor(
         private service: SignInService,
         params: ng.route.IRouteParamsService,
-        authorizeService: AuthorizeService
+        authorizeService: AuthorizeService,
+        private modalMessageService: ModalMessageService
     ) {
-        super(new SignIn);
+        super(
+            new SignIn,
+            null);
         authorizeService.Authentification()
             .success((data: User) => {
                 if (data == undefined) {
@@ -46,10 +50,15 @@ export class SignInController extends Validate {
 
         if (valid) {
             this.service.SignIn(this.model)
-                .success((data: RepositoryResult<MoveTo>) => {
-                    if (data.Responce.IsMoving) {
-                        window.location.href = data.Responce.Location;
+                .success((data: ControllerResult) => {
+                    if (data.IsSucces) {
+                        window.location.href = data.Message;
                         window.location.reload();
+                    }
+                    else {
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Упс!');
                     }
                 });
         }

@@ -1,9 +1,10 @@
 ﻿import {Registration} from '../../../Common/Models/Registration.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {SignUpService} from './SignUpService.ts'
 import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
 import {User} from '../../../Common/Models/User.ts'
 import {Validate} from '../Validate.ts'
+import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 
 export class SignUpController extends Validate {
 
@@ -11,7 +12,8 @@ export class SignUpController extends Validate {
     [
         'signUpService',
         '$routeParams',
-        'authorizeService'
+        'authorizeService',
+        'modalMessageService'
     ];
 
     private countries: Object[];
@@ -24,9 +26,12 @@ export class SignUpController extends Validate {
     constructor(
         private service: SignUpService,
         params: ng.route.IRouteParamsService,
-        authorizeService: AuthorizeService
+        authorizeService: AuthorizeService,
+        private modalMessageService: ModalMessageService
     ) {
-        super(new Registration());
+        super(
+            new Registration(),
+            'solo_grupp_signUp');
 
         $.getJSON('Bundles/lib/country-city/data.json', (data: any) => {
             this.countries = data.countries;
@@ -35,6 +40,20 @@ export class SignUpController extends Validate {
                 this.countriesName[this.countriesName.length] = name;
             }
         })
+
+        let model: Registration = this.getModel();
+
+        if (model != undefined) {
+            for (let propName in model) {
+                if (model[propName] != undefined) {
+                    let selector: string = '#' + propName.charAt(0).toLowerCase() + propName.substr(1);
+                    angular.element(selector).val(model[propName]);
+                }
+                else {
+                    continue;
+                }
+            }
+        }
 
         authorizeService.Authentification()
             .success((data: User) => {
@@ -67,6 +86,7 @@ export class SignUpController extends Validate {
         }
         else {
             this.clearError();
+            this.saveModel();
             return true;
         }
     }
@@ -83,6 +103,7 @@ export class SignUpController extends Validate {
         }
         else {
             this.clearError();
+            this.saveModel();
             return true;
         }
     }
@@ -99,6 +120,7 @@ export class SignUpController extends Validate {
         }
         else {
             this.clearError();
+            this.saveModel();
             return true;
         }
     }
@@ -126,6 +148,7 @@ export class SignUpController extends Validate {
         }
         else {
             this.clearError();
+            this.saveModel();
             return true;
         }
     }
@@ -151,9 +174,18 @@ export class SignUpController extends Validate {
 
         if (valid) {
             this.service.Registration(this.model)
-                .success((data: MoveTo) => {
-                    if (data.IsMoving) {
-                        window.location.href = data.Location;
+                .success((data: ControllerResult) => {
+                    if (data.IsSucces) {
+                        location.href = '/#/Home';
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Регистрация!');
+                        this.removeModel();
+                    }
+                    else {
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Упс!');
                     }
                 });
         }
@@ -173,6 +205,7 @@ export class SignUpController extends Validate {
 
         this.citiesName = this.countries[this.selectCountry];
         this.model.Country = this.selectCountry;
+        this.saveModel();
         return true;
 
     }
@@ -190,6 +223,7 @@ export class SignUpController extends Validate {
         }
 
         this.model.City = this.selectCity;
+        this.saveModel();
         return true;
     }
 }

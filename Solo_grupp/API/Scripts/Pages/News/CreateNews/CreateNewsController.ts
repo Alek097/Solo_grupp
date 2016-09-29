@@ -2,11 +2,12 @@
 import {UploadResult} from '../../../Common/Models/UploadResult.ts'
 import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 import {CreateNews} from '../../../Common/Models/CreateNews.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {PermissionService} from '../../../Common/PermissionService.ts'
 import {ResolutionType} from '../../../Common/Models/ResolutionType.ts'
+import {Validate} from '../../Authentification/Validate.ts'
 
-export class CreateNewsController {
+export class CreateNewsController extends Validate {
 
     public static $inject: string[] =
     [
@@ -25,30 +26,79 @@ export class CreateNewsController {
         private modalService: ModalMessageService,
         permissionService: PermissionService
     ) {
+        super(
+            new CreateNews(),
+            'solo_grupp_create_news');
+
         permissionService.IsResolution(ResolutionType.AddNews)
             .error(() => {
                 window.location.href = '/#/Home';
             });
+
+        let model: CreateNews = this.getModel();
+
+        this.content = model.Content;
+        this.imgUrls = model.Urls;
+        angular.element('#title').val(model.Title);
+    }
+
+    public titleValidate(): boolean {
+        this.elem = angular.element('#error-title');
+
+        let val: string = angular.element('#title').val();
+
+        this.model.Title = val;
+
+        if (val == undefined || val === '') {
+            this.writeError('Введите заголовок');
+            return false;
+        }
+        else {
+            this.clearError();
+            this.saveModel();
+            return true;
+        }
+    }
+
+    public contentValidate(): boolean {
+        this.elem = angular.element('#error-content');
+
+        if (this.content == undefined || this.content === '') {
+            this.writeError('Введите текст новости');
+            return false;
+        }
+        else {
+            this.clearError();
+
+            this.model.Content = this.content;
+
+            this.saveModel();
+            return true;
+        }
     }
 
     public submit(): void {
-        let data: CreateNews = new CreateNews();
+        let valid: boolean = true;
 
-        data.Content = this.content;
-        data.Urls = this.imgUrls;
+        valid = this.contentValidate() && valid;
+        valid = this.titleValidate() && valid;
 
-        this.service.createNews(data)
-            .success((data: MoveTo) => {
-                if (data.IsMoving) {
-                    window.location.href = data.Location;
-                }
-                else {
-                    this.modalService.open(
-                        'Ошибка при созании новости!',
-                        'Упс! Похоже что при загрузке файлов возникла ошибка. Попробуйте ещё раз. Убедитесь что нет файлов с внешних ресурсов так как они могут загружаться с ненадёжного ресурса. Если ошибка не исчезает огбратитесь в техподержку дабы они придумали пытку для разработчика.'
-                    );
-                }
-            });
+        if (valid) {
+
+            this.service.createNews(this.model)
+                .success((data: ControllerResult) => {
+                    if (data.IsSucces) {
+                        window.location.href = data.Message;
+                        this.removeModel();
+                    }
+                    else {
+                        this.modalService.open(
+                            data.Message,
+                            'Упс!'
+                        );
+                    }
+                });
+        }
     }
 
     public uploadFile(): void {
@@ -69,6 +119,10 @@ export class CreateNewsController {
                 if (data.IsUploading) {
                     for (let i: number = 0; i < data.Urls.length; i++) {
                         this.imgUrls[this.imgUrls.length] = data.Urls[i];
+
+                        this.model.Urls = this.imgUrls;
+
+                        this.saveModel();
 
                         this.timeout();
                     }

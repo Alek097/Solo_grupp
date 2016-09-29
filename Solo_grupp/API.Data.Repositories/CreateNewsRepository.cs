@@ -23,14 +23,17 @@
 			this.context = context;
 			this.logger = logger;
 		}
-		public async Task<RepositoryResult<News, MoveTo>> CreateNews(CreateNews model)
+		public async Task<RepositoryResult<News, ControllerResult>> CreateNews(CreateNews model)
 		{
-			RepositoryResult<News, MoveTo> result = new RepositoryResult<News, MoveTo>();
+			RepositoryResult<News, ControllerResult> result = new RepositoryResult<News, ControllerResult>();
 
 			MatchCollection matches = Regex.Matches(model.Content, "<img src=\"" + @".+?" + "\"" + @"[.\s]*/>");
 			List<string> urls = new List<string>(model.Urls);
 
-			News news = new News();
+			News news = new News()
+			{
+				Title = model.Title
+			};
 
 			List<Image> images = new List<Image>();
 
@@ -67,9 +70,10 @@
 
 						this.logger.WriteError(ex, string.Format("Ошибка при перемещении файла по расположению {0} в {1}", serverPath, newServerPath));
 
-						result.Responce = new MoveTo()
+						result.Responce = new ControllerResult()
 						{
-							IsMoving = false
+							IsSucces = false,
+							Message = "Ошибка на серевере. Сервер временно недоступен, приносим свои извинения."
 						};
 
 						result.ResultType = RepositoryResultType.Bad;
@@ -103,11 +107,13 @@
 						}
 						catch (Exception ex)
 						{
-							this.logger.WriteError(ex, string.Format("Ошибка при загрузке файла с внешнего ресурса по ссылке {0}.", url));
+							string error = string.Format("Ошибка при загрузке файла с внешнего ресурса по ссылке {0}.", url);
+							this.logger.WriteError(ex, error);
 
-							result.Responce = new MoveTo()
+							result.Responce = new ControllerResult()
 							{
-								IsMoving = false
+								IsSucces = false,
+								Message = error
 							};
 
 							result.ResultType = RepositoryResultType.Bad;
@@ -123,9 +129,10 @@
 				}
 				else
 				{
-					result.Responce = new MoveTo()
+					result.Responce = new ControllerResult()
 					{
-						IsMoving = false
+						IsSucces = false,
+						Message = "Ошибка на серевере. Сервер временно недоступен, приносим свои извинения."
 					};
 
 					result.ResultType = RepositoryResultType.Bad;
@@ -162,10 +169,10 @@
 			}
 
 
-			result.Responce = new MoveTo()
+			result.Responce = new ControllerResult()
 			{
-				IsMoving = true,
-				Location = string.Format("/#/News/{0}", news.Id)
+				IsSucces = true,
+				Message = string.Format("/#/News/{0}", news.Id)
 			};
 
 			result.Value = news;

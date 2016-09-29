@@ -31,6 +31,7 @@ export class MenuController {
             .success(() => {
                 this.isAuth = false;
                 this.fullName = '';
+                location.reload();
             });
     }
 }

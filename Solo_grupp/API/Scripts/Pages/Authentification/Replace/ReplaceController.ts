@@ -1,10 +1,10 @@
 ﻿import {ReplaceService} from './ReplaceService.ts'
 import {AuthorizeService} from '../../../Common/Menu/AuthorizeService.ts'
 import {User} from '../../../Common/Models/User.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
-import {RepositoryResult} from '../../../Common/Models/RepositoryResult.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {Replace} from '../../../Common/Models/Replace.ts'
 import {Validate} from '../Validate.ts'
+import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
 
 export class ReplaceController extends Validate {
 
@@ -14,15 +14,19 @@ export class ReplaceController extends Validate {
     [
         'replaceService',
         'authorizeService',
-        '$routeParams'
+        '$routeParams',
+        'modalMessageService'
     ];
 
     constructor(
         private service: ReplaceService,
         authorizeService: AuthorizeService,
-        params: ng.route.IRouteParamsService
+        params: ng.route.IRouteParamsService,
+        private modalMessageService: ModalMessageService
     ) {
-        super(new Replace());
+        super(
+            new Replace(),
+            null);
 
         authorizeService.Authentification()
             .success((data: User) => {
@@ -76,12 +80,18 @@ export class ReplaceController extends Validate {
         if (valid) {
             this.service.Replace(this.email)
                 .success((data) => {
-                    if (data.Responce.IsMoving) {
-                        window.location.href = data.Responce.Location;
-                    }
-                    else {
+                    if (data.IsSucces) {
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Смена пароля');
+
                         angular.element('#display-firstForm').css('display', 'none');
                         angular.element('#display-secondForm').css('display', 'block');
+                    }
+                    else {
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Упс!');
                     }
                 });
         }
@@ -95,8 +105,16 @@ export class ReplaceController extends Validate {
         if (valid) {
             this.service.ReplacePassword(this.model)
                 .success((data) => {
-                    if (data.Responce.IsMoving) {
-                        window.location.href = data.Responce.Location;
+                    if (data.IsSucces) {
+                        location.href = '/#/SignIn/';
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Поздравляем!');
+                    }
+                    else {
+                        this.modalMessageService.open(
+                            data.Message,
+                            'Упс!');
                     }
                 });
         }

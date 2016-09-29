@@ -9,11 +9,11 @@
 	#endregion
 	public interface IUserRepository : IDisposable
 	{
-		Task<RepositoryResult<MoveTo>> RegistartionAsync(NotActiveUser user);
+		Task<RepositoryResult<ControllerResult>> RegistartionAsync(NotActiveUser user);
 		Task<RepositoryResult<User, HttpResponseMessage>> Activation(Guid id);
-		Task<RepositoryResult<User, MoveTo>> SignIn(SignIn model);
-		Task<RepositoryResult<MoveTo>> Replace(string email);
-		Task<RepositoryResult<MoveTo>> Replace(Replace model);
+		Task<RepositoryResult<User, ControllerResult>> SignIn(SignIn model);
+		Task<RepositoryResult<ControllerResult>> Replace(string email);
+		Task<RepositoryResult<ControllerResult>> Replace(Replace model);
 		Task<RepositoryResult<HttpResponseMessage>> CancelReplace(Guid replaceCode);
 	}
 }

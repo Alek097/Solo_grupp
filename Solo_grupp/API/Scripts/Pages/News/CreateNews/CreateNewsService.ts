@@ -1,5 +1,5 @@
 ﻿import {CreateNews} from '../../../Common/Models/CreateNews.ts'
-import {MoveTo} from '../../../Common/Models/MoveTo.ts'
+import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 
 export class CreateNewsService {
     public static $inject: string[] =
@@ -12,7 +12,7 @@ export class CreateNewsService {
     ) {
 
     }
-    public createNews(data: CreateNews): ng.IHttpPromise<MoveTo> {
+    public createNews(data: CreateNews): ng.IHttpPromise<ControllerResult> {
         return this.http.post('/api/CreateNews/Create', data);
     }
 

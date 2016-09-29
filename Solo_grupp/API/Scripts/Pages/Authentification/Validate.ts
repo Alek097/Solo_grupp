@@ -4,7 +4,8 @@
     public elem: JQuery;
 
     constructor(
-        public model: any
+        public model: any,
+        private containerName: string
     ) {
     }
 
@@ -42,6 +43,7 @@
 
         if (Regex.test(email)) {
             this.clearError();
+            this.saveModel();
             return true;
         }
         else {
@@ -93,6 +95,42 @@
         else {
             this.clearError();
             return true;
+        }
+    }
+
+    public saveModel(): void {
+        if (this.containerName != undefined) {
+            let model: any = {};
+
+            for (let propName in this.model) {
+                model[propName] = this.model[propName];
+
+                if (propName === 'Password' || propName === 'RepeatedPassword') {
+                    model[propName] = undefined;
+                }
+                else {
+                    continue;
+                }
+            }
+
+            localStorage.setItem(
+                this.containerName,
+                JSON.stringify(model));
+        }
+    }
+
+    public getModel(): any {
+        if (this.containerName != undefined) {
+            return JSON.parse(localStorage.getItem(this.containerName));
+        }
+        else {
+            return undefined;
+        }
+    }
+
+    public removeModel(): void {
+        if (this.containerName != undefined) {
+            localStorage.removeItem(this.containerName);
         }
     }
 }

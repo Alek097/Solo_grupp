@@ -9,6 +9,6 @@
 	#endregion
 	public interface ICreateNewsRepository : IDisposable
 	{
-		Task<RepositoryResult<News, MoveTo>> CreateNews(CreateNews model);
+		Task<RepositoryResult<News, ControllerResult>> CreateNews(CreateNews model);
 	}
 }
