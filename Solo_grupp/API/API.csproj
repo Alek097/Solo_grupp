@@ -339,13 +339,13 @@
     <Content Include="Bundles\app\style.less" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bundles\app\fonts\ubuntumono.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Bundles\app\fonts\bebasneuebold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bundles\app\createNewsStyle.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bundles\app\fonts\Angleciaprodisplayregular.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
