@@ -14,7 +14,7 @@ export class SignInService {
 
     }
 
-    public SignIn(model: SignIn): ng.IHttpPromise<ControllerResult> {
+    public SignIn(model: SignIn): ng.IHttpPromise<ControllerResult<any>> {
         return this.http.post('/api/user/signin', model);
     }
 }

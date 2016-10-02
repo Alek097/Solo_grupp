@@ -86,7 +86,7 @@ export class CreateNewsController extends Validate {
         if (valid) {
 
             this.service.createNews(this.model)
-                .success((data: ControllerResult) => {
+                .success((data: ControllerResult<any>) => {
                     if (data.IsSucces) {
                         window.location.href = data.Message;
                         this.removeModel();

@@ -12,7 +12,7 @@ export class CreateNewsService {
     ) {
 
     }
-    public createNews(data: CreateNews): ng.IHttpPromise<ControllerResult> {
+    public createNews(data: CreateNews): ng.IHttpPromise<ControllerResult<any>> {
         return this.http.post('/api/CreateNews/Create', data);
     }
 

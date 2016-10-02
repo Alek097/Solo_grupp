@@ -174,7 +174,7 @@ export class SignUpController extends Validate {
 
         if (valid) {
             this.service.Registration(this.model)
-                .success((data: ControllerResult) => {
+                .success((data: ControllerResult<any>) => {
                     if (data.IsSucces) {
                         location.href = '/#/Home';
                         this.modalMessageService.open(

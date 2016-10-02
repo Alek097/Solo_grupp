@@ -13,10 +13,10 @@ export class ReplaceService {
 
     }
 
-    public Replace(email: string): ng.IHttpPromise<ControllerResult> {
+    public Replace(email: string): ng.IHttpPromise<ControllerResult<any>> {
         return this.http.post('/api/user/replace?email=' + email, null);
     }
-    public ReplacePassword(model: Replace): ng.IHttpPromise<ControllerResult> {
+    public ReplacePassword(model: Replace): ng.IHttpPromise<ControllerResult<any>> {
         return this.http.post('/api/user/replace', model);
     }
 }

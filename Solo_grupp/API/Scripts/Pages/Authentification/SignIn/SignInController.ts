@@ -50,7 +50,7 @@ export class SignInController extends Validate {
 
         if (valid) {
             this.service.SignIn(this.model)
-                .success((data: ControllerResult) => {
+                .success((data: ControllerResult<any>) => {
                     if (data.IsSucces) {
                         window.location.href = data.Message;
                         window.location.reload();
