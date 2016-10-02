@@ -20,7 +20,7 @@
 
 		public async Task<ControllerResult<News>> GetNews(Guid id)
 		{
-			return await new Task<ControllerResult<News>>(() =>
+			return await Task.Run<ControllerResult<News>>(() =>
 			{
 				ControllerResult<News> result = new ControllerResult<News>();
 

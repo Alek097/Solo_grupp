@@ -37,9 +37,11 @@ export class CreateNewsController extends Validate {
 
         let model: CreateNews = this.getModel();
 
-        this.content = model.Content;
-        this.imgUrls = model.Urls;
-        angular.element('#title').val(model.Title);
+        if (model != undefined) {
+            this.content = model.Content;
+            this.imgUrls = model.Urls;
+            angular.element('#title').val(model.Title);
+        }
     }
 
     public titleValidate(): boolean {

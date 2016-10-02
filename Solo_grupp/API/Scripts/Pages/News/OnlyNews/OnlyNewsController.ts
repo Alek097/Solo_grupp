@@ -8,7 +8,8 @@ export class OnlyNewsController {
     [
         'onlyNewsService',
         '$routeParams',
-        'modalMessageService'
+        'modalMessageService',
+        '$sce'
     ];
 
     public model: CreateNews;
@@ -16,8 +17,10 @@ export class OnlyNewsController {
     constructor(
         private service: OnlyNewsService,
         params: ng.route.IRouteParamsService,
-        private modalService: ModalMessageService
+        private modalService: ModalMessageService,
+        sce: ng.ISCEService
     ) {
+
         let id: string = params['id'];
 
         if (id == undefined || id === '') {
@@ -28,6 +31,7 @@ export class OnlyNewsController {
             .success((data: ControllerResult<CreateNews>) => {
                 if (data.IsSucces) {
                     this.model = data.Value;
+                    this.model.Content = sce.trustAsHtml(data.Value.Content);
                 }
                 else {
                     location.href = '/#/Home';

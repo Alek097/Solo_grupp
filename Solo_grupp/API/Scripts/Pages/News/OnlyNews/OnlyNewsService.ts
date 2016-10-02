@@ -14,6 +14,6 @@ export class OnlyNewsService {
     }
 
     public GetNews(id: string): ng.IHttpPromise<ControllerResult<CreateNews>> {
-        return this.http.get('/api/news/getnews' + id);
+        return this.http.get('/api/news/getnews?id=' + id);
     }
 }

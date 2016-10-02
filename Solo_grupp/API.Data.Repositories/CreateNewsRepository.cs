@@ -14,7 +14,7 @@
 	using System;
 	using System.Linq;
 	#endregion
-	public class CreateNewsRepository : ICreateNewsRepository
+	public class CreateNewsRepository : Repository, ICreateNewsRepository
 	{
 		private readonly IContext context;
 		private readonly ILogger logger;
@@ -29,6 +29,7 @@
 
 			MatchCollection matches = Regex.Matches(model.Content, "<img src=\"" + @".+?" + "\"" + @"[.\s]*/>");
 			List<string> urls = new List<string>(model.Urls);
+			List<string> usingUrls = new List<string>();
 
 			News news = new News()
 			{
@@ -41,10 +42,21 @@
 			{
 				string url = Regex.Match(match.ToString(), "src=\"" + @".+?" + "\"").ToString()
 					.Replace("src=\"", string.Empty)
-					.Replace("\"", string.Empty);
+					.Replace("\"", string.Empty)
+					.Replace(DNS, string.Empty);
 
-				if (urls.Contains(url))
+				if (urls.Contains(url) || usingUrls.Contains(url))
 				{
+
+					if (usingUrls.Contains(url))
+					{
+						continue;
+					}
+					else
+					{
+						usingUrls.Add(url);
+					}
+
 					urls.Remove(url);
 
 					string serverPath = HttpContext.Current.Server.MapPath(url);
@@ -67,7 +79,6 @@
 					}
 					catch (Exception ex)
 					{
-
 						this.logger.WriteError(ex, string.Format("Ошибка при перемещении файла по расположению {0} в {1}", serverPath, newServerPath));
 
 						result.Responce = new ControllerResult()
@@ -81,9 +92,13 @@
 						return result;
 					}
 
+					string newUrl = string.Format("/Bundles/app/img/news/{0}/{1}", news.Id, fileName);
+
+					model.Content = model.Content.Replace(url, newUrl);
+
 					images.Add(new Image()
 					{
-						URL = string.Format("~/Bundles/app/img/news/{0}/{1}", news.Id, fileName)
+						URL = newUrl
 					});
 
 				}
@@ -122,9 +137,13 @@
 						}
 					}
 
+					string newUrl = string.Format("/Bundles/app/img/news/{0}/{1}", news.Id, fileName);
+
+					model.Content = model.Content.Replace(url, newUrl);
+
 					images.Add(new Image()
 					{
-						URL = string.Format("~/Bundles/app/img/news/{0}/{1}", news.Id, fileName)
+						URL = newUrl
 					});
 				}
 				else
@@ -148,6 +167,7 @@
 			User user = context.GetAll<User>().FirstOrDefault(u => u.UserName == userName);
 
 			news.User = user;
+			news.Content = model.Content;
 
 			context.Add(news);
 
@@ -177,7 +197,7 @@
 
 			result.Value = news;
 
-			result.ResultType = RepositoryResultType.Bad;
+			result.ResultType = RepositoryResultType.OK;
 
 			return result;
 		}
