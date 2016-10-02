@@ -301,7 +301,9 @@
     <TypeScriptCompile Include="Scripts\Pages\News\CreateNews\CreateNewsService.ts" />
     <TypeScriptCompile Include="Scripts\Pages\News\NewsModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\News\News\NewsModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\OnlyNews\OnlyNewsController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\News\OnlyNews\OnlyNewsModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\OnlyNews\OnlyNewsService.ts" />
     <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceModule.ts" />
