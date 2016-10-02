@@ -222,6 +222,7 @@
     <Compile Include="App_Start\UnityResolver.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CreateNewsController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PermissionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\ResolutionAttribute.cs" />
@@ -233,6 +234,7 @@
   <ItemGroup>
     <Content Include="Bundles\app\bundle.js" />
     <Content Include="Bundles\app\img\Logo.jpg" />
+    <Content Include="Bundles\app\img\background.jpg" />
     <Content Include="Index_Template.html" />
     <Content Include="Scripts\Common\ModalMessage\ModalMessageView.html" />
     <Content Include="Scripts\Pages\Error\ErrorView.html" />
@@ -243,6 +245,7 @@
     <Content Include="Scripts\Pages\Authentification\SignIn\SignInView.html" />
     <Content Include="Scripts\Pages\Authentification\SignUp\SignUpView.html" />
     <Content Include="Scripts\Pages\News\CreateNews\CreateNewsView.html" />
+    <Content Include="Scripts\Pages\News\OnlyNews\OnlyNewsView.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -300,6 +303,9 @@
     <TypeScriptCompile Include="Scripts\Pages\News\CreateNews\CreateNewsService.ts" />
     <TypeScriptCompile Include="Scripts\Pages\News\NewsModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\News\News\NewsModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\OnlyNews\OnlyNewsController.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\OnlyNews\OnlyNewsModule.ts" />
+    <TypeScriptCompile Include="Scripts\Pages\News\OnlyNews\OnlyNewsService.ts" />
     <TypeScriptCompile Include="Scripts\Pages\PagesModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceController.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\Replace\ReplaceModule.ts" />
@@ -339,13 +345,13 @@
     <Content Include="Bundles\app\style.less" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bundles\app\fonts\ubuntumono.ttf" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Bundles\app\fonts\bebasneuebold.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bundles\app\createNewsStyle.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bundles\app\fonts\Angleciaprodisplayregular.ttf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

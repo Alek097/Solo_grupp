@@ -35,6 +35,7 @@
 			container.RegisterType<IContext, ApplicationContext>();
 			container.RegisterType<IUserRepository, UserRepository>();
 			container.RegisterType<ICreateNewsRepository, CreateNewsRepository>();
+			container.RegisterType<INewsRepository, NewsRepository>();
 		}
 	}
 }

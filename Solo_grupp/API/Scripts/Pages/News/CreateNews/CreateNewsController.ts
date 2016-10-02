@@ -37,9 +37,11 @@ export class CreateNewsController extends Validate {
 
         let model: CreateNews = this.getModel();
 
-        this.content = model.Content;
-        this.imgUrls = model.Urls;
-        angular.element('#title').val(model.Title);
+        if (model != undefined) {
+            this.content = model.Content;
+            this.imgUrls = model.Urls;
+            angular.element('#title').val(model.Title);
+        }
     }
 
     public titleValidate(): boolean {
@@ -86,7 +88,7 @@ export class CreateNewsController extends Validate {
         if (valid) {
 
             this.service.createNews(this.model)
-                .success((data: ControllerResult) => {
+                .success((data: ControllerResult<any>) => {
                     if (data.IsSucces) {
                         window.location.href = data.Message;
                         this.removeModel();

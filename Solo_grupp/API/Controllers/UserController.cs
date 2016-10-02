@@ -204,6 +204,7 @@
 		public new void Dispose()
 		{
 			this.repository.Dispose();
+			base.Dispose();
 		}
 	}
 }

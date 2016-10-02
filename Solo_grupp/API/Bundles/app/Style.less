@@ -12,8 +12,8 @@
 @Desktop-Size: 991px;
 
 @font-face {
-    font-family: 'Ubuntu Mono';
-    src: url(./fonts/ubuntumono.ttf);
+    font-family: 'America Pro';
+    src: url(./fonts/Angleciaprodisplayregular.ttf);
 }
 
 @font-face {
@@ -21,8 +21,22 @@
     src: url(./fonts/bebasneuebold.ttf);
 }
 
-.container{
+#ng-view-container, ng-view{
+    height: 100%;
+}
+
+.container {
     margin-top: 100px;
+}
+
+.container, .container-fluid {
+    font-size: 11pt;
+    height: 100%;
+}
+
+.container, .container-fluid {
+    background-color: rgba(255,255,255, 0.7);
+    height: 100%;
 }
 
 #brand {
@@ -37,12 +51,29 @@
     }
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
-    font-family: 'Ubuntu Mono';
+    font-family: 'America Pro';
+    background-color: rgba(0,0,0,0);
+}
+
+html {
+    background-image: url(img/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 nav {
     font-family: 'Bebas Neue Bold';
+
+    .container-fluid{
+        background-color: @BrandColor;
+    }
 }
 
 #brand-href {
@@ -173,7 +204,7 @@ nav {
     padding-top: 7px;
 
     @media(max-width: @Desktop-Size) {
-            padding-left: 30px;
+        padding-left: 30px;
     }
 }
 
@@ -201,4 +232,9 @@ label {
     @media(max-width: 334px) {
         font-size: 12pt;
     }
+}
+
+#news-title {
+    font-family: 'Bebas Neue Bold';
+    font-size: 30pt;
 }

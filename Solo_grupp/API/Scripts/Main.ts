@@ -63,4 +63,11 @@ angular.module('main',
                 controller: 'createNewsController',
                 controllerAs: 'createNews'
             });
+        $routeProvider.when('/News/:id',
+            <ng.route.IRoute>
+            {
+                templateUrl: '../Scripts/Pages/News/OnlyNews/OnlyNewsView.html',
+                controller: 'onlyNewsController',
+                controllerAs: 'news'
+            });
     });

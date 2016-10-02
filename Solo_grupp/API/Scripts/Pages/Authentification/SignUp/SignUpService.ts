@@ -12,7 +12,7 @@ export class SignUpService {
 
     }
 
-    public Registration(model: Registration): ng.IHttpPromise<ControllerResult> {
+    public Registration(model: Registration): ng.IHttpPromise<ControllerResult<any>> {
         return this.http.post('/api/user/signup', model);
     }
 }
