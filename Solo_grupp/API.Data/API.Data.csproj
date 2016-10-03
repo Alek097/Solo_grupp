@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201609290231190_Added_Property_Title.Designer.cs">
       <DependentUpon>201609290231190_Added_Property_Title.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610031819276_Added_Birthday_property.cs" />
+    <Compile Include="Migrations\201610031819276_Added_Birthday_property.Designer.cs">
+      <DependentUpon>201610031819276_Added_Birthday_property.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\News.cs" />
@@ -124,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609290231190_Added_Property_Title.resx">
       <DependentUpon>201609290231190_Added_Property_Title.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610031819276_Added_Birthday_property.resx">
+      <DependentUpon>201610031819276_Added_Birthday_property.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
