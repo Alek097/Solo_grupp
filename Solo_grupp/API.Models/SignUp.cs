@@ -1,6 +1,7 @@
 ﻿namespace API.Models
 {
 	#region Using
+	using System;
 	using System.ComponentModel.DataAnnotations;
 	#endregion
 	public class SignUp
@@ -26,5 +27,7 @@
 		public string Email { get; set; }
 		[Required(ErrorMessage = "Отсутствует номер телефона")]
 		public string PhoneNumber { get; set; }
+		[Required(ErrorMessage = "Отсутствует дата рождения")]
+		public DateTime Date { get; set; }
 	}
 }

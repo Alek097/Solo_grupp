@@ -17,6 +17,7 @@
 		public string Country { get; set; }
 		public string City { get; set; }
 		public Guid ReplaceCode { get; set; }
+		public DateTime Birthday { get; set; }
 		public virtual Salt Salt { get; set; }
 		public virtual ICollection<Resolution> Permission { get; set; }
 		public virtual ICollection<News> News { get; set; }
