@@ -38,6 +38,7 @@
 			this.Email = user.Email;
 			this.PhoneNumber = user.PhoneNumber;
 			this.FullName = string.Format("{0} {1} {2}", this.LastName, this.FirstName, this.Patronymic);
+			this.Birthday = user.Birthday;
 
 			this.Salt = new Salt();
 

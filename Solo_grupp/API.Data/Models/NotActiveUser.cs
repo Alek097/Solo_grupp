@@ -37,6 +37,7 @@
 			this.Password = model.Password;
 			this.Country = model.Country;
 			this.City = model.City;
+			this.Birthday = model.Date;
 		}
 		private void firstUpper(string value)
 		{

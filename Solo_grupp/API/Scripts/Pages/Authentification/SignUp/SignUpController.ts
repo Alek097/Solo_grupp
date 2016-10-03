@@ -172,6 +172,8 @@ export class SignUpController extends Validate {
 
         valid = this.changeCountry() && valid;
 
+        valid = this.dateValidate() && valid;
+
         if (valid) {
             this.service.Registration(this.model)
                 .success((data: ControllerResult<any>) => {
@@ -216,6 +218,24 @@ export class SignUpController extends Validate {
 
         if (this.selectCity == undefined || this.selectCity === '') {
             this.writeError('Выберите город');
+            return false;
+        }
+        else {
+            this.clearError();
+        }
+
+        this.model.City = this.selectCity;
+        this.saveModel();
+        return true;
+    }
+
+    public dateValidate(): boolean {
+        this.elem = angular.element('#error-date');
+
+        let date = angular.element('#date').val();
+
+        if (date == undefined || date === '') {
+            this.writeError('Введите дату рождения');
             return false;
         }
         else {
