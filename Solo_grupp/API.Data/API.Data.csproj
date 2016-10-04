@@ -93,6 +93,7 @@
       <DependentUpon>201610031819276_Added_Birthday_property.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\News.cs" />
     <Compile Include="Models\NotActiveUser.cs" />
