@@ -24,6 +24,7 @@
 		public DbSet<Image> Images { get; set; }
 		public DbSet<NotActiveUser> NotActiveUsers { get; set; }
 		public DbSet<Salt> Salts { get; set; }
+		public DbSet<Comment> Comments { get; set; }
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
@@ -35,6 +36,9 @@
 			modelBuilder.Entity<User>()
 				.HasMany(user => user.News)
 				.WithOptional(news => news.User);
+			modelBuilder.Entity<User>()
+	.			HasMany(user => user.Comments)
+				.WithOptional(comment => comment.Author);
 
 			modelBuilder.Entity<User>()
 				.HasRequired(user => user.Salt)
@@ -191,7 +195,7 @@
 
 					NotActiveUser user = this.GetAll<NotActiveUser>().FirstOrDefault(u => u.Id == id);
 
-					if(user == null)
+					if (user == null)
 					{
 						this.logger.WriteError(string.Format("Не активиованный пользователь с id = {0} не найден", id));
 						return null;

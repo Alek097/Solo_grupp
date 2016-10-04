@@ -21,6 +21,7 @@
 		public virtual Salt Salt { get; set; }
 		public virtual ICollection<Resolution> Permission { get; set; }
 		public virtual ICollection<News> News { get; set; }
+		public virtual ICollection<Comment> Comments { get; set; }
 
 		public User()
 		{
