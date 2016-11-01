@@ -143,7 +143,7 @@ export class SignUpController extends Validate {
         this.model.PhoneNumber = phoneNumber;
 
         if (phoneNumber.length == 0) {
-            this.writeError('Введите адрес');
+            this.writeError('Введите номер телефона');
             return false;
         }
         else {
