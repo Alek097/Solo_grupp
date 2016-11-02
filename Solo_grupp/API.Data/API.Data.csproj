@@ -96,6 +96,10 @@
     <Compile Include="Migrations\201610041818565_Added_Comments_Table.Designer.cs">
       <DependentUpon>201610041818565_Added_Comments_Table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611021720488_Added_Property_CreateDate.cs" />
+    <Compile Include="Migrations\201611021720488_Added_Property_CreateDate.Designer.cs">
+      <DependentUpon>201611021720488_Added_Property_CreateDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Image.cs" />
@@ -139,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610041818565_Added_Comments_Table.resx">
       <DependentUpon>201610041818565_Added_Comments_Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611021720488_Added_Property_CreateDate.resx">
+      <DependentUpon>201611021720488_Added_Property_CreateDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

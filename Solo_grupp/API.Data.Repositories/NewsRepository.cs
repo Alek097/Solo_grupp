@@ -41,6 +41,7 @@
 					result.Value.Content = news.Content;
 					result.Value.Id = news.Id;
 					result.Value.Title = news.Title;
+					result.Value.CreateDate = news.CreateDate;
 
 					result.Value.Author = new UserInformation();
 					result.Value.Author.Id = news.User.Id;

@@ -168,6 +168,7 @@
 
 			news.User = user;
 			news.Content = model.Content;
+			news.CreateDate = DateTime.Now;
 
 			context.Add(news);
 

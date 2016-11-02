@@ -5,4 +5,5 @@ export class News {
     public Content: string = null;
     public Title: string = null;
     public Author: User = null;
+    public CreateDate: Date = null;
 }
