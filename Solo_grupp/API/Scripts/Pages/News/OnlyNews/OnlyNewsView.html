@@ -1,4 +1,14 @@
 ﻿<div class="news-container container">
     <div id="news-title" class="col-xs-12">{{news.model.Title}}</div>
     <div class="col-xs-12" ng-bind-html="news.model.Content"></div>
+    <div id="news-footer" class="col-xs-12">
+        <hr />
+        <div>
+            <h5>{{news.model.Author.FullName}}</h5>
+        </div>
+        <div>
+            <h6>{{news.model.CreateDate}}</h6>
+        </div>
+        <hr />
+    </div>
 </div>
