@@ -1,4 +1,4 @@
-﻿import {CreateNews} from '../../../Common/Models/CreateNews.ts'
+﻿import {News} from '../../../Common/Models/News.ts'
 import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 
 export class OnlyNewsService {
@@ -13,7 +13,7 @@ export class OnlyNewsService {
 
     }
 
-    public GetNews(id: string): ng.IHttpPromise<ControllerResult<CreateNews>> {
+    public GetNews(id: string): ng.IHttpPromise<ControllerResult<News>> {
         return this.http.get('/api/news/getnews?id=' + id);
     }
 }

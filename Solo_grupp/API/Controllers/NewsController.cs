@@ -16,9 +16,11 @@
 			this.repository = repository;
 		}
 		[HttpGet]
-		public async Task<ControllerResult<News>> GetNews(Guid id)
+		public async Task<ControllerResult<NewsModel>> GetNews(Guid id)
 		{
-			return await this.repository.GetNews(id);
+			ControllerResult<NewsModel> result = await this.repository.GetNews(id);
+
+			return result;
 		}
 
 		public new void Dispose()

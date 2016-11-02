@@ -1,4 +1,4 @@
-﻿import {CreateNews} from '../../../Common/Models/CreateNews.ts'
+﻿import {News} from '../../../Common/Models/News.ts'
 import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {OnlyNewsService} from './OnlyNewsService.ts'
 import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
@@ -12,7 +12,7 @@ export class OnlyNewsController {
         '$sce'
     ];
 
-    public model: CreateNews;
+    public model: News;
 
     constructor(
         private service: OnlyNewsService,
@@ -28,7 +28,7 @@ export class OnlyNewsController {
         }
 
         this.service.GetNews(id)
-            .success((data: ControllerResult<CreateNews>) => {
+            .success((data: ControllerResult<News>) => {
                 if (data.IsSucces) {
                     this.model = data.Value;
                     this.model.Content = sce.trustAsHtml(data.Value.Content);

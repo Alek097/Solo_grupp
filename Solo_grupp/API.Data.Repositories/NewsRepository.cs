@@ -18,11 +18,11 @@
 			this.logger = logger;
 		}
 
-		public async Task<ControllerResult<News>> GetNews(Guid id)
+		public async Task<ControllerResult<NewsModel>> GetNews(Guid id)
 		{
-			return await Task.Run<ControllerResult<News>>(() =>
+			return await Task.Run<ControllerResult<NewsModel>>(() =>
 			{
-				ControllerResult<News> result = new ControllerResult<News>();
+				ControllerResult<NewsModel> result = new ControllerResult<NewsModel>();
 
 				News news = context.Get<News, Guid>(id);
 
@@ -35,11 +35,22 @@
 				}
 				else
 				{
-					news.Images = null;
-					news.User = null;
-
 					result.IsSucces = true;
-					result.Value = news;
+
+					result.Value = new NewsModel();
+					result.Value.Content = news.Content;
+					result.Value.Id = news.Id;
+					result.Value.Title = news.Title;
+
+					result.Value.Author = new UserInformation();
+					result.Value.Author.Id = news.User.Id;
+					result.Value.Author.City = news.User.City;
+					result.Value.Author.Country = news.User.Country;
+					result.Value.Author.Email = news.User.Email;
+					result.Value.Author.FirstName = news.User.FirstName;
+					result.Value.Author.FullName = news.User.FullName;
+					result.Value.Author.LastName = news.User.LastName;
+					result.Value.Author.Patronymic = news.User.Patronymic;
 				}
 
 				return result;

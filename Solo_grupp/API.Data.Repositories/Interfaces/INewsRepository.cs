@@ -8,6 +8,6 @@
 	#endregion
 	public interface INewsRepository : IDisposable
 	{
-		Task<ControllerResult<News>> GetNews(Guid id);
+		Task<ControllerResult<NewsModel>> GetNews(Guid id);
 	}
 }
