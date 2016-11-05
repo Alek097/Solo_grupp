@@ -6,6 +6,7 @@
 	using System.Security.Cryptography;
 	using System.Text;
 	using System;
+	using API.Models;
 	#endregion
 	public class User : IdentityUser
 	{
@@ -64,6 +65,21 @@
 			bytesHashPass = sha256.ComputeHash(bytesPaassword);
 
 			return Encoding.UTF8.GetString(bytesHashPass);
+		}
+
+		public static explicit operator UserInformation(User usr)
+		{
+			UserInformation model = new UserInformation();
+			model.City = usr.City;
+			model.Country = usr.Country;
+			model.Email = usr.Email;
+			model.FirstName = usr.FirstName;
+			model.FullName = usr.FullName;
+			model.Id = usr.Id;
+			model.LastName = usr.LastName;
+			model.Patronymic = usr.Patronymic;
+
+			return model;
 		}
 	}
 }
