@@ -1,0 +1,31 @@
+﻿<div ng-repeat="comment in ctr.comments" style="margin-left: {{ctr.innerLevel}}px" class="comment">
+    <div>
+        <a href="/#/User/{{comment.Author.Id}}">
+            <div class="col-xs-3">
+                <h5>
+                    {{comment.Author.FullName}}
+                </h5>
+                <h6>
+                    {{comment.CreateDate}}
+                </h6>
+            </div>
+        </a>
+        <div class="col-xs-9">
+            <p>
+                {{comment.Text}}
+            </p>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <p>
+            {{comment.Text}}
+        </p>
+    </div>
+
+    <div ng-if="comment.Comments != undefined">
+        <showcomments comments="{{comment.Comments}}" innerLevel="{{ctr.innerLevel + 1}}">
+
+        </showcomments>
+    </div>
+</div>
