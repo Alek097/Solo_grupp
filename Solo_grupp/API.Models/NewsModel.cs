@@ -1,8 +1,8 @@
-﻿using System;
-
-
-namespace API.Models
+﻿namespace API.Models
 {
+	#region Using
+	using System;
+	#endregion
 	public class NewsModel
 	{
 		public Guid Id { get; set; }
