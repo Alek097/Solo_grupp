@@ -7,6 +7,7 @@
 	using Interfaces;
 	using Models;
 	using Logging;
+	using System.Collections.Generic;
 	#endregion
 	public class NewsRepository : INewsRepository
 	{
@@ -35,6 +36,7 @@
 				}
 				else
 				{
+					//TODO: Refactoring
 					result.IsSucces = true;
 
 					result.Value = new NewsModel();
@@ -52,6 +54,39 @@
 					result.Value.Author.FullName = news.User.FullName;
 					result.Value.Author.LastName = news.User.LastName;
 					result.Value.Author.Patronymic = news.User.Patronymic;
+				}
+
+				return result;
+			});
+		}
+
+		public async Task<ControllerResult<List<CommentModel>>> GetComments(Guid id)
+		{
+			return await Task.Run<ControllerResult<List<CommentModel>>>(() =>
+			{
+
+				ControllerResult<List<CommentModel>> result = new ControllerResult<List<CommentModel>>();
+
+				News news = context.Get<News, Guid>(id);
+
+				if (news == null)
+				{
+					result.IsSucces = false;
+					result.Message = "Новость не найдена!";
+
+					this.logger.WriteError(string.Format("Новость по id {0} не найдена.", id));
+				}
+				else
+				{
+					result.IsSucces = true;
+
+					result.Value = new List<CommentModel>();
+					List<CommentModel> comments = result.Value;
+
+					foreach (Comment comment in news.Comments)
+					{
+						comments.Add((CommentModel)comment);
+					}
 				}
 
 				return result;

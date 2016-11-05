@@ -1,10 +1,10 @@
 ﻿namespace API.Controllers
 {
 	#region Using
-	using Data.Models;
 	using Data.Repositories.Interfaces;
 	using Models;
 	using System;
+	using System.Collections.Generic;
 	using System.Threading.Tasks;
 	using System.Web.Http;
 	#endregion
@@ -21,6 +21,11 @@
 			ControllerResult<NewsModel> result = await this.repository.GetNews(id);
 
 			return result;
+		}
+		[HttpGet]
+		public async Task<ControllerResult<List<CommentModel>>> GetComments(Guid id)
+		{
+			return await this.repository.GetComments(id);
 		}
 
 		public new void Dispose()
