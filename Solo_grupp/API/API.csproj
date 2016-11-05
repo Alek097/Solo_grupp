@@ -279,6 +279,7 @@
     <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageController.ts" />
     <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageModule.ts" />
     <TypeScriptCompile Include="Scripts\Common\ModalMessage\ModalMessageService.ts" />
+    <TypeScriptCompile Include="Scripts\Common\Models\Comment.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\CreateNews.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\ControllerResult.ts" />
     <TypeScriptCompile Include="Scripts\Common\Models\News.ts" />
