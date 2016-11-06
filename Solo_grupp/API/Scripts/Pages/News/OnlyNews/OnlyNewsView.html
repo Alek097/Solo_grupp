@@ -11,4 +11,7 @@
         </div>
         <hr />
     </div>
+    <div ng-if="news.isComments">
+        <showcomments comments="{{news.model.Comments}}" innerlevel="0" />
+    </div>
 </div>

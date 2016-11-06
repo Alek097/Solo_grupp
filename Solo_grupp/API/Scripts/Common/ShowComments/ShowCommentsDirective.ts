@@ -5,7 +5,7 @@
     public controllerAs: string = 'ctr';
 
     public link: Function = (scope: ng.IScope, element, attrs: ng.IAttributes): void => {
-        this.controller.prototype.comments = attrs['comments'];
+        this.controller.prototype.comments = JSON.parse(attrs['comments']);
         this.controller.prototype.innerLevel = attrs['innerlevel'];
     };
 }

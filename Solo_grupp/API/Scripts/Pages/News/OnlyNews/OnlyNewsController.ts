@@ -1,4 +1,5 @@
 ﻿import {News} from '../../../Common/Models/News.ts'
+import {Comment} from '../../../Common/Models/Comment.ts'
 import {ControllerResult} from '../../../Common/Models/ControllerResult.ts'
 import {OnlyNewsService} from './OnlyNewsService.ts'
 import {ModalMessageService} from '../../../Common/ModalMessage/ModalMessageService.ts'
@@ -13,6 +14,7 @@ export class OnlyNewsController {
     ];
 
     public model: News;
+    public isComments: boolean = false;
 
     constructor(
         private service: OnlyNewsService,
@@ -32,6 +34,16 @@ export class OnlyNewsController {
                 if (data.IsSucces) {
                     this.model = data.Value;
                     this.model.Content = sce.trustAsHtml(data.Value.Content);
+
+                    this.service.GetComments(this.model.Id)
+                        .success((data: ControllerResult<Comment[]>) => {
+                            if (data.IsSucces) {
+                                this.model.Comments = data.Value;
+
+                                this.isComments = true;
+
+                            }
+                        });
                 }
                 else {
                     location.href = '/#/Home';

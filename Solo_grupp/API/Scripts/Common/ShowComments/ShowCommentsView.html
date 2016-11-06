@@ -1,7 +1,7 @@
-﻿<div ng-repeat="comment in ctr.comments" style="margin-left: {{ctr.innerLevel}}px" class="comment">
-    <div>
+﻿<div ng-repeat="comment in ctr.comments">
+    <div class="comment col-xs-12" style="margin-left: {{ctr.innerLevel * 15}}px">
         <a href="/#/User/{{comment.Author.Id}}">
-            <div class="col-xs-3">
+            <div class="col-xs-3 comment-usrinf">
                 <h5>
                     {{comment.Author.FullName}}
                 </h5>
@@ -10,22 +10,14 @@
                 </h6>
             </div>
         </a>
-        <div class="col-xs-9">
+        <div class="col-xs-9 comment-body">
             <p>
                 {{comment.Text}}
             </p>
         </div>
     </div>
 
-    <div class="col-xs-12">
-        <p>
-            {{comment.Text}}
-        </p>
-    </div>
-
-    <div ng-if="comment.Comments != undefined">
-        <showcomments comments="{{comment.Comments}}" innerlevel="{{ctr.innerLevel + 1}}">
-
-        </showcomments>
+    <div ng-if="comment.Comments != undefined && comment.Comments.length > 0" >
+        <showcomments comments="{{comment.Comments}}" innerlevel="{{ctr.innerLevel + 1}}" >
     </div>
 </div>
