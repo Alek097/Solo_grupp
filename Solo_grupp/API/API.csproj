@@ -237,7 +237,6 @@
     <Content Include="Bundles\app\img\background.jpg" />
     <Content Include="Index_Template.html" />
     <Content Include="Scripts\Common\ModalMessage\ModalMessageView.html" />
-    <Content Include="Scripts\Common\ShowComments\ShowCommentsView.html" />
     <Content Include="Scripts\Pages\Error\ErrorView.html" />
     <Content Include="Scripts\Common\Menu\MenuView.html" />
     <Content Include="Scripts\Pages\Home\HomeView.html" />
