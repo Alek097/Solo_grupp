@@ -27,6 +27,9 @@
 				model.Comments.Add((CommentModel)item);
 			}
 
+			model.Comments.Sort();
+			model.Comments.Reverse();
+
 			return model;
 		}
 	}

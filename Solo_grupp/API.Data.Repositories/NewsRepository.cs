@@ -89,6 +89,9 @@
 					}
 				}
 
+				result.Value.Sort();
+				result.Value.Reverse();
+
 				return result;
 			});
 		}
