@@ -17,12 +17,12 @@ export class ShowCommentsDirective implements ng.IDirective {
             let comment: string =
                 '<div class="comment col-xs-12" style="margin-left:' + innerLevel * 15 + 'px">' +
                 '<a href="/#/User/' + comments[i].Author.Id + '">' +
-                '<div class="col-xs-3 comment-usrinf">' +
+                '<div class="col-xs-3 col-md-2 comment-usrinf">' +
                 '<h5>' + comments[i].Author.FullName + '</h5>' +
                 '<h6>' + comments[i].CreateDate + '</h6>' +
                 '</div>' +
                 '</a>' +
-                '<div class="col-xs-9 comment-body">' +
+                '<div class="col-xs-9 col-md-10 comment-body">' +
                 '<p>' + comments[i].Text + '</p>' +
                 '</div>' +
                 '</div>';

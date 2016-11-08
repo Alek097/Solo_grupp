@@ -1,6 +1,8 @@
 ﻿<div class="news-container container">
+
     <div id="news-title" class="col-xs-12">{{news.model.Title}}</div>
     <div class="col-xs-12" ng-bind-html="news.model.Content"></div>
+
     <div id="news-footer" class="col-xs-12">
         <hr />
         <div>
@@ -12,6 +14,6 @@
         <hr />
     </div>
     <div ng-if="news.isComments">
-        <showcomments comments="{{news.model.Comments}}" innerlevel="0" />
+        <showcomments class="col-xs-12" comments="{{news.model.Comments}}" innerlevel="0" />
     </div>
 </div>
