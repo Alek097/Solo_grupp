@@ -1,11 +1,40 @@
-﻿export class ShowCommentsDirective implements ng.IDirective {
-    public restrict: string = 'E';
-    public templateUrl: string = '../../../Scripts/Common/ShowComments/ShowCommentsView.html';
-    public controller: Function = (): void => { };
-    public controllerAs: string = 'ctr';
+﻿import {Comment} from '../Models/Comment'
 
-    public link: Function = (scope: ng.IScope, element, attrs: ng.IAttributes): void => {
-        this.controller.prototype.comments = JSON.parse(attrs['comments']);
-        this.controller.prototype.innerLevel = attrs['innerlevel'];
+export class ShowCommentsDirective implements ng.IDirective {
+    public restrict: string = 'E';
+
+    public link: Function = (scope: ng.IScope, element: JQuery, attrs: ng.IAttributes): void => {
+        element.append(
+            this.render(JSON.parse(attrs['comments']), 0)
+        );
+
     };
+
+    private render(comments: Comment[], innerLevel: number): string {
+        let html: string = '';
+
+        for (let i = 0; i < comments.length; i++) {
+            let comment: string =
+                '<div class="comment col-xs-12" style="margin-left:' + innerLevel * 15 + 'px">' +
+                '<a href="/#/User/' + comments[i].Author.Id + '">' +
+                '<div class="col-xs-3 comment-usrinf">' +
+                '<h5>' + comments[i].Author.FullName + '</h5>' +
+                '<h6>' + comments[i].CreateDate + '</h6>' +
+                '</div>' +
+                '</a>' +
+                '<div class="col-xs-9 comment-body">' +
+                '<p>' + comments[i].Text + '</p>' +
+                '</div>' +
+                '</div>';
+
+            if (comments[i].Comments != undefined && comments[i].Comments.length > 0) {
+                comment += '<div>' + this.render(comments[i].Comments, innerLevel + 1) + '</div>';
+            }
+
+            html += comment;
+
+        }
+
+        return html;
+    }
 }
