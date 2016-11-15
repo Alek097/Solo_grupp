@@ -237,6 +237,7 @@
     <Content Include="Bundles\app\img\background.jpg" />
     <Content Include="Index_Template.html" />
     <Content Include="Scripts\Common\ModalMessage\ModalMessageView.html" />
+    <Content Include="Scripts\Common\ShowComments\ShowCommentsView.html" />
     <Content Include="Scripts\Pages\Error\ErrorView.html" />
     <Content Include="Scripts\Common\Menu\MenuView.html" />
     <Content Include="Scripts\Pages\Home\HomeView.html" />
@@ -290,6 +291,7 @@
     <TypeScriptCompile Include="Scripts\Common\Models\UploadResult.ts" />
     <TypeScriptCompile Include="Scripts\Common\Other\OtherStart.ts" />
     <TypeScriptCompile Include="Scripts\Common\PermissionService.ts" />
+    <TypeScriptCompile Include="Scripts\Common\ShowComments\ShowCommentsController.ts" />
     <TypeScriptCompile Include="Scripts\Common\ShowComments\ShowCommentsDirective.ts" />
     <TypeScriptCompile Include="Scripts\Common\ShowComments\ShowCommentsModule.ts" />
     <TypeScriptCompile Include="Scripts\Pages\Authentification\AuthentificationModule.ts" />

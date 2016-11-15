@@ -1,0 +1,26 @@
+﻿<div ng-transclude></div>
+<div ng-if="ctrl.isRender" class="comment col-xs-12" style="margin-left:{{ctrl.innerLevel * 20}}px" ng-repeat="comment in ctrl.Comments">
+    <a href="/#/User/{{comment.Author.Id}}">
+        <div class="col-xs-3 col-md-2 comment-usrinf">
+            <h5>{{comment.Author.FullName}}</h5>
+            <h6>{{comment.CreateDate}}</h6>
+        </div>
+    </a>
+    <div class="col-xs-9 col-md-10 comment-body">
+        <p> {{comment.Text}}</p>
+    </div>
+    <div ng-if="ctrl.isAuth">
+        <form role="form" ng-submit="ctrl.submit(comment.Author.Id)" ng-if="ctrl.isAuth">
+            <div class="form-group col-xs-12">
+                <textarea class="comment-text" ng-model="ctrl.text"></textarea>
+            </div>
+            <div class="col-xs-12 col-md-3 submit-btn comment-send">
+                <button type="submit" class="btn btn-primary btn-block col-xs-12">Ответить</button>
+            </div>
+        </form>
+    </div>
+
+    <showcomments ng-if="comment.Comments.length > 0 && comment.Comments != undefined" comments="{{comment.Comments}}" innerlevel="{{ctrl.InnerLevel + 1}}">
+        <div ng-transclude></div>
+    </showcomments>
+</div>
