@@ -58,8 +58,8 @@
 
 				ControllerResult responce = new ControllerResult()
 				{
-					IsSucces = true,
-					Message = string.Format("{0}/#/SignUp/{1}", Repository.DNS, errorMessage)
+					IsSucces = false,
+					Message = errorMessage
 				};
 
 				return responce;

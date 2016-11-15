@@ -64,18 +64,6 @@
 
             <div class="form-group col-xs-12">
                 <div class="col-xs-12">
-                    <label for="date">Дата рождения</label>
-                </div>
-                <div class="col-xs-12">
-                    <p class="error" id="error-date"></p>
-                </div>
-                <div class="col-xs-12">
-                    <input type="date" class="form-control" id="date" autocomplete="off">
-                </div>
-            </div>
-
-            <div class="form-group col-xs-12">
-                <div class="col-xs-12">
                     <label for="patronymic">Отчество</label>
                 </div>
                 <div class="col-xs-12">
@@ -83,6 +71,18 @@
                 </div>
                 <div class="col-xs-12">
                     <input ng-keyup="signUpCtrl.patronymicValidate()" type="text" class="form-control" id="patronymic" autocomplete="off" placeholder="Иванович">
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+                <div class="col-xs-12">
+                    <label for="date">Дата рождения</label>
+                </div>
+                <div class="col-xs-12">
+                    <p class="error" id="error-date"></p>
+                </div>
+                <div class="col-xs-12">
+                    <input type="date" ng-model="signUpCtrl.model.Date" class="form-control" id="date" autocomplete="off">
                 </div>
             </div>
 

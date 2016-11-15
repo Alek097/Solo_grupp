@@ -8,5 +8,5 @@
     public PhoneNumber: string = null;
     public Country: string = null;
     public City: string = null;
-    public Date: string = null;
+    public Date: Date = null;
 }
